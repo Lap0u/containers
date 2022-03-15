@@ -51,6 +51,7 @@ public:
 		_start = _allocator.allocate(count);
 		for (size_type i = 0; i < count; i++)
 			_start[i] = value;
+		_filled = _size;
 	}
 
 	// Constructs the container with the contents of the range [first, last).
@@ -61,15 +62,19 @@ public:
 		_size = last - first;
 		_start = _allocator.allocate(_size);
 		for (size_type i = 0; i < _size; i++)
-		{	_start[i] = first;
+		{	
+			_start[i] = first;
 			first++;
 		}
+		_filled = _size;
 	}
 
 	// Copy constructor. Constructs the container with the copy of the contents of other.
-	vector(const vector & other)
+	vector(const vector & other) : _allocator(other._allocator), _size(other._size), _filled(other._filled)
 	{
-		(void)other;
+		this->_start = _allocator.allocate(_size);
+		for(size_t i = 0; i < _filled; i++)
+			this->_start[i] = other._start[i];
 	}
     /*      Destructor      */
 	// Destructs the vector. The destructors of the elements 

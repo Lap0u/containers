@@ -10,8 +10,9 @@
 
 int main()
 {
+	std::vector<int>lol;
     using namespace ft;
-    vector<int>re;
+    vector<int>re(3, 22);
     re.disp();
     return 0;
 }

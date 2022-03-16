@@ -2,16 +2,24 @@
 # define FT_VECTOR_HPP
 
 # include <memory>
-
+# include "v_iterator.hpp"
 # define COUT std::cout <<
 # define ENDL << std::endl
 
 /*https://en.cppreference.com/w/cpp/container/vector*/
 
+/*https://www.cplusplus.com/reference/vector/vector/?kw=vector*/
+
+/*https://www.lirmm.fr/~ducour/Doc-objets/ISO+IEC+14882-1998.pdf*/
+
+
 namespace ft {
+
 template <class T, class Allocator = std::allocator<T> >
 class vector
 {
+
+
 public:
     void disp() { std::cout <<"Lol" << std::endl;};
 /*==Member types==*/
@@ -25,9 +33,20 @@ public:
 	typedef	typename 	Allocator::pointer								pointer;
 	typedef	typename 	Allocator::const_pointer						const_pointer;
 	/*iterators!!*/
+	typedef				ft::myIterator<T>								iterator;
+	typedef				ft::myIterator<const T>							const_iterator;
 
-
+	typedef             std::reverse_iterator<iterator>					reverse_iterator;
+    typedef				std::reverse_iterator<const_iterator>			const_reverse_iterator;
 	/*!!!!!!!!!!!*/
+
+private:
+	allocator_type	_allocator;
+	value_type*				_start;
+	size_t			_size;
+	size_t			_filled;
+
+public:
 /*==Basics==*/
 
     /*      Constructor     */
@@ -80,8 +99,26 @@ public:
 	// Destructs the vector. The destructors of the elements 
 	// are called and the used storage is deallocated. 
 	virtual ~vector() { _allocator.deallocate(_start, _size);}
+    
     /*      Operator=       */
+    // Copy assignment operator. Replaces the contents with a copy of the contents of other.
+    vector& operator=( const vector& other )
+    {
+        if (this != &other)
+        {
+            this->_allocator.deallocate(_start, _size);
+            this->_allocator = other._allocator;
+            this->_size = other._size;
+            this->_filled = other._filled;
+            this->_start = this->_allocator.allocate(this->_size);
+    		for(size_t i = 0; i < _filled; i++)
+			    this->_start[i] = other._start[i];
+        }
+    }
+
     /*      Assign          */
+    // Replaces the contents with count copies of value value
+    // void assign( size_type count, const T& value )
     /*      Allocator       */
 
 /*==Element access==*/
@@ -117,11 +154,6 @@ public:
 	/*		Resize			*/
 	/*		Swap			*/
 
-private:
-	allocator_type	_allocator;
-	value_type*		_start;
-	size_t			_size;
-	size_t			_filled;
 };
 
 /*==Operators overload==*/

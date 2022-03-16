@@ -1,7 +1,7 @@
 #ifndef I_ITERATOR_HPP
 # define I_ITERATOR_HPP
 
-#include "ft_vector.hpp"
+#include "vector.hpp"
 // # include <vector>
 
 namespace ft {
@@ -11,17 +11,17 @@ class myIterator
 {
 public:
 
-	typedef typename T::value_type			value_type;
-	typedef	value_type*			pointer;
-	typedef	value_type&			reference;
-	typedef std::ptrdiff_t	difference_type;
-	typedef	std::random_access_iterator_tag iterator_category;
+	typedef T									value_type;
+	typedef	value_type*							pointer;
+	typedef	value_type&							reference;
+	typedef std::ptrdiff_t						difference_type;
+	typedef	std::random_access_iterator_tag 	iterator_category;
 
     myIterator() :	_m_ptr(NULL){}   
     myIterator(pointer ptr) :	_m_ptr(ptr){}   
 	virtual ~myIterator() {}
-	myIterator (reference src): _m_ptr(src->_m_ptr) {}
-	myIterator operator=(reference rhs)
+	myIterator (myIterator const & src): _m_ptr(src._m_ptr) {}
+	myIterator & operator=(myIterator const & rhs)
 	{
 		this->_m_ptr = rhs._m_ptr;
 		return *this;
@@ -31,15 +31,15 @@ public:
 	{
 		return (rhs - *this);
 	}
-	pointer operator+=(int index)
+	myIterator & operator+=(int index)
 	{
-		*this += index;
+		_m_ptr += index;
 		return *this;
 	}
 	
-	pointer operator-=(int index)
+	myIterator & operator-=(int index)
 	{
-		*this -= index;
+		_m_ptr -= index;
 		return *this;
 	}
 	

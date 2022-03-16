@@ -130,7 +130,7 @@ public:
 /*==Iterators==*/
     
     /*      Begin           */
-	// iterator begin() {return myIterator(_start);  }
+	iterator begin() {return (_start);  }
     /*      End             */
     /*      Rbegin          */
     /*      Rend            */

@@ -79,7 +79,7 @@ public:
     /*      Destructor      */
 	// Destructs the vector. The destructors of the elements 
 	// are called and the used storage is deallocated. 
-	~vector() { _allocator.deallocate(_start, _size);}
+	virtual ~vector() { _allocator.deallocate(_start, _size);}
     /*      Operator=       */
     /*      Assign          */
     /*      Allocator       */

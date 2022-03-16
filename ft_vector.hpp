@@ -18,8 +18,6 @@ namespace ft {
 template <class T, class Allocator = std::allocator<T> >
 class vector
 {
-
-
 public:
     void disp() { std::cout <<"Lol" << std::endl;};
 /*==Member types==*/
@@ -32,13 +30,13 @@ public:
 	typedef	const 		value_type&										const_reference;
 	typedef	typename 	Allocator::pointer								pointer;
 	typedef	typename 	Allocator::const_pointer						const_pointer;
-	/*iterators!!*/
-	typedef				ft::myIterator<T>								iterator;
+
+	typedef				ft::myIterator<vector<T> >								iterator;
 	typedef				ft::myIterator<const T>							const_iterator;
 
 	typedef             std::reverse_iterator<iterator>					reverse_iterator;
     typedef				std::reverse_iterator<const_iterator>			const_reverse_iterator;
-	/*!!!!!!!!!!!*/
+	
 
 private:
 	allocator_type	_allocator;
@@ -132,6 +130,7 @@ public:
 /*==Iterators==*/
     
     /*      Begin           */
+	// iterator begin() {return myIterator(_start);  }
     /*      End             */
     /*      Rbegin          */
     /*      Rend            */

@@ -10,9 +10,10 @@
 
 int main()
 {
-	std::vector<int>lol;
-    using namespace ft;
-    vector<int>re(3, 22);
-    re.disp();
+	using namespace ft;
+	vector<int> re(12);
+#if 1 //iterators
+	vector<int>::iterator it;
+#endif
     return 0;
 }

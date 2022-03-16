@@ -11,52 +11,120 @@ class myIterator
 {
 public:
 
-	typedef T			value_type;
-	typedef	T*			pointer;
-	typedef	T&			reference;
+	typedef typename T::value_type			value_type;
+	typedef	value_type*			pointer;
+	typedef	value_type&			reference;
 	typedef std::ptrdiff_t	difference_type;
 	typedef	std::random_access_iterator_tag iterator_category;
 
+    myIterator() :	_m_ptr(NULL){}   
+    myIterator(pointer ptr) :	_m_ptr(ptr){}   
+	virtual ~myIterator() {}
+	myIterator (reference src): _m_ptr(src->_m_ptr) {}
+	myIterator operator=(reference rhs)
+	{
+		this->_m_ptr = rhs._m_ptr;
+		return *this;
+	}
 
-    myIterator():                    v(nullptr), i(0) {}   
-    myIterator(T* v, int i): v(v),       i(i) {}
-    // Default Copy/Move Are Fine.
-    // Default Destructor fine.
+	difference_type operator-(pointer rhs)
+	{
+		return (rhs - *this);
+	}
+	pointer operator+=(int index)
+	{
+		*this += index;
+		return *this;
+	}
+	
+	pointer operator-=(int index)
+	{
+		*this -= index;
+		return *this;
+	}
+	
+	pointer	operator+(int index) const 
+	{
+		return (_m_ptr + index);
+	}
 
-    reference       operator*()             {return (*v)[i];}
-    reference 		operator*()       const {return (*v)[i];}
-    pointer         operator->()            {return &((*v)[i]);}
-    pointer			operator->()      const {return &((*v)[i]);}
-    reference       operator[](int m)       {return (*v)[i + m];}
-    reference		operator[](int m) const {return (*v)[i + m];}
-    
+	pointer operator-(int index) const
+	{
+		return (_m_ptr - index);
+	}
 
-    myIterator& operator++()       {++i;return *this;}
-    myIterator& operator--()       {--i;return *this;}
-    myIterator  operator++(int)    {myIterator r(*this);++i;return r;}
-    myIterator  operator--(int)    {myIterator r(*this);--i;return r;}
+	bool operator==(pointer rhs) const 
+	{
+		return *this = *rhs;
+	}
 
-    myIterator& operator+=(int n)  {i += n;return *this;}
-    myIterator& operator-=(int n)  {i -= n;return *this;}
+	bool operator!=(pointer rhs) const 
+	{
+		return *this != *rhs;
+	}	
 
-    myIterator operator+(int n)   const {myIterator r(*this);return r += n;}
-    myIterator operator-(int n)   const {myIterator r(*this);return r -= n;}
+	bool operator<(pointer rhs) const
+	{
+		return *this < rhs;
+	}
 
-    difference_type operator-(myIterator const& r) const {return i - r.i;}
+	bool operator<=(pointer rhs) const
+	{
+		return *this <= rhs;
+	}
 
-    // Note: comparing iterator from different containers
-    //       is undefined behavior so we don't need to check
-    //       if they are the same container.
-    bool operator<(myIterator const& r)  const {return i <  r.i;}
-    bool operator<=(myIterator const& r) const {return i <= r.i;}
-    bool operator>(myIterator const& r)  const {return i >  r.i;}
-    bool operator>=(myIterator const& r) const {return i >= r.i;}
-    bool operator!=(const myIterator &r) const {return i != r.i;}
-    bool operator==(const myIterator &r) const {return i == r.i;}
+	bool operator>(pointer rhs) const
+	{
+		return *this > rhs;
+	}
 
+	bool operator>=(pointer rhs) const
+	{
+		return *this >= rhs;
+	}
+
+	myIterator& operator++()
+	{
+		_m_ptr++;
+		return *this;
+	}
+
+	myIterator operator++(int)
+	{
+		myIterator it  = *this;
+		++(*this);
+		return it;
+	}
+	
+	myIterator& operator--()
+	{
+		_m_ptr--;
+		return *this;
+	}
+
+	myIterator operator--(int)
+	{
+		myIterator it  = *this;
+		--(*this);
+		return it;
+	}
+
+	reference operator[](int index)
+	{
+		return *(_m_ptr + index);
+	}
+
+	pointer operator->()
+	{
+		return _m_ptr;
+	}
+
+	reference operator*()
+	{
+		return * _m_ptr;
+	}
 private:
-    T* v;
-    int        i;
+    pointer	_m_ptr;
 };
 }
 #endif

@@ -31,7 +31,7 @@ public:
 	typedef	typename 	Allocator::pointer								pointer;
 	typedef	typename 	Allocator::const_pointer						const_pointer;
 
-	typedef				ft::myIterator<vector<T> >								iterator;
+	typedef				ft::myIterator<T>								iterator;
 	typedef				ft::myIterator<const T>							const_iterator;
 
 	typedef             std::reverse_iterator<iterator>					reverse_iterator;

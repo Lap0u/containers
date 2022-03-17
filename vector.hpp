@@ -4,6 +4,7 @@
 # include <memory>
 # include <limits>
 # include <exception>
+# include <iterator>
 
 # include "v_iterator.hpp"
 # define COUT std::cout <<
@@ -88,7 +89,7 @@ public:
 		_start = _allocator.allocate(_capacity);
 		for (size_type i = 0; i < _capacity; i++)
 		{	
-			_start[i] = first;
+			_start[i] = *first;
 			first++;
 		}
 		_filled = _capacity;
@@ -130,10 +131,34 @@ public:
 /*==Element access==*/
 
     /*      At              */
+	reference at(size_type pos)
+	{
+		if (pos >= _filled)
+			throw(std::out_of_range("Pos out of bonds"));
+		return *(_start + pos);
+	}
+
+	const_reference at(size_type pos) const
+	{
+		if (pos >= _filled)
+			throw(std::out_of_range("Pos out of bonds"));
+		return *(_start + pos);
+	}	
+
     /*      Operator[]      */
-    /*      Front           */
-    /*      Back            */
-    /*      Data            */
+    reference operator[](size_type pos) { return *(_start + pos);}
+    const_reference operator[](size_type pos) const { return *(_start + pos);}
+	
+	/*      Front           */
+	reference front() { return *this->begin();}
+	const_reference front() const { return *this->begin();}
+    
+	/*      Back            */
+   	reference back() { return *(this->end() - 1);}
+	const_reference back() const { return *(this->end() - 1);}
+	/*      Data            */
+	T*	data() { return this->_start;}
+	const T* data() const { return this->_start;}
 
 /*==Iterators==*/
     
@@ -158,13 +183,13 @@ public:
 	void reserve(size_type n)
 	{
 		if (n > max_size())
-			throw length_error();
+			throw std::length_error("Not enough space to allocate memory");
 		if (n > this->capacity())
 		{
 			this->_allocator.deallocate(_start, _capacity);
 			_start = this->_allocator.allocate(n);
 			this->_capacity = n;
-			
+
 		}
 	}
     /*      _Capacity        */
@@ -180,8 +205,6 @@ public:
 	/*		Resize			*/
 	/*		Swap			*/
 
-/*==Exceptions==*/
-	class length_error : public std::exception {};
 };
 
 /*==Operators overload==*/

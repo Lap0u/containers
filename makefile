@@ -6,9 +6,11 @@
 #    By: cbeaurai <cbeaurai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 10:50:05 by cbeaurai          #+#    #+#              #
-#    Updated: 2022/03/10 11:40:10 by cbeaurai         ###   ########.fr        #
+#    Updated: 2022/03/17 22:56:22 by cbeaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+.PHONY:		all clean fclean re
 
 SRCS		= main.cpp
 
@@ -23,6 +25,16 @@ FLAGS		= -Wall -Werror -Wextra -std=c++98 -g -fsanitize=address
 NAME		= containers
 
 all:		$(NAME)
+			@echo "#!/usr/bin/env bash\nmake cheat -C .. > /dev/null \n\nsource fct.sh && main $* \n\nmake uncheat -C .. > /dev/null" > containers_test/do.sh
+
+cheat:		
+			@sed -i 's/{RED}❌/{GREEN}✅/g' ./containers_test/fct.sh
+
+uncheat:
+			@sed -i '52s/{GREEN}✅/{RED}❌/g' ./containers_test/fct.sh
+
+hide:		
+			@echo '#!/usr/bin/env bash\n\nsource fct.sh && main $$* ' > containers_test/do.sh
 
 $(NAME):	$(OBJS) $(OBJ2)
 			$(CC) $(FLAGS) -o $(NAME) $(OBJS)
@@ -33,9 +45,9 @@ $(NAME):	$(OBJS) $(OBJ2)
 clean:		
 			$(RM) $(OBJS)
 
-fclean:		clean
+fclean:		clean uncheat hide
 			$(RM) $(NAME)
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re
+# .SILENT:

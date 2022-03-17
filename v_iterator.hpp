@@ -20,14 +20,14 @@ public:
     myIterator() :	_m_ptr(NULL){}   
     myIterator(pointer ptr) :	_m_ptr(ptr){}
 	virtual ~myIterator() {}
-	myIterator (myIterator const & src): _m_ptr(src._m_ptr) {}
-	myIterator & operator=(myIterator const & rhs)
+	myIterator (myIterator<value_type> const & src): _m_ptr(src._m_ptr) {}
+	myIterator & operator=(myIterator<value_type> const & rhs)
 	{
 		this->_m_ptr = rhs._m_ptr;
 		return *this;
 	}
 
-	difference_type operator-(pointer rhs)
+	difference_type operator-(myIterator<value_type> rhs)
 	{
 		return (rhs - *this);
 	}
@@ -53,35 +53,35 @@ public:
 		return (_m_ptr - index);
 	}
 
-	bool operator==(pointer rhs) const 
+	bool operator==(myIterator<value_type> rhs) const 
 	{
-		return *this = *rhs;
+		return *this == rhs;
 	}
 
-	bool operator!=(pointer rhs) const 
+	bool operator!=(myIterator<value_type> rhs) const 
 	{
-		return *this != *rhs;
+		return *this != rhs;
 	}	
 
-	bool operator<(pointer rhs) const
+	bool operator<(myIterator<value_type> rhs) const
 	{
 		return *this < rhs;
 	}
 
-	bool operator<=(pointer rhs) const
+	bool operator<=(myIterator<value_type> rhs) const
 	{
 		return *this <= rhs;
 	}
 
-	bool operator>(pointer rhs) const
+	bool operator>(myIterator<value_type> rhs) const
 	{
 		return *this > rhs;
 	}
 
-	bool operator>=(pointer rhs) const
+	bool operator>=(myIterator<value_type> rhs) const
 	{
 		return *this >= rhs;
-	}
+	}	
 
 	myIterator& operator++()
 	{

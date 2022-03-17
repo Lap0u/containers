@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "vector": "cpp"
-    }
+		"*.tpp": "cpp",
+		"vector": "cpp",
+		"stack": "cpp"
+	}
 }

@@ -18,7 +18,7 @@ public:
 	typedef	std::random_access_iterator_tag 	iterator_category;
 
     myIterator() :	_m_ptr(NULL){}   
-    myIterator(pointer ptr) :	_m_ptr(ptr){}   
+    myIterator(pointer ptr) :	_m_ptr(ptr){}
 	virtual ~myIterator() {}
 	myIterator (myIterator const & src): _m_ptr(src._m_ptr) {}
 	myIterator & operator=(myIterator const & rhs)

@@ -12,7 +12,7 @@ int main()
 {
 	using namespace ft;
 	vector<int> re(12);
-#if 1 //iterators
+#if 0 //iterators
 	vector<int>::iterator it = re.begin();
 	COUT *it ENDL;
 	*it = 12;

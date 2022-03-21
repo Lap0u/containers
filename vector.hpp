@@ -213,30 +213,40 @@ public:
 	/*		Erase			*/
 	iterator erase(iterator pos)
 	{
-		size_type		i;
+		size_type	i;
+		iterator	beg;
 
-		for (i = 0; this->begin() + i != pos; i++);
-		COUT "i = " << i ENDL;
+		beg = this->begin();
+
+		for (i = 0; beg + i != pos; i++);
 		this->_allocator.destroy(this->_start + i);
 		this->_filled--;
 		for (size_type j = i; j != this->_filled; j++)
 		{
 			*(this->_start + j) = *(this->_start + (j + 1));
 		}
-		COUT this->_filled ENDL;
 		// this->_allocator.deallocate(this->_start + this->_filled - 1, 1);
 		return pos;
 	}
 
-	// iterator erase(iterator first, iterator last)
-	// {
-	// 	if (last == first)
-	// 		return first;
-	// 	this->_allocator.deallocate(first, last - first);
-	// 	this->_filled -= last - first;
-	// 	this->_start += last - first;
-	// 	return last;
-	// }
+	iterator erase(iterator first, iterator last)
+	{
+		size_type	i;
+		iterator	beg;
+
+		beg = this->begin();
+		if (last == first)
+			return first;
+
+		for (i = 0; beg + i != first; i++);
+		for (size_type j = i; beg + j != last; j++)
+		{
+			this->_allocator.destroy(beg + j);
+		}
+		this->_filled -= last - first;
+		this->_start += last - first;
+		return last;
+	}
 	/*		Push_back		*/
 	/*		Pop-back		*/
 	/*		Resize			*/

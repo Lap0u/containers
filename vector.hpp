@@ -198,8 +198,45 @@ public:
 /*==Modifiers==*/
 
 	/*		Clear			*/
+	void	clear()
+	{
+		size_t	save = this->_filled;
+		while (this->_filled != 0)
+		{
+			this->_allocator.destroy(this->_start + this->_filled - 1);
+			this->_filled--;
+		}
+		this->_allocator.deallocate(this->_start, save);
+	}
 	/*		Insert			*/
+
 	/*		Erase			*/
+	iterator erase(iterator pos)
+	{
+		size_type		i;
+
+		for (i = 0; this->begin() + i != pos; i++);
+		COUT "i = " << i ENDL;
+		this->_allocator.destroy(this->_start + i);
+		this->_filled--;
+		for (size_type j = i; j != this->_filled; j++)
+		{
+			*(this->_start + j) = *(this->_start + (j + 1));
+		}
+		COUT this->_filled ENDL;
+		// this->_allocator.deallocate(this->_start + this->_filled - 1, 1);
+		return pos;
+	}
+
+	// iterator erase(iterator first, iterator last)
+	// {
+	// 	if (last == first)
+	// 		return first;
+	// 	this->_allocator.deallocate(first, last - first);
+	// 	this->_filled -= last - first;
+	// 	this->_start += last - first;
+	// 	return last;
+	// }
 	/*		Push_back		*/
 	/*		Pop-back		*/
 	/*		Resize			*/

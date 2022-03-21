@@ -11,7 +11,18 @@
 int main()
 {
 	using namespace ft;
-	vector<int> re(12);
+	vector<int> re(3);
+	re[0] = 10;re[1] = 11; re[2] = 12;
+	COUT "cap" << re.capacity() ENDL;
+	COUT &re[1] ENDL;
+	re.erase(re.begin() + 1);
+	// re.clear();
+	COUT &re[2] ENDL;
+	COUT re[0] ENDL << re[1] ENDL;
+	COUT "size" << re.size() ENDL;
+	COUT "cap" << re.capacity() ENDL;
+	COUT re[2] ENDL;
+
 #if 0 //iterators
 	vector<int>::iterator it = re.begin();
 	COUT *it ENDL;

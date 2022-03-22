@@ -210,6 +210,51 @@ public:
 		this->_allocator.deallocate(this->_start, save);
 	}
 	/*		Insert			*/
+	iterator insert (iterator position, const value_type& val)
+	{
+		if (this->_filled == this->_capacity)//realloc required
+		{
+			ft::vector<value_type>	temp;
+			size_type				i;
+			size_type				ret;
+
+			temp._capacity = this->_capacity * 2;
+			temp._filled = this->_filled + 1;
+			temp._allocator = this->_allocator;
+			temp._start = this->_allocator.allocate(temp->_capacity);
+			for (i = 0; i + this.begin() != position; i++)
+				*(temp._start + i) = *(this->_start + i);
+			*(this->_temp + i) = val;
+			ret = i;
+			i++;
+			while (i < temp->_filled)
+			{
+				*(temp._start + i) = *(this->_start + i - 1);
+				i++;	
+			}
+			*this = temp;
+			return this->begin() + ret;
+		}
+		else
+		{
+			size_type	offset = position - this->begin();
+			size_type	save_off = offset;
+			value_type	save;
+
+			this->_filled++;
+			save = this->_start + offset;
+			this->_start + offset = val;
+			offset++;
+			while(offset < this->filled)
+			{
+				*(this->_start + offset) = save;
+				offset++;
+				save = *(this->_start + offset);
+			}
+			return this->begin() + save_off;
+		}
+	}
+
 
 	/*		Erase			*/
 	iterator erase(iterator pos)
@@ -311,7 +356,7 @@ public:
 				this->_filled++;
 			}
 		}
-		else //il faut gerer si n est plus de 2 fois plus grand que capa
+		else if (this->_filled * 2 >= n)
 		{
 			ft::vector<value_type> temp;
 
@@ -325,6 +370,23 @@ public:
 			{
 				*(temp._start + temp._filled) = val;
 				temp._filled++;
+			}
+			*this = temp;
+		}
+		else
+		{
+			ft::vector<value_type> temp;
+
+			temp._allocator = this->_allocator;
+			temp._capacity = n;
+			temp._filled = n;
+			temp._start = temp._allocator.allocate(temp._capacity);
+			for (size_type i = 0; i < this->_filled; i++)
+				*(temp._start + i) = *(this->_start + i);
+			while (this->_filled < n)
+			{
+				*(temp._start + this->_filled) = val;
+				this->_filled++;
 			}
 			*this = temp;
 		}

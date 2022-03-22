@@ -121,6 +121,7 @@ public:
     		for(size_t i = 0; i < _filled; i++)
 			    this->_start[i] = other._start[i];
         }
+		return *this;
     }
 
     /*      Assign          */
@@ -243,13 +244,58 @@ public:
 		{
 			this->_allocator.destroy(beg + j);
 		}
+		for (size_type j = i; j != this->end(); j++)
+		{
+			this->_start + j = this->_start + j + (last - first);
+		}
 		this->_filled -= last - first;
 		this->_start += last - first;
 		return last;
 	}
 	/*		Push_back		*/
+	void push_back (const value_type& val)
+	{
+		ft::vector<value_type> temp;
+		if (this->_filled == this->_capacity && this->_capacity != 0)
+		{
+			temp._allocator = this->_allocator;
+			temp._filled = this->_filled;
+			temp._capacity = this->_capacity * 2;
+			temp._start = temp._allocator.allocate(temp._capacity);
+			for (size_type i = 0; i < temp._filled; i++)
+				*(temp._start + i) = *(this->_start + i);
+			*(temp._start + temp._filled) = val;
+			temp._filled++;
+			// this->_allocator.deallocate(this->_start, this->_capacity);
+			*this = temp;
+		}
+		else if (this->_capacity == 0)
+		{
+			this->_start = this->_allocator.allocate(1);
+			this->_filled = 1;
+			this->_capacity = 1;
+			*(this->_start) = val;
+		}
+		else
+		{
+			size_type	i;
+			for (i = 0; i < this->_filled; i++);
+			*(this->_start + i) = val;
+		}
+	}
 	/*		Pop-back		*/
+	void	pop_back()
+	{
+		size_type	i;
+
+		if (this->_filled == 0)
+			return ;
+		for (i = 0; i != this->_filled;i++);
+		this->_allocator.destroy(this->_start + i);
+		this->_filled--;
+	}
 	/*		Resize			*/
+	
 	/*		Swap			*/
 
 };

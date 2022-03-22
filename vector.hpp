@@ -89,7 +89,7 @@ public:
 		_start = _allocator.allocate(_capacity);
 		for (size_type i = 0; i < _capacity; i++)
 		{	
-			_start[i] = *first;
+			*(_start + i) = first;
 			first++;
 		}
 		_filled = _capacity;
@@ -295,7 +295,40 @@ public:
 		this->_filled--;
 	}
 	/*		Resize			*/
-	
+	void resize (size_type n, value_type val = value_type())
+	{
+		if (n < this->_filled)
+		{
+			for (size_type i = n; i < this->_filled; i++)
+				this->_allocator.destroy(this->_start + i);
+			this->_filled = n;
+		}
+		else if (n < this->_capacity)
+		{
+			while (this->_filled < n)
+			{
+				*(this->_start + this->_filled) = val;
+				this->_filled++;
+			}
+		}
+		else //il faut gerer si n est plus de 2 fois plus grand que capa
+		{
+			ft::vector<value_type> temp;
+
+			temp._allocator = this->_allocator;
+			temp._filled = this->_filled;
+			temp._capacity = this->_capacity * 2;
+			temp._start = temp._allocator.allocate(temp._capacity);
+			for (size_type i = 0; i < temp._filled; i++)
+				*(temp._start + i) = *(this->_start + i);
+			while (temp._filled < n)
+			{
+				*(temp._start + temp._filled) = val;
+				temp._filled++;
+			}
+			*this = temp;
+		}
+	}
 	/*		Swap			*/
 
 };

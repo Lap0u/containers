@@ -46,7 +46,7 @@ public:
 
 	difference_type	operator-(myIterator rhs) 
 	{
-		return (rhs._m_ptr - this->_m_ptr);
+		return (this->_m_ptr - rhs._m_ptr);
 	}
 
 	myIterator	operator+(difference_type index) 

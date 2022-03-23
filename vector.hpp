@@ -187,10 +187,16 @@ public:
 			throw std::length_error("Not enough space to allocate memory");
 		if (n > this->capacity())
 		{
-			this->_allocator.deallocate(_start, _capacity);
-			_start = this->_allocator.allocate(n);
-			this->_capacity = n;
+			ft::vector<value_type>temp;
 
+			temp._allocator = this->_allocator;
+			temp._capacity = n;
+			temp._filled = this->_filled;
+			temp._start = temp._start = temp._allocator.allocate(temp._capacity);
+			for (size_type i = 0; i < this->_filled; i++)
+				*(temp._start + i) = *(this->_start + i);
+			// this->_allocator.deallocate(_start, _capacity);
+			*this = temp;
 		}
 	}
     /*      _Capacity        */
@@ -221,13 +227,13 @@ public:
 			temp._capacity = this->_capacity * 2;
 			temp._filled = this->_filled + 1;
 			temp._allocator = this->_allocator;
-			temp._start = this->_allocator.allocate(temp->_capacity);
-			for (i = 0; i + this.begin() != position; i++)
+			temp._start = temp._allocator.allocate(temp._capacity);
+			for (i = 0; this->begin() + i != position; i++)
 				*(temp._start + i) = *(this->_start + i);
-			*(this->_temp + i) = val;
+			*(temp._start + i) = val;
 			ret = i;
 			i++;
-			while (i < temp->_filled)
+			while (i < temp._filled)
 			{
 				*(temp._start + i) = *(this->_start + i - 1);
 				i++;	
@@ -240,16 +246,20 @@ public:
 			size_type	offset = position - this->begin();
 			size_type	save_off = offset;
 			value_type	save;
+			value_type	save_next;
 
 			this->_filled++;
-			save = this->_start + offset;
-			this->_start + offset = val;
+			save = *(this->_start + offset);
+			*(this->_start + offset) = val;
 			offset++;
-			while(offset < this->filled)
+			while(offset < this->_filled)
 			{
+				save_next = *(this->_start + offset);
 				*(this->_start + offset) = save;
 				offset++;
-				save = *(this->_start + offset);
+				// if (offset == this->_filled)
+				// 	break ;
+				save = save_next;
 			}
 			return this->begin() + save_off;
 		}

@@ -10,11 +10,25 @@
 
 int main()
 {
-	using namespace std;
+	using namespace ft;
 	vector<int> re(4);
+	// re.reserve(5);
 	COUT re.size() ENDL;
 	COUT re.capacity() ENDL;
+	re[0] = 2;
+	re[1] = 4;
+	re[2] = 6;
+	re[3] = 8;
+	COUT re[0] ENDL;
+	COUT re[1] ENDL;
+	COUT re[2] ENDL;
+	COUT re[3] ENDL ENDL;
 	re.insert(re.begin() + 2, 12);
+	COUT re[0] ENDL;
+	COUT re[1] ENDL;
+	COUT re[2] ENDL;
+	COUT re[3] ENDL;
+	COUT re[4] ENDL ENDL;
 	COUT re.size() ENDL;
 	COUT re.capacity() ENDL;
 

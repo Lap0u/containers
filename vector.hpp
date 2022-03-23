@@ -113,7 +113,8 @@ public:
     {
         if (this != &other)
         {
-            this->_allocator.deallocate(_start, _capacity);
+			if (this->_start != NULL)
+            	this->_allocator.deallocate(_start, _capacity);
             this->_allocator = other._allocator;
             this->_capacity = other._capacity;
             this->_filled = other._filled;
@@ -125,9 +126,14 @@ public:
     }
 
     /*      Assign          */
-    // Replaces the contents with count copies of value value
-    // void assign( size_type count, const T& value )
+    // Replaces the contents with count copies of value val
+    void assign( size_type count, const T& val)
+	{
+		this->clear();
+		this->insert(this->begin(), count, val);
+	}
     /*      Allocator       */
+	allocator_type get_allocator() const { return this->_allocator;}
 
 /*==Element access==*/
 
@@ -164,11 +170,11 @@ public:
 /*==Iterators==*/
     
     /*      Begin           */
-	iterator begin() {return _start;}
-	const_iterator begin() const {return _start;}
+	iterator begin() {return iterator(this->_start);}
+	const_iterator begin() const {return const_iterator(this->_start);}
     /*      End             */
-	iterator end() {return _start + _filled;}
-	const_iterator end() const {return _start + _filled;}	
+	iterator end() {return this->begin() + this->_filled;}
+	const_iterator end() const {return this->begin() + this->_filled;}	
     /*      Rbegin          */
     /*      Rend            */
 
@@ -214,10 +220,26 @@ public:
 			this->_filled--;
 		}
 		this->_allocator.deallocate(this->_start, save);
+		this->_start = NULL;
 	}
 	/*		Insert			*/
 	iterator insert (iterator position, const value_type& val)
 	{
+
+		if (this->_capacity == 0)
+		{
+			this->_start = this->_allocator.allocate(1);
+			this->_start = val;
+			this->_filled = 1;
+			this->_capacity = 1;
+		}
+		if (this->_filled == 0)
+		{
+			this->_start = val;
+			this->_filled++;
+			return ;
+		}
+
 		if (this->_filled == this->_capacity)//realloc required
 		{
 			ft::vector<value_type>	temp;
@@ -257,8 +279,6 @@ public:
 				save_next = *(this->_start + offset);
 				*(this->_start + offset) = save;
 				offset++;
-				// if (offset == this->_filled)
-				// 	break ;
 				save = save_next;
 			}
 			return this->begin() + save_off;
@@ -267,13 +287,22 @@ public:
 
 	void insert (iterator position, size_type n, const value_type& val)
 	{
+		// if (this->_filled == 0)
+		// {
+		// 	ft::vector<value_type> temp(n);
+		// 	for (size_type i = 0; i < n; i++)
+		// 		*(temp._start + i) = val;
+		// 	temp._capacity = this->_capacity;
+		// 	*this = temp;
+		// 	return ;
+		// }
 		if (this->_filled + n > this->_capacity)
 		{
 			ft::vector<value_type>	temp;
 			size_type				i;
 			size_type				j;
 
-			if (this->_capacity * 2 < this->_filled + n)
+			if (this->_filled * 2 < this->_filled + n)
 				temp._capacity = this->_filled + n;
 			else
 				temp._capacity = this->_capacity * 2;
@@ -311,6 +340,15 @@ template <class InputIterator>
     void insert (iterator position, InputIterator first, InputIterator last)
 	{
 		size_type	n = last - first;
+		if (this->_filled == 0)
+		{
+			ft::vector<value_type> temp(n);
+			for (size_type i = 0; i < n; i++)
+				*(temp._start + i) = first + i;
+			temp._capacity = this->_capacity;
+			*this = temp;
+			return ;
+		}
 		if (this->_filled + n > this->_capacity)
 		{
 			ft::vector<value_type>	temp;

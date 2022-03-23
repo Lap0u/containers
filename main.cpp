@@ -10,31 +10,32 @@
 
 int main()
 {
+
 	using namespace ft;
 	vector<int> re(4);
-	re.reserve(6);
-	COUT re.size() ENDL;
-	COUT re.capacity() ENDL ENDL;
-	re[0] = 2;
-	re[1] = 4;
-	re[2] = 6;
-	re[3] = 8;
-	COUT re[0] ENDL;
-	COUT re[1] ENDL;
-	COUT re[2] ENDL;
-	COUT re[3] ENDL ENDL;
-	re.insert(re.begin() + 2, 2, 4);
-	COUT re[0] ENDL;
-	COUT re[1] ENDL;
-	COUT re[2] ENDL;
-	COUT re[3] ENDL;
-	COUT re[4] ENDL;
-	COUT re[5] ENDL ENDL;
-	COUT re.size() ENDL;
-	COUT re.capacity() ENDL;
+	// re.reserve(6);
+	// COUT re.size() ENDL;
+	// COUT re.capacity() ENDL ENDL;
+	// re[0] = 2;
+	// re[1] = 4;
+	// re[2] = 6;
+	// re[3] = 8;
+	// COUT re[0] ENDL;
+	// COUT re[1] ENDL;
+	// COUT re[2] ENDL;
+	// COUT re[3] ENDL ENDL;
+	// re.assign(8, 12);
+	// COUT re[0] ENDL;
+	// COUT re[1] ENDL;
+	// COUT re.size() ENDL;
+	// COUT re.capacity() ENDL;
 
-#if 0 //iterators
+#if 1 //iterators
 	vector<int>::iterator it = re.begin();
+	vector<int>::iterator it2 = re.end();
+	re[3] = 111;
+	COUT *(re.begin() + 3) ENDL;
+	COUT *(it2 - 1) ENDL ENDL;
 	COUT *it ENDL;
 	*it = 12;
 	COUT *it ENDL;

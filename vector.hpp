@@ -74,10 +74,11 @@ public:
 	explicit vector(size_type count, const T& value = T(),
 		const Allocator& alloc = Allocator()) : _allocator(alloc), _capacity(count)
 	{
-		_start = _allocator.allocate(count);
+		COUT count ENDL ENDL;
+		this->_start = this->_allocator.allocate(count);
 		for (size_type i = 0; i < count; i++)
-			_start[i] = value;
-		_filled = _capacity;
+			this->_start[i] = value;
+		this->_filled = this->_capacity;
 	}
 
 	// Constructs the container with the contents of the range [first, last).

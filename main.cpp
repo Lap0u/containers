@@ -34,7 +34,7 @@ int main()
 	vector<int>::iterator it = re.begin();
 	vector<int>::iterator it2 = re.end();
 	re[3] = 111;
-	COUT *(re.begin() + 3) ENDL;
+	COUT *(it + 3) ENDL;
 	COUT *(it2 - 1) ENDL ENDL;
 	COUT *it ENDL;
 	*it = 12;
@@ -49,7 +49,7 @@ int main()
 	COUT *it ENDL;
 	it[3] = 24;
 	COUT *(it + 3) ENDL;
-	it = &(it[3]);
+	it += 3;
 	COUT *it ENDL;
 	it -= 3;
 	COUT *it ENDL;

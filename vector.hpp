@@ -45,8 +45,8 @@ public:
 private:
 	allocator_type		_allocator;
 	value_type*			_start;
-	size_t				_capacity;
-	size_t				_filled;
+	size_type			_capacity;
+	size_type			_filled;
 
 public:
 /*==Basics==*/
@@ -173,8 +173,8 @@ public:
 	iterator begin() {return iterator(this->_start);}
 	const_iterator begin() const {return const_iterator(this->_start);}
     /*      End             */
-	iterator end() {return this->begin() + this->_filled;}
-	const_iterator end() const {return this->begin() + this->_filled;}	
+	iterator end() {COUT "Size is " << this->_filled ENDL; return iterator(this->_start + this->_filled - 1);}
+	const_iterator end() const {return (this->_start + this->_filled);}	
     /*      Rbegin          */
     /*      Rend            */
 
@@ -232,12 +232,13 @@ public:
 			this->_start = val;
 			this->_filled = 1;
 			this->_capacity = 1;
+			return this->begin();
 		}
 		if (this->_filled == 0)
 		{
 			this->_start = val;
 			this->_filled++;
-			return ;
+			return this->begin();
 		}
 
 		if (this->_filled == this->_capacity)//realloc required

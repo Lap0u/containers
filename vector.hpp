@@ -295,15 +295,58 @@ public:
 		else
 		{
 			size_type	offset = position - this->begin();
-
+			size_type	last_off = this->end() - position;
+			
 			this->_filled += n;
-			for (size_type i = offset; i + n < this->_filled; i++)
-				*(this->_start + i + n) = *(this->_start + i);
+			for (size_type i = 0; i < last_off; i++)
+			{
+				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - last_off);
+			}
 			for (size_type j = 0; j < n; j++)
-				*(this->_start + offset + j) = val;
+				*(this->_start + j + offset) = val;
 		}
 	}
 
+template <class InputIterator>
+    void insert (iterator position, InputIterator first, InputIterator last)
+	{
+		size_type	n = last - first;
+		if (this->_filled + n > this->_capacity)
+		{
+			ft::vector<value_type>	temp;
+			size_type				i;
+			size_type				j;
+
+			if (this->_capacity * 2 < this->_filled + n)
+				temp._capacity = this->_filled + n;
+			else
+				temp._capacity = this->_capacity * 2;
+			
+			temp._filled = this->_filled + n;
+			temp._allocator = this->_allocator;
+			temp._start = temp._allocator.allocate(temp._capacity);
+			for (i = 0; this->begin() + i != position; i++)
+				*(temp._start + i) = *(this->_start + i);
+			for ( j = 0; j < n; j++)
+				*(temp._start + i + j) = first + j;
+			for (; i + j < temp._filled; i++)
+				*(temp._start + i + j) = *(this->_start + i);
+			*this = temp;
+		}
+		else
+		{
+			size_type	offset = position - this->begin();
+			size_type	last_off = this->end() - position;
+			
+			this->_filled += n;
+			for (size_type i = 0; i < last_off; i++)
+			{
+				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - last_off);
+			}
+			for (size_type j = 0; j < n; j++)
+				*(this->_start + j + offset) = first + j;
+		}
+	}
 
 	/*		Erase			*/
 	iterator erase(iterator pos)

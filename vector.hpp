@@ -265,6 +265,45 @@ public:
 		}
 	}
 
+	void insert (iterator position, size_type n, const value_type& val)
+	{
+		if (this->_filled + n > this->_capacity)
+		{
+			ft::vector<value_type>	temp;
+			size_type				i;
+			size_type				j;
+
+			if (this->_capacity * 2 < this->_filled + n)
+				temp._capacity = this->_filled + n;
+			else
+				temp._capacity = this->_capacity * 2;
+			
+			temp._filled = this->_filled + n;
+			temp._allocator = this->_allocator;
+			temp._start = temp._allocator.allocate(temp._capacity);
+			for (i = 0; this->begin() + i != position; i++)
+				*(temp._start + i) = *(this->_start + i);
+			for (j = 0; j < n; j++)
+				*(temp._start + j + i) = val;
+			while (j + i < temp._filled)
+			{
+				*(temp._start + j + i) = *(this->_start + i);
+				i++;
+			}
+			*this = temp;
+		}
+		else
+		{
+			size_type	offset = position - this->begin();
+
+			this->_filled += n;
+			for (size_type i = offset; i + n < this->_filled; i++)
+				*(this->_start + i + n) = *(this->_start + i);
+			for (size_type j = 0; j < n; j++)
+				*(this->_start + offset + j) = val;
+		}
+	}
+
 
 	/*		Erase			*/
 	iterator erase(iterator pos)

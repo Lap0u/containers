@@ -56,7 +56,7 @@ public:
 
 	myIterator	operator-(difference_type index) 
 	{
-		return myIterator(this->_m_ptr + index);
+		return myIterator(this->_m_ptr - index);
 	}
 
 	bool operator==(myIterator<value_type> rhs) const 

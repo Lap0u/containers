@@ -14,6 +14,14 @@ int main()
 	using namespace ft;
 	// size_t x = 4;
 	vector<int> re(4, 12);
+	re[0] = 25;
+	re[1] = 100;
+	vector<int>::iterator s = re.begin();
+	vector<int>::iterator t = re.begin() + 2;
+	vector<int> yo(s, t);
+	COUT yo[0] ENDL;
+	COUT yo[1] ENDL ENDL;
+	
 #if 1 //basic_test
 	COUT re.size() ENDL;
 	COUT re.capacity() ENDL ENDL;
@@ -35,8 +43,8 @@ int main()
 	vector<int>::iterator it = re.begin();
 	vector<int>::iterator it2 = re.end();
 	re[3] = 111;
-	COUT *(it + 3) ENDL;
-	COUT *(it2 - 1) ENDL ENDL;
+	COUT *(it2 - 1) ENDL;
+	// COUT *(it2 - 1) ENDL ENDL;
 	COUT *it ENDL;
 	*it = 12;
 	COUT *it ENDL;

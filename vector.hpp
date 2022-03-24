@@ -8,6 +8,7 @@
 
 # include "v_iterator.hpp"
 # include "enable_if.hpp"
+# include "is_integral.hpp"
 # define COUT std::cout <<
 # define ENDL << std::endl
 
@@ -85,14 +86,14 @@ public:
 	// Constructs the container with the contents of the range [first, last).
 	template<class InputIt>
 	vector(InputIt first, InputIt last, const Allocator & alloc = Allocator(),
-	typename enable_if<false, InputIt>::type = 0) :
+	typename enable_if<!is_integral<InputIt>::value, InputIt>::type* = NULL) : /////voir cond avec iterator_trait
 		_allocator(alloc)
 	{
 		_capacity = last - first;
 		_start = _allocator.allocate(_capacity);
 		for (size_type i = 0; i < _capacity; i++)
 		{	
-			*(_start + i) = first;
+			*(_start + i) = *first;
 			first++;
 		}
 		_filled = _capacity;
@@ -135,6 +136,13 @@ public:
 		this->clear();
 		this->insert(this->begin(), count, val);
 	}
+
+template <class InputIterator>
+	void assign (InputIterator first, InputIterator last)
+	{
+		this->clear();
+		this->insert(this->begin(), first, last);
+	}
     /*      Allocator       */
 	allocator_type get_allocator() const { return this->_allocator;}
 
@@ -176,7 +184,7 @@ public:
 	iterator begin() {return iterator(this->_start);}
 	const_iterator begin() const {return const_iterator(this->_start);}
     /*      End             */
-	iterator end() {COUT "Size is " << this->_filled ENDL; return iterator(this->_start + this->_filled - 1);}
+	iterator end() {COUT "Size is " << this->_filled ENDL; return iterator(this->_start + this->_filled);}
 	const_iterator end() const {return (this->_start + this->_filled);}	
     /*      Rbegin          */
     /*      Rend            */
@@ -348,7 +356,7 @@ template <class InputIterator>
 		{
 			ft::vector<value_type> temp(n);
 			for (size_type i = 0; i < n; i++)
-				*(temp._start + i) = first + i;
+				*(temp._start + i) = *(first + i);
 			temp._capacity = this->_capacity;
 			*this = temp;
 			return ;
@@ -370,7 +378,7 @@ template <class InputIterator>
 			for (i = 0; this->begin() + i != position; i++)
 				*(temp._start + i) = *(this->_start + i);
 			for ( j = 0; j < n; j++)
-				*(temp._start + i + j) = first + j;
+				*(temp._start + i + j) = *(first + j);
 			for (; i + j < temp._filled; i++)
 				*(temp._start + i + j) = *(this->_start + i);
 			*this = temp;
@@ -386,7 +394,7 @@ template <class InputIterator>
 				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - last_off);
 			}
 			for (size_type j = 0; j < n; j++)
-				*(this->_start + j + offset) = first + j;
+				*(this->_start + j + offset) = *(first + j);
 		}
 	}
 

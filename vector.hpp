@@ -7,6 +7,7 @@
 # include <iterator>
 
 # include "v_iterator.hpp"
+# include "enable_if.hpp"
 # define COUT std::cout <<
 # define ENDL << std::endl
 
@@ -83,7 +84,8 @@ public:
 
 	// Constructs the container with the contents of the range [first, last).
 	template<class InputIt>
-	vector(InputIt first, InputIt last, const Allocator & alloc = Allocator()) :
+	vector(InputIt first, InputIt last, const Allocator & alloc = Allocator(),
+	typename enable_if<false, InputIt>::type = 0) :
 		_allocator(alloc)
 	{
 		_capacity = last - first;

@@ -118,13 +118,18 @@ public:
         if (this != &other)
         {
 			if (this->_start != NULL)
-            	this->_allocator.deallocate(_start, _capacity);
+            	this->_allocator.deallocate(this->_start, this->_capacity);
             this->_allocator = other._allocator;
             this->_capacity = other._capacity;
             this->_filled = other._filled;
             this->_start = this->_allocator.allocate(this->_capacity);
-    		for(size_t i = 0; i < _filled; i++)
-			    this->_start[i] = other._start[i];
+    		for(size_t i = 0; i < other._filled; i++)
+			{
+				// COUT this->_capacity << " re" ENDL;
+				// COUT "tourne" ENDL;
+				// COUT other[i] ENDL;
+			    this->_allocator.construct(_start + i, other[i]);
+			}
         }
 		return *this;
     }
@@ -349,15 +354,25 @@ template <class InputIterator>
 	}
 
 template <class InputIterator>
-    void insert (iterator position, InputIterator first, InputIterator last)
+    void insert (iterator position, InputIterator first, InputIterator last,
+	typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 	{
-		size_type	n = last - first;
+		size_type n = 0;
+		InputIterator temp = first;
+
+		while (temp != last)
+		{
+			n++;
+			temp++;
+		}
 		if (this->_filled == 0)
 		{
-			ft::vector<value_type> temp(n);
+			ft::vector<value_type> temp(n, 0);
 			for (size_type i = 0; i < n; i++)
-				*(temp._start + i) = *(first + i);
-			temp._capacity = this->_capacity;
+			{
+				*(temp._start + i) = *first;
+				first++;
+			}
 			*this = temp;
 			return ;
 		}

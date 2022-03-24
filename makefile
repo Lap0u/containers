@@ -6,7 +6,7 @@
 #    By: cbeaurai <cbeaurai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 10:50:05 by cbeaurai          #+#    #+#              #
-#    Updated: 2022/03/23 11:37:51 by cbeaurai         ###   ########.fr        #
+#    Updated: 2022/03/24 16:53:46 by cbeaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,4 +40,4 @@ fclean:		clean
 
 re:			fclean $(NAME)
 
-# .SILENT:
+.SILENT:

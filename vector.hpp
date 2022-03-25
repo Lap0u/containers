@@ -239,14 +239,14 @@ template <class InputIterator>
 		if (this->_capacity == 0)
 		{
 			this->_start = this->_allocator.allocate(1);
-			this->_start = val;
+			this->_allocator.construct(this->_start, val);
 			this->_filled = 1;
 			this->_capacity = 1;
 			return this->begin();
 		}
 		if (this->_filled == 0)
 		{
-			this->_start = val;
+			this->_allocator.construct(this->_start, val);
 			this->_filled++;
 			return this->begin();
 		}

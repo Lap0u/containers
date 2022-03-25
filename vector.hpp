@@ -394,7 +394,7 @@ template <class InputIterator>
 			for (i = 0; this->begin() + i != position; i++)
 				*(temp._start + i) = *(this->_start + i);
 			for ( j = 0; j < n; j++)
-				temp._allocator.construct(temp._start + i + j, *(first + j));
+				temp._allocator.construct(temp._start + i + j, first++);
 			for (; i + j < temp._filled; i++)
 				*(temp._start + i + j) = *(this->_start + i);
 			*this = temp;

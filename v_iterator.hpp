@@ -2,7 +2,6 @@
 # define I_ITERATOR_HPP
 
 #include "vector.hpp"
-// # include <vector>
 
 namespace ft {
 
@@ -135,5 +134,138 @@ public:
 private:
     pointer	_m_ptr;
 };
+
+/*****************************Reverse Iterator*****************************/
+
+template<typename T>
+class myRevIterator
+{
+public:
+
+	typedef T									value_type;
+	typedef	value_type*							pointer;
+	typedef	value_type&							reference;
+	typedef std::ptrdiff_t						difference_type;
+	typedef	std::random_access_iterator_tag 	iterator_category;
+
+    myRevIterator() :	_m_ptr(NULL){}   
+    myRevIterator(pointer ptr) :	_m_ptr(ptr){}
+	virtual ~myRevIterator() {}
+	myRevIterator (myRevIterator<value_type> const & src): _m_ptr(src._m_ptr) {}
+	myRevIterator & operator=(myRevIterator<value_type> const & rhs)
+	{
+		this->_m_ptr = rhs._m_ptr;
+		return *this;
+	}
+
+	myRevIterator & operator+=(difference_type index)
+	{
+		_m_ptr += index;
+		return *this;
+	}
+	
+	myRevIterator & operator-=(difference_type index)
+	{
+		_m_ptr -= index;
+		return *this;
+	}
+	
+	difference_type	operator+(myRevIterator rhs) const
+	{
+		return (rhs._m_ptr + this->_m_ptr);
+	}
+
+	difference_type	operator-(myRevIterator rhs) const
+	{
+		return (this->_m_ptr - rhs._m_ptr);
+	}
+
+	myRevIterator	operator+(difference_type index) const
+	{
+		return myRevIterator(this->_m_ptr + index);
+	}
+
+	myRevIterator	operator-(difference_type index) const
+	{
+		return myRevIterator(this->_m_ptr - index);
+	}
+
+	bool operator==(myRevIterator<value_type> rhs) const 
+	{
+		return this->_m_ptr == rhs._m_ptr;
+	}
+
+	bool operator!=(myRevIterator<value_type> rhs) const 
+	{
+		return this->_m_ptr != rhs._m_ptr;
+	}	
+
+	bool operator<(myRevIterator<value_type> rhs) const
+	{
+		return this->_m_ptr < rhs._m_ptr;
+	}
+
+	bool operator<=(myRevIterator<value_type> rhs) const
+	{
+		return this->_m_ptr <= rhs._m_ptr;
+	}
+
+	bool operator>(myRevIterator<value_type> rhs) const
+	{
+		return this->_m_ptr > rhs._m_ptr;
+	}
+
+	bool operator>=(myRevIterator<value_type> rhs) const
+	{
+		return this->_m_ptr >= rhs._m_ptr;
+	}	
+
+	myRevIterator& operator++()
+	{
+		_m_ptr++;
+		return *this;
+	}
+
+	myRevIterator operator++(int)
+	{
+		myRevIterator it  = *this;
+		++(*this);
+		return it;
+	}
+	
+	myRevIterator& operator--()
+	{
+		_m_ptr--;
+		return *this;
+	}
+
+	myRevIterator operator--(int)
+	{
+		myRevIterator it  = *this;
+		--(*this);
+		return it;
+	}
+
+	reference operator[](int index)
+	{
+		return *(_m_ptr + index);
+	}
+
+	pointer operator->()
+	{
+		return _m_ptr;
+	}
+
+	reference operator*()
+	{
+		return * _m_ptr;
+	}
+	
+	operator myRevIterator <const value_type>() { return myRevIterator <const value_type> (_m_ptr);}
+
+private:
+    pointer	_m_ptr;
+};
+
 }
 #endif

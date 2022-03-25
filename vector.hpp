@@ -40,8 +40,8 @@ public:
 	typedef				ft::myIterator<value_type>						iterator;
 	typedef				ft::myIterator<const value_type>				const_iterator;
 
-	typedef             std::reverse_iterator<iterator>					reverse_iterator;
-    typedef				std::reverse_iterator<const_iterator>			const_reverse_iterator;
+	typedef             ft::myRevIterator<value_type>					reverse_iterator;
+    typedef				ft::myRevIterator<const value_type>				const_reverse_iterator;
 	
 
 private:
@@ -88,7 +88,11 @@ public:
 	typename enable_if<!is_integral<InputIt>::value, InputIt>::type* = NULL) : /////voir cond avec iterator_trait
 		_allocator(alloc)
 	{
-		_capacity = last - first;
+		size_t diff = 0;
+		InputIt	temp = first;
+		while (temp++ != last)
+			diff++;
+		_capacity = diff;
 		_start = _allocator.allocate(_capacity);
 		for (size_type i = 0; i < _capacity; i++)
 		{	
@@ -184,9 +188,13 @@ template <class InputIterator>
 	const_iterator begin() const {return const_iterator(this->_start);}
     /*      End             */
 	iterator end() {return iterator(this->_start + this->_filled);}
-	const_iterator end() const {return (this->_start + this->_filled);}	
-    /*      Rbegin          */
-    /*      Rend            */
+	const_iterator end() const {return const_iterator(this->_start + this->_filled);}
+	/*      RBegin           */
+	reverse_iterator rbegin() {return reverse_iterator(this->_start);}
+	const_reverse_iterator rbegin() const {return const_reverse_iterator(this->_start);}
+    /*      REnd             */
+	reverse_iterator rend() {return reverse_iterator(this->_start + this->_filled);}
+	const_reverse_iterator rend() const {return const_reverse_iterator(this->_start + this->_filled);}
 
 /*==_Capacity==*/
 
@@ -386,7 +394,7 @@ template <class InputIterator>
 			for (i = 0; this->begin() + i != position; i++)
 				*(temp._start + i) = *(this->_start + i);
 			for ( j = 0; j < n; j++)
-				*(temp._start + i + j) = *(first + j);
+				temp._allocator.construct(temp._start + i + j, *(first + j));
 			for (; i + j < temp._filled; i++)
 				*(temp._start + i + j) = *(this->_start + i);
 			*this = temp;

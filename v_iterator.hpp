@@ -39,22 +39,22 @@ public:
 		return *this;
 	}
 	
-	difference_type	operator+(myIterator rhs) 
+	difference_type	operator+(myIterator rhs) const
 	{
 		return (rhs._m_ptr + this->_m_ptr);
 	}
 
-	difference_type	operator-(myIterator rhs) 
+	difference_type	operator-(myIterator rhs) const
 	{
 		return (this->_m_ptr - rhs._m_ptr);
 	}
 
-	myIterator	operator+(difference_type index) 
+	myIterator	operator+(difference_type index) const
 	{
 		return myIterator(this->_m_ptr + index);
 	}
 
-	myIterator	operator-(difference_type index) 
+	myIterator	operator-(difference_type index) const
 	{
 		return myIterator(this->_m_ptr - index);
 	}

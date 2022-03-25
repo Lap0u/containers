@@ -76,7 +76,6 @@ public:
 	explicit vector(size_type count, const T& value = T(),
 		const Allocator& alloc = Allocator()) : _allocator(alloc), _capacity(count)
 	{
-		COUT count ENDL ENDL;
 		this->_start = this->_allocator.allocate(count);
 		for (size_type i = 0; i < count; i++)
 			this->_start[i] = value;
@@ -124,12 +123,7 @@ public:
             this->_filled = other._filled;
             this->_start = this->_allocator.allocate(this->_capacity);
     		for(size_t i = 0; i < other._filled; i++)
-			{
-				// COUT this->_capacity << " re" ENDL;
-				// COUT "tourne" ENDL;
-				// COUT other[i] ENDL;
 			    this->_allocator.construct(_start + i, other[i]);
-			}
         }
 		return *this;
     }
@@ -189,7 +183,7 @@ template <class InputIterator>
 	iterator begin() {return iterator(this->_start);}
 	const_iterator begin() const {return const_iterator(this->_start);}
     /*      End             */
-	iterator end() {COUT "Size is " << this->_filled ENDL; return iterator(this->_start + this->_filled);}
+	iterator end() {return iterator(this->_start + this->_filled);}
 	const_iterator end() const {return (this->_start + this->_filled);}	
     /*      Rbegin          */
     /*      Rend            */
@@ -304,15 +298,14 @@ template <class InputIterator>
 
 	void insert (iterator position, size_type n, const value_type& val)
 	{
-		// if (this->_filled == 0)
-		// {
-		// 	ft::vector<value_type> temp(n);
-		// 	for (size_type i = 0; i < n; i++)
-		// 		*(temp._start + i) = val;
-		// 	temp._capacity = this->_capacity;
-		// 	*this = temp;
-		// 	return ;
-		// }
+		if (this->_filled == 0)
+		{
+			ft::vector<value_type> temp(n);
+			for (size_type i = 0; i < n; i++)
+				*(temp._start + i) = val;
+			*this = temp;
+			return ;
+		}
 		if (this->_filled + n > this->_capacity)
 		{
 			ft::vector<value_type>	temp;
@@ -444,15 +437,14 @@ template <class InputIterator>
 		for (i = 0; beg + i != first; i++);
 		for (size_type j = i; beg + j != last; j++)
 		{
-			this->_allocator.destroy(beg + j);
+			this->_allocator.destroy(this->_start + j);
 		}
-		for (size_type j = i; j != this->end(); j++)
+		for (size_type j = i; beg + j != this->end(); j++)
 		{
-			this->_start + j = this->_start + j + (last - first);
+			*(this->_start + j )= *(this->_start + j + (last - first));
 		}
 		this->_filled -= last - first;
-		this->_start += last - first;
-		return last;
+		return first;
 	}
 	/*		Push_back		*/
 	void push_back (const value_type& val)
@@ -483,6 +475,7 @@ template <class InputIterator>
 			size_type	i;
 			for (i = 0; i < this->_filled; i++);
 			*(this->_start + i) = val;
+			this->_filled++;
 		}
 	}
 	/*		Pop-back		*/

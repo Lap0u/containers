@@ -1,5 +1,7 @@
 #ifndef IS_INTEGRAL_HPP
 # define IS_INTEGRAL_HPP
+# include <uchar.h>
+# include <stdint.h>
 
 namespace ft {
 
@@ -75,17 +77,17 @@ struct is_integral_base<unsigned char>
 	const static bool value = true;
 };
 
-template <>
-struct is_integral_base<unsigned short int>
-{
-	const static bool value = true;
-};
+// template <>
+// struct is_integral_base<unsigned short int>
+// {
+// 	const static bool value = true;
+// };
 
-template <>
-struct is_integral_base<unsigned int>
-{
-	const static bool value = true;
-};
+// template <>
+// struct is_integral_base<unsigned int>
+// {
+// 	const static bool value = true;
+// };
 
 template <>
 struct is_integral_base<unsigned long int>

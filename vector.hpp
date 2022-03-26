@@ -11,6 +11,7 @@
 # include "is_integral.hpp"
 # define COUT std::cout <<
 # define ENDL << std::endl
+# define DEB COUT "yo" ENDL ENDL;
 
 /*https://en.cppreference.com/w/cpp/container/vector*/
 
@@ -78,7 +79,7 @@ public:
 	{
 		this->_start = this->_allocator.allocate(count);
 		for (size_type i = 0; i < count; i++)
-			this->_start[i] = value;
+			this->_allocator.construct(this->_start + i, value);
 		this->_filled = this->_capacity;
 	}
 
@@ -199,7 +200,7 @@ template <class InputIterator>
 /*==_Capacity==*/
 
     /*      Empty           */
-	bool empty () const { return !capacity();} 
+	bool empty () const { return !size();} 
     /*      Size            */
 	size_type size() const { return _filled;}
     /*      Max_size        */
@@ -394,7 +395,7 @@ template <class InputIterator>
 			for (i = 0; this->begin() + i != position; i++)
 				*(temp._start + i) = *(this->_start + i);
 			for ( j = 0; j < n; j++)
-				temp._allocator.construct(temp._start + i + j, first++);
+				temp._allocator.construct(temp._start + i + j, *first++);
 			for (; i + j < temp._filled; i++)
 				*(temp._start + i + j) = *(this->_start + i);
 			*this = temp;
@@ -465,8 +466,8 @@ template <class InputIterator>
 			temp._capacity = this->_capacity * 2;
 			temp._start = temp._allocator.allocate(temp._capacity);
 			for (size_type i = 0; i < temp._filled; i++)
-				*(temp._start + i) = *(this->_start + i);
-			*(temp._start + temp._filled) = val;
+				temp._allocator.construct(temp._start + i, *(this->_start + i));
+			temp._allocator.construct(temp._start + temp._filled, val);
 			temp._filled++;
 			// this->_allocator.deallocate(this->_start, this->_capacity);
 			*this = temp;
@@ -476,7 +477,7 @@ template <class InputIterator>
 			this->_start = this->_allocator.allocate(1);
 			this->_filled = 1;
 			this->_capacity = 1;
-			*(this->_start) = val;
+			this->_allocator.construct(this->_start, val);
 		}
 		else
 		{
@@ -489,12 +490,9 @@ template <class InputIterator>
 	/*		Pop-back		*/
 	void	pop_back()
 	{
-		size_type	i;
-
 		if (this->_filled == 0)
 			return ;
-		for (i = 0; i != this->_filled;i++);
-		this->_allocator.destroy(this->_start + i);
+		this->_allocator.destroy(this->_start + this->_filled - 1);
 		this->_filled--;
 	}
 	/*		Resize			*/
@@ -550,6 +548,27 @@ template <class InputIterator>
 		}
 	}
 	/*		Swap			*/
+	void swap (vector& x)
+	{
+		vector<value_type>	temp;
+		pointer				point;
+
+		point = x._start;
+		temp._capacity = x._capacity;
+		temp._filled = x._filled;
+		temp._allocator = x._allocator;
+
+		x._start = this->_start;
+		x._capacity = this->_capacity;
+		x._filled = this->_filled;
+		x._allocator = this->_allocator;
+
+		this->_start = point;
+		this->_capacity = temp._capacity;
+		this->_filled = temp._filled;
+		this->_allocator = temp._allocator;
+
+	}
 
 };
 

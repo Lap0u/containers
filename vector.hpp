@@ -9,6 +9,9 @@
 # include "v_iterator.hpp"
 # include "enable_if.hpp"
 # include "is_integral.hpp"
+# include "equal.hpp"
+# include "lexicographical_compare.hpp"
+
 # define COUT std::cout <<
 # define ENDL << std::endl
 # define DEB COUT "yo" ENDL ENDL;
@@ -575,12 +578,37 @@ template <class InputIterator>
 /*==Operators overload==*/
 
 	/*		==				*/
-	/*		Const==			*/
+template <class T, class Alloc>
+	bool operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return false;
+		return equal(lhs.begin(), lhs.end(), rhs.begin());
+	}
+
 	/*		!=				*/
+template <class T, class Alloc>
+	bool operator!=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{return !(lhs == rhs);}
+
 	/*		<				*/
+template <class T, class Alloc>
+	bool operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());}
 	/*		<=				*/
+template <class T, class Alloc>
+	bool operator>(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{return rhs < lhs;}
+
 	/*		>=				*/
+template <class T, class Alloc>
+	bool operator<=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{return !(rhs < lhs);}
+
 	/*		>=				*/
+template <class T, class Alloc>
+	bool operator>=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	{return !(lhs < rhs);}
 
 
 /*==Swap==*/

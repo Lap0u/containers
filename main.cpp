@@ -13,16 +13,16 @@ int main()
 
 	using namespace ft;
 	// size_t x = 4;
-	vector<int> re(4, 12);
-	re[0] = 25;
-	re[1] = 100;
-	vector<int>::iterator s = re.begin();
-	vector<int>::iterator t = re.begin() + 2;
-	vector<int> yo(s, t);
-	COUT yo[0] ENDL;
-	COUT yo[1] ENDL ENDL;
+	vector<int> re(4);
+	re[0] = 10; re[1] = 11; re[2] = 12; re[3] = 13;
+	vector<int>::iterator it = re.begin();
+	COUT *it ENDL;
+	it = it + 1;
+	COUT *it ENDL;
+	it = 1 + it;
+	COUT *it ENDL;
 	
-#if 1 //basic_test
+#if 0 //basic_test
 	COUT re.size() ENDL;
 	COUT re.capacity() ENDL ENDL;
 	// re[0] = 2;

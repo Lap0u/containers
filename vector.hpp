@@ -11,6 +11,7 @@
 # include "is_integral.hpp"
 # include "equal.hpp"
 # include "lexicographical_compare.hpp"
+# include "iterator_traits.hpp"
 
 # define COUT std::cout <<
 # define ENDL << std::endl
@@ -411,10 +412,10 @@ template <class InputIterator>
 			this->_filled += n;
 			for (size_type i = 0; i < last_off; i++)
 			{
-				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - last_off);
+				this->_allocator.construct((this->_start + this->_filled - 1 - i), *(this->_start + this->_filled - 1 - i - last_off));
 			}
 			for (size_type j = 0; j < n; j++)
-				*(this->_start + j + offset) = *(first + j);
+				this->_allocator.construct(this->_start + j + offset, *(first++));
 		}
 	}
 

@@ -12,6 +12,7 @@
 # include "equal.hpp"
 # include "lexicographical_compare.hpp"
 # include "iterator_traits.hpp"
+# include "reverse_iterator.hpp"
 
 # define COUT std::cout <<
 # define ENDL << std::endl
@@ -33,20 +34,20 @@ public:
     void disp() { std::cout <<"Lol" << std::endl;};
 /*==Member types==*/
 
-	typedef				T 												value_type;
-	typedef				Allocator										allocator_type;
-	typedef				std::size_t										size_type;
-	typedef				std::ptrdiff_t									difference_type;
-	typedef				value_type&										reference;
-	typedef	const 		value_type&										const_reference;
-	typedef	typename 	Allocator::pointer								pointer;
-	typedef	typename 	Allocator::const_pointer						const_pointer;
+	typedef				T 											value_type;
+	typedef				Allocator									allocator_type;
+	typedef				std::size_t									size_type;
+	typedef				std::ptrdiff_t								difference_type;
+	typedef				value_type&									reference;
+	typedef	const 		value_type&									const_reference;
+	typedef	typename 	Allocator::pointer							pointer;
+	typedef	typename 	Allocator::const_pointer					const_pointer;
 
-	typedef				ft::myIterator<value_type>						iterator;
-	typedef				ft::myIterator<const value_type>				const_iterator;
+	typedef				ft::myIterator<value_type>					iterator;
+	typedef				ft::myIterator<const value_type>			const_iterator;
 
-	typedef             ft::myRevIterator<value_type>					reverse_iterator;
-    typedef				ft::myRevIterator<const value_type>				const_reverse_iterator;
+	typedef             ft::reverse_iterator<iterator>					reverse_iterator;
+    typedef				ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 	
 
 private:

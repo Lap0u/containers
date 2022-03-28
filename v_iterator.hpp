@@ -5,9 +5,10 @@
 # include "iterator_traits.hpp"
 
 namespace ft {
+class iterator_traits;
 
 template<typename T>
-class myIterator
+class myIterator : public iterator_traits
 {
 public:
 
@@ -59,62 +60,62 @@ public:
 		return myIterator(this->_m_ptr - index);
 	}
 
-	bool operator==(myIterator<value_type> rhs)
+	bool operator==(const myIterator<value_type> & rhs)
 	{
 		return this->_m_ptr == rhs._m_ptr;
 	}
 
-	bool operator==(myIterator<const value_type> rhs) const 
+	bool operator==(const myIterator<const value_type> & rhs) const 
 	{
 		return this->_m_ptr == rhs._m_ptr;
 	}
 
-	bool operator!=(myIterator<value_type> rhs) 
+	bool operator!=(const myIterator<value_type> & rhs) 
 	{
 		return this->_m_ptr != rhs._m_ptr;
 	}
 
-	bool operator!=(myIterator<const value_type> rhs) const 
+	bool operator!=(const myIterator<const value_type> & rhs) const 
 	{
 		return this->_m_ptr != rhs._m_ptr;
 	}
 
-	bool operator<(myIterator<value_type> rhs) const
+	bool operator<(const myIterator<value_type> & rhs)
 	{
 		return this->_m_ptr < rhs._m_ptr;
 	}
 
-	bool operator<(const myIterator<const value_type> rhs) const
+	bool operator<(const myIterator<const value_type> & rhs) const
 	{
 		return this->_m_ptr < rhs._m_ptr;
 	}
 
-	bool operator<=(myIterator<value_type> rhs) 
+	bool operator<=(const myIterator<value_type> & rhs) 
 	{
 		return this->_m_ptr <= rhs._m_ptr;
 	}
 
-	bool operator<=(myIterator<const value_type> rhs) const
+	bool operator<=(const myIterator<const value_type> & rhs) const
 	{
 		return this->_m_ptr <= rhs._m_ptr;
 	}
 
-	bool operator>(myIterator<value_type> rhs) 
+	bool operator>(const myIterator<value_type> & rhs) 
 	{
 		return this->_m_ptr > rhs._m_ptr;
 	}
 
-	bool operator>(myIterator<const value_type> rhs) const
+	bool operator>(const myIterator<const value_type> & rhs) const
 	{
 		return this->_m_ptr > rhs._m_ptr;
 	}
 
-	bool operator>=(myIterator<value_type> rhs) 
+	bool operator>=(const myIterator<value_type> & rhs) 
 	{
 		return this->_m_ptr >= rhs._m_ptr;
 	}	
 
-	bool operator>=(myIterator<const value_type> rhs) const
+	bool operator>=(const myIterator<const value_type> & rhs) const
 	{
 		return this->_m_ptr >= rhs._m_ptr;
 	}	

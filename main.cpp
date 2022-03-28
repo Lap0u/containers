@@ -16,11 +16,18 @@ int main()
 	vector<int> re(4);
 	re[0] = 10; re[1] = 11; re[2] = 12; re[3] = 13;
 	vector<int>::iterator it = re.begin();
-	COUT *it ENDL;
-	it = it + 1;
-	COUT *it ENDL;
-	it = 1 + it;
-	COUT *it ENDL;
+	vector<int>::const_iterator cit = re.begin();
+	vector<int>::iterator it2 = re.begin();
+	vector<int>::const_iterator cit2 = re.begin();
+	
+	if (it <= cit)
+		COUT "it <= cit" ENDL;
+	if (cit <= it)
+		COUT "cit <= it" ENDL;
+	if (it2 <= it)
+		COUT "it2 <= it" ENDL;
+	if (cit2 <= cit)
+		COUT "cit2 <= cit" ENDL;
 	
 #if 0 //basic_test
 	COUT re.size() ENDL;

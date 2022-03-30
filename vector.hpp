@@ -6,13 +6,13 @@
 # include <exception>
 # include <iterator>
 
-# include "v_iterator.hpp"
-# include "enable_if.hpp"
-# include "is_integral.hpp"
-# include "equal.hpp"
-# include "lexicographical_compare.hpp"
-# include "iterator_traits.hpp"
-# include "reverse_iterator.hpp"
+# include "headers/v_iterator.hpp"
+# include "headers/enable_if.hpp"
+# include "headers/is_integral.hpp"
+# include "headers/equal.hpp"
+# include "headers/lexicographical_compare.hpp"
+# include "headers/iterator_traits.hpp"
+# include "headers/reverse_iterator.hpp"
 
 # define COUT std::cout <<
 # define ENDL << std::endl

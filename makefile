@@ -6,7 +6,7 @@
 #    By: cbeaurai <cbeaurai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 10:50:05 by cbeaurai          #+#    #+#              #
-#    Updated: 2022/03/30 16:54:29 by cbeaurai         ###   ########.fr        #
+#    Updated: 2022/03/30 21:10:00 by cbeaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ SRCS		= main.cpp
 
 OBJS		= $(SRCS:.cpp=.o)
 
-DEP_H		= vector.hpp v_iterator.hpp enable_if.hpp is_integral.hpp \
-				equal.hpp lexicographical_compare.hpp iterator_traits.hpp \
-				reverse_iterator.hpp
+DEP_H		= vector.hpp headers/v_iterator.hpp headers/enable_if.hpp \
+				headers/is_integral.hpp headers/equal.hpp headers/lexicographical_compare.hpp \
+				headers/iterator_traits.hpp headers/reverse_iterator.hpp
 
 CC			= c++
 

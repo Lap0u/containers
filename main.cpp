@@ -11,6 +11,18 @@
 int main()
 {
 
+#if 1
+	std::vector<int>re (4, 12); re[1] = 13; re[2] = 14; re[3] = 15;
+	COUT re[0] << " " << re[1] << " " << re[2] << " " << re[3] ENDL ENDL;
+
+	std::vector<int>::iterator beg = re.begin();
+	COUT *beg ENDL;
+	std::vector<int>::reverse_iterator rev(beg);
+	COUT *(rev - 1) ENDL;
+	beg = rev.base();
+	COUT *beg ENDL;
+#endif
+#if 0
 	using namespace ft;
 	// size_t x = 4;
 	vector<int> re(4);
@@ -28,7 +40,7 @@ int main()
 		COUT "it2 <= it" ENDL;
 	if (cit2 <= cit)
 		COUT "cit2 <= cit" ENDL;
-	
+#endif
 #if 0 //basic_test
 	COUT re.size() ENDL;
 	COUT re.capacity() ENDL ENDL;

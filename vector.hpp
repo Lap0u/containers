@@ -196,11 +196,11 @@ template <class InputIterator>
 	iterator end() {return iterator(this->_start + this->_filled);}
 	const_iterator end() const {return const_iterator(this->_start + this->_filled);}
 	/*      RBegin           */
-	reverse_iterator rbegin() {return reverse_iterator(this->_start);}
-	const_reverse_iterator rbegin() const {return const_reverse_iterator(this->_start);}
+	reverse_iterator rbegin() {return reverse_iterator(this->end());}
+	const_reverse_iterator rbegin() const {return const_reverse_iterator(this->end());}
     /*      REnd             */
-	reverse_iterator rend() {return reverse_iterator(this->_start + this->_filled);}
-	const_reverse_iterator rend() const {return const_reverse_iterator(this->_start + this->_filled);}
+	reverse_iterator rend() {return reverse_iterator(this->begin());}
+	const_reverse_iterator rend() const {return const_reverse_iterator(this->begin());}
 
 /*==_Capacity==*/
 

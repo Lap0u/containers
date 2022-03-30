@@ -24,6 +24,7 @@ public:
     myIterator(pointer ptr) :	_m_ptr(ptr){}
 	virtual ~myIterator() {}
 	myIterator (myIterator<value_type> const & src): _m_ptr(src._m_ptr) {}
+	pointer base () const {return this->_m_ptr;}
 	myIterator & operator=(myIterator<value_type> const & rhs)
 	{
 		this->_m_ptr = rhs._m_ptr;
@@ -60,66 +61,6 @@ public:
 	myIterator	operator-(difference_type index) const
 	{
 		return myIterator(this->_m_ptr - index);
-	}
-
-	bool operator==(const myIterator<value_type> & rhs)
-	{
-		return this->_m_ptr == rhs._m_ptr;
-	}
-
-	bool operator==(const myIterator<const value_type> & rhs) const 
-	{
-		return this->_m_ptr == rhs._m_ptr;
-	}
-
-	bool operator!=(const myIterator<value_type> & rhs) 
-	{
-		return this->_m_ptr != rhs._m_ptr;
-	}
-
-	bool operator!=(const myIterator<const value_type> & rhs) const 
-	{
-		return this->_m_ptr != rhs._m_ptr;
-	}
-
-	bool operator<(const myIterator<value_type> & rhs)
-	{
-		return this->_m_ptr < rhs._m_ptr;
-	}
-
-	bool operator<(const myIterator<const value_type> & rhs) const
-	{
-		return this->_m_ptr < rhs._m_ptr;
-	}
-
-	bool operator<=(const myIterator<value_type> & rhs) 
-	{
-		return this->_m_ptr <= rhs._m_ptr;
-	}
-
-	bool operator<=(const myIterator<const value_type> & rhs) const
-	{
-		return this->_m_ptr <= rhs._m_ptr;
-	}
-
-	bool operator>(const myIterator<value_type> & rhs) 
-	{
-		return this->_m_ptr > rhs._m_ptr;
-	}
-
-	bool operator>(const myIterator<const value_type> & rhs) const
-	{
-		return this->_m_ptr > rhs._m_ptr;
-	}
-
-	bool operator>=(const myIterator<value_type> & rhs) 
-	{
-		return this->_m_ptr >= rhs._m_ptr;
-	}	
-
-	bool operator>=(const myIterator<const value_type> & rhs) const
-	{
-		return this->_m_ptr >= rhs._m_ptr;
 	}	
 
 	myIterator& operator++()
@@ -165,141 +106,82 @@ public:
 	
 	operator myIterator <const value_type>() { return myIterator <const value_type> (_m_ptr);}
 
-// private:
+private:
     pointer	_m_ptr;
 };
-
-/*****************************Reverse Iterator*****************************/
 
 template<typename T>
-class myRevIterator
-{
-public:
-
-	typedef T									value_type;
-	typedef	value_type*							pointer;
-	typedef	value_type&							reference;
-	typedef std::ptrdiff_t						difference_type;
-	typedef	std::random_access_iterator_tag 	iterator_category;
-
-    myRevIterator() :	_m_ptr(NULL){}   
-    myRevIterator(pointer ptr) :	_m_ptr(ptr){}
-	virtual ~myRevIterator() {}
-	myRevIterator (myRevIterator<value_type> const & src): _m_ptr(src._m_ptr) {}
-	myRevIterator & operator=(myRevIterator<value_type> const & rhs)
+	bool operator==(const myIterator<T> & lhs, const myIterator<T> & rhs)
 	{
-		this->_m_ptr = rhs._m_ptr;
-		return *this;
+		return lhs.base() == rhs.base();
 	}
 
-	myRevIterator & operator+=(difference_type index)
+template<typename L, typename R>
+	bool operator==(const myIterator<L> & lhs, const myIterator<R> & rhs)
 	{
-		_m_ptr += index;
-		return *this;
+		return lhs.base() == rhs.base();
 	}
-	
-	myRevIterator & operator-=(difference_type index)
+template<typename T>
+	bool operator!=(const myIterator<T> & lhs, const myIterator<T> & rhs)
 	{
-		_m_ptr -= index;
-		return *this;
-	}
-	
-	difference_type	operator+(myRevIterator rhs) const
-	{
-		return (rhs._m_ptr + this->_m_ptr);
+		return lhs.base() != rhs.base();
 	}
 
-	difference_type	operator-(myRevIterator rhs) const
+template<typename L, typename R>
+	bool operator!=(const myIterator<L> & lhs, const myIterator<R> & rhs)
 	{
-		return (this->_m_ptr - rhs._m_ptr);
+		return lhs.base() != rhs.base();
 	}
 
-	myRevIterator	operator+(difference_type index) const
+template<typename T>
+	bool operator<(const myIterator<T> & lhs, const myIterator<T> & rhs)
 	{
-		return myRevIterator(this->_m_ptr + index);
+		return lhs.base() < rhs.base();
 	}
 
-	myRevIterator	operator-(difference_type index) const
+template<typename L, typename R>
+	bool operator<(const myIterator<L> & lhs, const myIterator<R> & rhs)
 	{
-		return myRevIterator(this->_m_ptr - index);
+		return lhs.base() < rhs.base();
+	}
+template<typename T>
+	bool operator>(const myIterator<T> & lhs, const myIterator<T> & rhs)
+	{
+		return lhs.base() > rhs.base();
 	}
 
-	bool operator==(myRevIterator<value_type> rhs) const 
+template<typename L, typename R>
+	bool operator>(const myIterator<L> & lhs, const myIterator<R> & rhs)
 	{
-		return this->_m_ptr == rhs._m_ptr;
+		return lhs.base() > rhs.base();
+	}
+template<typename T>
+	bool operator<=(const myIterator<T> & lhs, const myIterator<T> & rhs)
+	{
+		return lhs.base() <= rhs.base();
 	}
 
-	bool operator!=(myRevIterator<value_type> rhs) const 
+template<typename L, typename R>
+	bool operator<=(const myIterator<L> & lhs, const myIterator<R> & rhs)
 	{
-		return this->_m_ptr != rhs._m_ptr;
-	}	
-
-	bool operator<(myRevIterator<value_type> rhs) const
+		return lhs.base() <= rhs.base();
+	}
+template<typename T>
+	bool operator>=(const myIterator<T> & lhs, const myIterator<T> & rhs)
 	{
-		return this->_m_ptr < rhs._m_ptr;
+		return lhs.base() >= rhs.base();
 	}
 
-	bool operator<=(myRevIterator<value_type> rhs) const
+template<typename L, typename R>
+	bool operator>=(const myIterator<L> & lhs, const myIterator<R> & rhs)
 	{
-		return this->_m_ptr <= rhs._m_ptr;
+		return lhs.base() >= rhs.base();
 	}
 
-	bool operator>(myRevIterator<value_type> rhs) const
+template<typename L, typename R>
+	typename myIterator<L>::difference_type	operator-(const myIterator<L> & lhs, const myIterator<R> & rhs) 
 	{
-		return this->_m_ptr > rhs._m_ptr;
+		return (lhs.base() - rhs.base());
 	}
-
-	bool operator>=(myRevIterator<value_type> rhs) const
-	{
-		return this->_m_ptr >= rhs._m_ptr;
-	}	
-
-	myRevIterator& operator++()
-	{
-		_m_ptr++;
-		return *this;
-	}
-
-	myRevIterator operator++(int)
-	{
-		myRevIterator it  = *this;
-		++(*this);
-		return it;
-	}
-	
-	myRevIterator& operator--()
-	{
-		_m_ptr--;
-		return *this;
-	}
-
-	myRevIterator operator--(int)
-	{
-		myRevIterator it  = *this;
-		--(*this);
-		return it;
-	}
-
-	reference operator[](int index)
-	{
-		return *(_m_ptr + index);
-	}
-
-	pointer operator->()
-	{
-		return _m_ptr;
-	}
-
-	reference operator*()
-	{
-		return * _m_ptr;
-	}
-
-	operator myRevIterator <const value_type>() { return myRevIterator <const value_type> (_m_ptr);}
-
-// private:
-    pointer	_m_ptr;
-};
-
 }
 #endif

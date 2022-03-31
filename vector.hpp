@@ -617,7 +617,11 @@ template <class T, class Alloc>
 /*==Swap==*/
 
 	/*		Swap			*/
-
+template <class T, class Alloc>
+  void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
+  {
+	  x.swap(y);
+  }
 
 }
 

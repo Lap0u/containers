@@ -9,7 +9,7 @@
 # define COUT std::cout <<
 # define ENDL << std::endl
 # define NL std::cout << std::endl;
-# define DEB COUT "yo" ENDL ENDL;
+# define SEP COUT "###############################" ENDL ENDL;
 
 int main()
 {
@@ -33,7 +33,7 @@ int main()
 		COUT temp.top() ENDL;
 	}
 	NL
-	
+
 	for (int i = 0; i < 6; i++)
 	{
 		COUT temp.top() ENDL;

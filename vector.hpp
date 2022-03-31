@@ -5,6 +5,7 @@
 # include <limits>
 # include <exception>
 # include <iterator>
+# include <iostream>
 
 # include "headers/v_iterator.hpp"
 # include "headers/enable_if.hpp"

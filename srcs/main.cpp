@@ -2,7 +2,7 @@
 #include <stack>
 #include <map>
 #include <iostream>
-#include "vector.hpp"
+#include "../vector.hpp"
 
 #define CIN >> std::cin
 #define COUT std::cout <<

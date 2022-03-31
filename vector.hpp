@@ -32,7 +32,6 @@ template <class T, class Allocator = std::allocator<T> >
 class vector
 {
 public:
-    void disp() { std::cout <<"Lol" << std::endl;};
 /*==Member types==*/
 
 	typedef				T 											value_type;
@@ -349,7 +348,6 @@ template <class InputIterator>
 			size_type	last_off = this->end() - position;
 			
 			this->_filled += n;
-			COUT last_off << " Lastoff" ENDL;
 			for (size_type i = 0; i < last_off; i++)
 			{
 				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - n);
@@ -408,11 +406,10 @@ template <class InputIterator>
 		{
 			size_type	offset = position - this->begin();
 			size_type	last_off = this->end() - position;
-			
 			this->_filled += n;
 			for (size_type i = 0; i < last_off; i++)
 			{
-				this->_allocator.construct((this->_start + this->_filled - 1 - i), *(this->_start + this->_filled - 1 - i - last_off));
+				this->_allocator.construct((this->_start + this->_filled - 1 - i), *(this->_start + this->_filled - 1 - i - n));
 			}
 			for (size_type j = 0; j < n; j++)
 				this->_allocator.construct(this->_start + j + offset, *(first++));

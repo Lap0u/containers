@@ -7,7 +7,7 @@
 # define NL COUT std::endl;
 # define SEP COUT "###############################" ENDL ENDL;
 
-using namespace ft;
+using namespace NS;
 
 void	printVec(const vector<int> & vec)
 {
@@ -156,7 +156,6 @@ int main()
 	range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
 	range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
 	fill.insert(fill.begin(), 3, 29);
-	COUT fill.capacity() << " cap then size " << fill.size() ENDL;
 	fill.insert(fill.begin(), 3, 40);
 	COUT "After insert" ENDL ENDL;
 	printVec(emp);

@@ -238,14 +238,11 @@ template <class InputIterator>
 	/*		Clear			*/
 	void	clear()
 	{
-		size_t	save = this->_filled;
 		while (this->_filled != 0)
 		{
 			this->_allocator.destroy(this->_start + this->_filled - 1);
 			this->_filled--;
 		}
-		this->_allocator.deallocate(this->_start, save);
-		this->_start = NULL;
 	}
 	/*		Insert			*/
 	iterator insert (iterator position, const value_type& val)
@@ -317,7 +314,7 @@ template <class InputIterator>
 		{
 			ft::vector<value_type> temp(n);
 			for (size_type i = 0; i < n; i++)
-				*(temp._start + i) = val;
+				temp._allocator.construct(temp._start + i, val);
 			*this = temp;
 			return ;
 		}
@@ -352,9 +349,10 @@ template <class InputIterator>
 			size_type	last_off = this->end() - position;
 			
 			this->_filled += n;
+			COUT last_off << " Lastoff" ENDL;
 			for (size_type i = 0; i < last_off; i++)
 			{
-				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - last_off);
+				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - n);
 			}
 			for (size_type j = 0; j < n; j++)
 				*(this->_start + j + offset) = val;
@@ -436,7 +434,6 @@ template <class InputIterator>
 		{
 			*(this->_start + j) = *(this->_start + (j + 1));
 		}
-		// this->_allocator.deallocate(this->_start + this->_filled - 1, 1);
 		return pos;
 	}
 
@@ -454,7 +451,7 @@ template <class InputIterator>
 		{
 			this->_allocator.destroy(this->_start + j);
 		}
-		for (size_type j = i; beg + j != this->end(); j++)
+		for (size_type j = i; beg + j != this->end() - (last - first); j++)
 		{
 			*(this->_start + j )= *(this->_start + j + (last - first));
 		}
@@ -489,7 +486,7 @@ template <class InputIterator>
 		{
 			size_type	i;
 			for (i = 0; i < this->_filled; i++);
-			*(this->_start + i) = val;
+			this->_allocator.construct(this->_start + i, val);
 			this->_filled++;
 		}
 	}

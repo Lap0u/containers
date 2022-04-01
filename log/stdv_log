@@ -1,0 +1,869 @@
+****Constructors****
+
+vec is empty = 1
+
+vec is empty = 0
+11
+11
+42
+11
+11
+
+vec is empty = 0
+11
+11
+42
+100
+11
+
+vec is empty = 0
+11
+11
+42
+100
+11
+
+vec is empty = 0
+11
+11
+42
+100
+11
+
+vec is empty = 0
+-10
+11
+42
+100
+11
+
+###############################
+
+****Assign****
+
+vec is empty = 0
+-10
+11
+42
+100
+11
+
+vec is empty = 0
+85
+85
+85
+85
+85
+85
+85
+85
+85
+85
+
+###############################
+
+****At****
+
+Print using at 
+-10
+11
+42
+100
+11
+
+vec is empty = 0
+-10
+11
+42
+100
+11
+
+Print using at 
+85
+85
+85
+85
+85
+85
+85
+85
+85
+85
+
+vec is empty = 0
+85
+85
+85
+85
+85
+85
+85
+85
+85
+85
+
+###############################
+
+****Back****
+
+vec is empty = 1
+
+vec is empty = 0
+-10
+11
+42
+100
+11
+
+vec is empty = 0
+85
+85
+85
+85
+85
+85
+85
+85
+85
+85
+
+vec is empty = 0
+-10
+11
+42
+100
+66
+
+Back on empty ctnr is undefined behavior
+Range back is 11
+Fill back is 85
+Copy back is 66
+###############################
+
+****Back****
+
+Emp capacity is 0
+Range back is 5
+Fill back is 10
+Copy back is 5
+###############################
+
+****Clear****
+
+vec is empty = 1
+
+vec is empty = 1
+
+vec is empty = 1
+
+vec is empty = 1
+
+Emp capacity is 0 and size is 0
+Range capacity is 5 and size is 0
+Fill capacity is 10 and size is 0
+Copy capacity is 5 and size is 0
+###############################
+
+****Erase****
+
+vec is empty = 1
+
+vec is empty = 0
+0
+4
+8
+12
+16
+
+vec is empty = 0
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+
+vec is empty = 0
+0
+6
+12
+18
+24
+
+After deletion
+
+vec is empty = 1
+
+vec is empty = 0
+12
+16
+
+vec is empty = 0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+
+vec is empty = 0
+0
+12
+18
+24
+
+###############################
+
+****Front****
+
+Front on empty ctnr is undefined behavior
+Range front is 12
+Fill front is 5
+Copy front is 0
+###############################
+
+****Allocator****
+
+11
+12
+13
+###############################
+
+****Insert****
+
+vec is empty = 1
+
+vec is empty = 0
+12
+16
+
+vec is empty = 0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+
+vec is empty = 0
+0
+12
+18
+24
+
+After insert
+
+vec is empty = 0
+10
+20
+30
+
+vec is empty = 0
+12
+10
+10
+16
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+35
+40
+45
+
+vec is empty = 0
+0
+12
+18
+24
+
+###############################
+
+****Max_Size****
+
+Max size is 2305843009213693951
+Max size is 2305843009213693951
+Max size is 2305843009213693951
+Max size is 2305843009213693951
+
+###############################
+
+****Operator=****
+
+vec is empty = 0
+10
+20
+30
+
+vec is empty = 0
+12
+10
+10
+16
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+35
+40
+45
+
+vec is empty = 0
+0
+12
+18
+24
+
+After assignement and modifications
+
+vec is empty = 0
+10
+20
+30
+
+vec is empty = 0
+10
+-99
+30
+
+vec is empty = 0
+12
+10
+10
+16
+
+vec is empty = 0
+12
+-99
+10
+16
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+35
+40
+45
+
+vec is empty = 0
+40
+-99
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+35
+40
+45
+
+vec is empty = 0
+0
+12
+18
+24
+
+vec is empty = 0
+0
+-99
+18
+24
+
+###############################
+
+****Pop_back****
+
+vec is empty = 0
+10
+20
+30
+
+vec is empty = 0
+12
+10
+10
+16
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+35
+40
+45
+
+vec is empty = 0
+0
+12
+18
+24
+
+After 3 pop_backs each
+vec is empty = 1
+
+vec is empty = 0
+12
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+
+vec is empty = 0
+0
+
+###############################
+
+****Push_back****
+
+vec is empty = 1
+
+vec is empty = 0
+12
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+
+vec is empty = 0
+0
+
+After 3 push_backs each
+vec is empty = 0
+0
+-2
+-4
+
+vec is empty = 0
+12
+0
+-3
+-6
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+0
+-4
+-8
+
+vec is empty = 0
+0
+0
+-5
+-10
+
+###############################
+
+****Rbegin/Rend****
+Displaying in reverse order
+-4
+-2
+0
+
+-6
+-3
+0
+12
+
+-8
+-4
+0
+30
+25
+20
+15
+10
+5
+29
+29
+29
+40
+40
+40
+
+-10
+-5
+0
+0
+
+Original order
+vec is empty = 0
+0
+-2
+-4
+
+vec is empty = 0
+12
+0
+-3
+-6
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+0
+-4
+-8
+
+vec is empty = 0
+0
+0
+-5
+-10
+
+###############################
+
+****Reserve****
+vec is empty = 0
+12
+0
+-3
+-6
+
+range capacity is 5
+range capacity is 20
+range capacity is 20
+range capacity is 400
+vec is empty = 0
+12
+0
+-3
+-6
+
+###############################
+
+****Resize****
+vec is empty = 0
+12
+0
+-3
+-6
+
+range size is 4
+vec is empty = 0
+12
+0
+
+range size is 2
+vec is empty = 0
+12
+0
+55
+55
+55
+
+range size is 5
+vec is empty = 0
+12
+0
+55
+55
+55
+0
+0
+0
+0
+0
+
+range size is 10
+
+###############################
+
+****Vector::Swap****
+vec is empty = 0
+12
+0
+55
+55
+55
+0
+0
+0
+0
+0
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+0
+-4
+-8
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+0
+-4
+-8
+
+vec is empty = 0
+12
+0
+55
+55
+55
+0
+0
+0
+0
+0
+
+vec is empty = 0
+12
+0
+55
+55
+55
+0
+0
+0
+0
+0
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+0
+-4
+-8
+
+###############################
+
+****Relational Operator****
+0
+1
+1
+0
+1
+0
+
+0
+1
+0
+1
+0
+1
+
+1
+0
+0
+0
+1
+1
+
+###############################
+
+****Generic swap overload****
+vec is empty = 0
+12
+0
+55
+55
+55
+0
+0
+0
+0
+0
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+0
+-4
+-8
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+0
+-4
+-8
+
+vec is empty = 0
+12
+0
+55
+55
+55
+0
+0
+0
+0
+0
+
+vec is empty = 0
+12
+0
+55
+55
+55
+0
+0
+0
+0
+0
+
+vec is empty = 0
+40
+40
+40
+29
+29
+29
+5
+10
+15
+20
+25
+30
+0
+-4
+-8
+
+###############################
+

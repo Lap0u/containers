@@ -102,7 +102,7 @@ public:
 		_start = _allocator.allocate(_capacity);
 		for (size_type i = 0; i < _capacity; i++)
 		{	
-			*(_start + i) = *first;
+			_allocator.construct(_start + i, *first);
 			first++;
 		}
 		_filled = _capacity;
@@ -113,7 +113,7 @@ public:
 	{
 		this->_start = _allocator.allocate(_capacity);
 		for(size_t i = 0; i < _filled; i++)
-			this->_start[i] = other._start[i];
+			this->_allocator.construct(this->_start + i, other._start[i]);
 	}
     /*      Destructor      */
 	// Destructs the vector. The destructors of the elements 
@@ -246,7 +246,6 @@ template <class InputIterator>
 	/*		Insert			*/
 	iterator insert (iterator position, const value_type& val)
 	{
-
 		if (this->_capacity == 0)
 		{
 			this->_start = this->_allocator.allocate(1);
@@ -261,25 +260,23 @@ template <class InputIterator>
 			this->_filled++;
 			return this->begin();
 		}
-
 		if (this->_filled == this->_capacity)//realloc required
 		{
 			ft::vector<value_type>	temp;
 			size_type				i;
 			size_type				ret;
-
 			temp._capacity = this->_capacity * 2;
 			temp._filled = this->_filled + 1;
 			temp._allocator = this->_allocator;
 			temp._start = temp._allocator.allocate(temp._capacity);
 			for (i = 0; this->begin() + i != position; i++)
-				*(temp._start + i) = *(this->_start + i);
-			*(temp._start + i) = val;
+				temp._allocator.construct(temp._start + i, *(this->_start + i));
+			temp._allocator.construct(temp._start + i, val);
 			ret = i;
 			i++;
 			while (i < temp._filled)
 			{
-				*(temp._start + i) = *(this->_start + i - 1);
+				temp._allocator.construct(temp._start + i, *(this->_start + i - 1));
 				i++;	
 			}
 			*this = temp;
@@ -332,12 +329,12 @@ template <class InputIterator>
 			temp._allocator = this->_allocator;
 			temp._start = temp._allocator.allocate(temp._capacity);
 			for (i = 0; this->begin() + i != position; i++)
-				*(temp._start + i) = *(this->_start + i);
+				temp._allocator.construct(temp._start + i, *(this->_start + i));
 			for (j = 0; j < n; j++)
-				*(temp._start + j + i) = val;
+				temp._allocator.construct(temp._start + j + i, val);
 			while (j + i < temp._filled)
 			{
-				*(temp._start + j + i) = *(this->_start + i);
+				temp._allocator.construct(temp._start + j + i, *(this->_start + i));
 				i++;
 			}
 			*this = temp;
@@ -353,7 +350,7 @@ template <class InputIterator>
 				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - n);
 			}
 			for (size_type j = 0; j < n; j++)
-				*(this->_start + j + offset) = val;
+				this->_allocator.construct(this->_start + j + offset, val);
 		}
 	}
 
@@ -363,7 +360,6 @@ template <class InputIterator>
 	{
 		size_type n = 0;
 		InputIterator temp = first;
-
 		while (temp != last)
 		{
 			n++;
@@ -371,10 +367,10 @@ template <class InputIterator>
 		}
 		if (this->_filled == 0)
 		{
-			ft::vector<value_type> temp(n, 0);
+			ft::vector<value_type> temp(n);
 			for (size_type i = 0; i < n; i++)
 			{
-				*(temp._start + i) = *first;
+				temp._allocator.construct(temp._start + i, *first);
 				first++;
 			}
 			*this = temp;
@@ -395,15 +391,16 @@ template <class InputIterator>
 			temp._allocator = this->_allocator;
 			temp._start = temp._allocator.allocate(temp._capacity);
 			for (i = 0; this->begin() + i != position; i++)
-				*(temp._start + i) = *(this->_start + i);
+				temp._allocator.construct(temp._start + i, *(this->_start + i));
 			for ( j = 0; j < n; j++)
 				temp._allocator.construct(temp._start + i + j, *first++);
 			for (; i + j < temp._filled; i++)
-				*(temp._start + i + j) = *(this->_start + i);
+				temp._allocator.construct(temp._start + i + j, *(this->_start + i));
 			*this = temp;
 		}
 		else
 		{
+			DEB
 			size_type	offset = position - this->begin();
 			size_type	last_off = this->end() - position;
 			this->_filled += n;
@@ -580,7 +577,7 @@ template <class T, class Alloc>
 	{
 		if (lhs.size() != rhs.size())
 			return false;
-		return equal(lhs.begin(), lhs.end(), rhs.begin());
+		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 	}
 
 	/*		!=				*/
@@ -591,7 +588,7 @@ template <class T, class Alloc>
 	/*		<				*/
 template <class T, class Alloc>
 	bool operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
-	{return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());}
+	{return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());}
 	/*		<=				*/
 template <class T, class Alloc>
 	bool operator>(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)

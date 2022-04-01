@@ -13,6 +13,9 @@ using namespace NS;
 void	printVec(const vector<int> & vec)
 {
 	COUT "vec is empty = " << vec.empty() ENDL;
+	if (vec.empty())
+		return ;
+	COUT "capacity is " << vec.capacity() << " and size is " << vec.size() ENDL;
 	for (vector<int>::const_iterator beg = vec.begin(); beg != vec.end(); beg++)
 		COUT *beg ENDL;
 	NL
@@ -21,6 +24,9 @@ void	printVec(const vector<int> & vec)
 void	printVec(vector<std::string> vec)
 {
 	COUT "vec is empty = " << vec.empty() ENDL;
+	if (vec.empty())
+		return ;
+	COUT "capacity is " << vec.capacity() << "  and size is " << vec.size() ENDL;
 	for (vector<std::string>::const_iterator beg = vec.begin(); beg != vec.end(); beg++)
 		COUT *beg ENDL;
 	NL
@@ -513,6 +519,7 @@ int main()
 	range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
 	range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
 	fill.insert(fill.begin(), 3, "oiseau");
+	printVec(fill);
 	fill.insert(fill.begin(), 3, "voiture");
 	COUT "After insert" ENDL ENDL;
 	printVec(emp);

@@ -347,8 +347,10 @@ template <class InputIterator>
 			this->_filled += n;
 			for (size_type i = 0; i < last_off; i++)
 			{
+				COUT "in" ENDL;
 				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - n);
 			}
+			COUT "died" ENDL;
 			for (size_type j = 0; j < n; j++)
 				this->_allocator.construct(this->_start + j + offset, val);
 		}
@@ -406,7 +408,7 @@ template <class InputIterator>
 			this->_filled += n;
 			for (size_type i = 0; i < last_off; i++)
 			{
-				this->_allocator.construct((this->_start + this->_filled - 1 - i), *(this->_start + this->_filled - 1 - i - n));
+				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - n);
 			}
 			for (size_type j = 0; j < n; j++)
 				this->_allocator.construct(this->_start + j + offset, *(first++));

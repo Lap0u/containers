@@ -35,341 +35,340 @@ void	printVec(const vector<std::string> & vec)
 int main()
 {
 
-# if 0 //enable/disable int tests (next L 378)
+# if 1 //enable/disable int tests (next L 378)
 
 #if 1
 	COUT "****Constructors****" ENDL ENDL;
 
-	vector<int>emp;
-	printVec(emp);
-	vector<int>fill (5, 11);
-	fill[2] = 42;
-	printVec(fill);
-	vector<int>range (fill.begin(), fill.end());
-	range[3] = 100;
-	printVec(range);
-	vector<int>copy (range);
-	printVec(copy);
-	copy[0] = -10;
-	printVec(range);
-	printVec(copy);
+	vector<int>empI;
+	printVec(empI);
+	vector<int>fillI (5, 11);
+	fillI[2] = 42;
+	printVec(fillI);
+	vector<int>rangeI (fillI.begin(), fillI.end());
+	rangeI[3] = 100;
+	printVec(rangeI);
+	vector<int>copyI (rangeI);
+	printVec(copyI);
+	copyI[0] = -10;
+	printVec(rangeI);
+	printVec(copyI);
 	SEP
 #endif
 #if 1
 	COUT "****Assign****" ENDL ENDL;
-	range.assign(copy.begin(), copy.end());
-	printVec(range);
-	fill.assign(10, 85);
-	printVec(fill);
+	rangeI.assign(copyI.begin(), copyI.end());
+	printVec(rangeI);
+	fillI.assign(10, 85);
+	printVec(fillI);
 	SEP
 #endif
 #if 1
 	COUT "****At****" ENDL ENDL;
 	COUT "Print using at " ENDL;
-	for (size_t i = 0; i < range.size(); i++)
-		COUT range.at(i) ENDL;
+	for (size_t i = 0; i < rangeI.size(); i++)
+		COUT rangeI.at(i) ENDL;
 	NL
-	printVec(range);
+	printVec(rangeI);
 	COUT "Print using at " ENDL;
-	for (size_t i = 0; i < fill.size(); i++)
-		COUT fill.at(i) ENDL;
+	for (size_t i = 0; i < fillI.size(); i++)
+		COUT fillI.at(i) ENDL;
 	NL
-	printVec(fill);
+	printVec(fillI);
 	SEP
 #endif
 #if 1
 	COUT "****Back****" ENDL ENDL;
-	copy[copy.size() - 1] = 66;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	copyI[copyI.size() - 1] = 66;
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	printVec(copyI);
 	COUT "Back on empty ctnr is undefined behavior" ENDL;
-	COUT "Range back is " << range.back() ENDL;
-	COUT "Fill back is " << fill.back() ENDL;
-	COUT "Copy back is " << copy.back() ENDL;
+	COUT "Range back is " << rangeI.back() ENDL;
+	COUT "Fill back is " << fillI.back() ENDL;
+	COUT "CopyI back is " << copyI.back() ENDL;
 	SEP
 #endif
 #if 1
 	COUT "****Capacity****" ENDL ENDL;
 
-	COUT "Emp capacity is " << emp.capacity() ENDL;
-	COUT "Range back is " << range.capacity() ENDL;
-	COUT "Fill back is " << fill.capacity() ENDL;
-	COUT "Copy back is " << copy.capacity() ENDL;
+	COUT "Emp capacity is " << empI.capacity() ENDL;
+	COUT "Range back is " << rangeI.capacity() ENDL;
+	COUT "Fill back is " << fillI.capacity() ENDL;
+	COUT "CopyI back is " << copyI.capacity() ENDL;
 	SEP
 #endif
 #if 1
 	COUT "****Clear****" ENDL ENDL;
-	emp.clear();
-	range.clear();
-	fill.clear();
-	copy.clear();
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
-	COUT "Emp capacity is " << emp.capacity() << " and size is " << emp.size() ENDL;
-	COUT "Range capacity is " << range.capacity() << " and size is " << range.size() ENDL;
-	COUT "Fill capacity is " << fill.capacity() << " and size is " << fill.size() ENDL;
-	COUT "Copy capacity is " << copy.capacity() << " and size is " << copy.size() ENDL;
-	for (size_t i = 0; i < range.capacity(); i++)
-		range.push_back(i * 4);
-	for (size_t i = 0; i < fill.capacity(); i++)
-		fill.push_back(i * 5);
-	for (size_t i = 0; i < copy.capacity(); i++)
-		copy.push_back(i * 6);
+	empI.clear();
+	rangeI.clear();
+	fillI.clear();
+	copyI.clear();
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	printVec(copyI);
+	COUT "Emp capacity is " << empI.capacity() << " and size is " << empI.size() ENDL;
+	COUT "Range capacity is " << rangeI.capacity() << " and size is " << rangeI.size() ENDL;
+	COUT "Fill capacity is " << fillI.capacity() << " and size is " << fillI.size() ENDL;
+	COUT "CopyI capacity is " << copyI.capacity() << " and size is " << copyI.size() ENDL;
+	for (size_t i = 0; i < rangeI.capacity(); i++)
+		rangeI.push_back(i * 4);
+	for (size_t i = 0; i < fillI.capacity(); i++)
+		fillI.push_back(i * 5);
+	for (size_t i = 0; i < copyI.capacity(); i++)
+		copyI.push_back(i * 6);
 	SEP
 #endif
 #if 1
 	COUT "****Erase****" ENDL ENDL;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
-	range.erase(range.begin(), range.end() - 2);
-	fill.erase(fill.begin());
-	copy.erase(copy.begin() + 1);
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	printVec(copyI);
+	rangeI.erase(rangeI.begin(), rangeI.end() - 2);
+	fillI.erase(fillI.begin());
+	copyI.erase(copyI.begin() + 1);
 	COUT "After deletion" ENDL ENDL;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	printVec(copyI);
 	SEP
 #endif
 #if 1
 	COUT "****Front****" ENDL ENDL;
 	COUT "Front on empty ctnr is undefined behavior" ENDL;
-	COUT "Range front is " << range.front() ENDL;
-	COUT "Fill front is " << fill.front() ENDL;
-	COUT "Copy front is " << copy.front() ENDL;
+	COUT "Range front is " << rangeI.front() ENDL;
+	COUT "Fill front is " << fillI.front() ENDL;
+	COUT "CopyI front is " << copyI.front() ENDL;
 	SEP
 #endif
 #if 1
 	COUT "****Allocator****" ENDL ENDL;
 	int *lol;
 
-	lol = range.get_allocator().allocate(3);
-	range.get_allocator().construct(&lol[0], 11);
-	range.get_allocator().construct(&lol[1], 12);
-	range.get_allocator().construct(&lol[2], 13);
+	lol = rangeI.get_allocator().allocate(3);
+	rangeI.get_allocator().construct(&lol[0], 11);
+	rangeI.get_allocator().construct(&lol[1], 12);
+	rangeI.get_allocator().construct(&lol[2], 13);
 	COUT lol[0] ENDL;
 	COUT lol[1] ENDL;
 	COUT lol[2] ENDL;
-	range.get_allocator().destroy(&lol[0]);
-	range.get_allocator().destroy(&lol[1]);
-	range.get_allocator().destroy(&lol[2]);
-	range.get_allocator().deallocate(lol, 3);
+	rangeI.get_allocator().destroy(&lol[0]);
+	rangeI.get_allocator().destroy(&lol[1]);
+	rangeI.get_allocator().destroy(&lol[2]);
+	rangeI.get_allocator().deallocate(lol, 3);
 	SEP
 #endif
 #if 1
 	COUT "****Insert****" ENDL ENDL;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
-	emp.insert(emp.begin(), 30);
-	emp.insert(emp.begin(), 20);
-	emp.insert(emp.begin(), 10);
-	range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
-	range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
-	fill.insert(fill.begin(), 3, 29);
-	fill.insert(fill.begin(), 3, 40);
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	empI.insert(empI.begin(), 30);
+	empI.insert(empI.begin(), 20);
+	empI.insert(empI.begin(), 10);
+	rangeI.insert(rangeI.begin() + 1, empI.begin(), empI.begin() + 1);
+	rangeI.insert(rangeI.begin() + 1, empI.begin(), empI.begin() + 1);
+	fillI.insert(fillI.begin(), 3, 29);
+	printVec(fillI);
+	fillI.insert(fillI.begin(), 3, 40);
 	COUT "After insert" ENDL ENDL;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
 	SEP
 #endif
 #if 1
 	COUT "****Max_Size****" ENDL ENDL;
-	COUT "Max size is " << emp.max_size() ENDL;
-	COUT "Max size is " << range.max_size() ENDL;
-	COUT "Max size is " << fill.max_size() ENDL;
-	COUT "Max size is " << copy.max_size() ENDL;
+	COUT "Max size is " << empI.max_size() ENDL;
+	COUT "Max size is " << rangeI.max_size() ENDL;
+	COUT "Max size is " << fillI.max_size() ENDL;
+	COUT "Max size is " << copyI.max_size() ENDL;
 	NL
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Operator=****" ENDL ENDL;
 
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
-	vector<int>t_emp = emp;
-	vector<int>t_fill = fill;
-	vector<int>t_range = range;
-	vector<int>t_copy = copy;
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	printVec(copyI);
+	vector<int>t_emp = empI;
+	vector<int>t_fill = fillI;
+	vector<int>t_range = rangeI;
+	vector<int>t_copyI = copyI;
 	COUT "After assignement and modifications" ENDL ENDL;
-	t_emp[1] = t_fill[1] = t_range[1] = t_copy[1] = -99;
-	printVec(emp);
+	t_emp[1] = t_fill[1] = t_range[1] = t_copyI[1] = -99;
+	printVec(empI);
 	printVec(t_emp);
-	printVec(range);
+	printVec(rangeI);
 	printVec(t_range);
-	printVec(fill);
+	printVec(fillI);
 	printVec(t_fill);
-	printVec(copy);	
-	printVec(t_copy);
+	printVec(copyI);	
+	printVec(t_copyI);
 	SEP
 #endif
 #if 1
 	COUT "****Pop_back****" ENDL ENDL;
 
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	printVec(copyI);
 	COUT "After 3 pop_backs each" ENDL;
 	for (int i = 0; i < 3; i++)
 	{
-		emp.pop_back();
-		range.pop_back();
-		fill.pop_back();
-		copy.pop_back();
+		empI.pop_back();
+		rangeI.pop_back();
+		fillI.pop_back();
+		copyI.pop_back();
 	}
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	printVec(copyI);
 	SEP
 #endif
 #if 1
 	COUT "****Push_back****" ENDL ENDL;
 
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	printVec(copyI);
 	COUT "After 3 push_backs each" ENDL;
 	for (int i = 0; i < 3; i++)
 	{
-		emp.push_back(i * -2);
-		range.push_back(i * -3);
-		fill.push_back(i * -4);
-		copy.push_back(i * -5);
+		empI.push_back(i * -2);
+		rangeI.push_back(i * -3);
+		fillI.push_back(i * -4);
+		copyI.push_back(i * -5);
 	}
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	printVec(copyI);
 	SEP
 #endif
 #if 1
 	COUT "****Rbegin/Rend****" ENDL;
 
-	vector<int>::reverse_iterator emprbeg = emp.rbegin();
-	vector<int>::reverse_iterator rangerbeg = range.rbegin();
-	vector<int>::reverse_iterator fillrbeg = fill.rbegin();
-	vector<int>::reverse_iterator copyrbeg = copy.rbegin();
+	vector<int>::reverse_iterator emprbeg = empI.rbegin();
+	vector<int>::reverse_iterator rangerbeg = rangeI.rbegin();
+	vector<int>::reverse_iterator fillrbeg = fillI.rbegin();
+	vector<int>::reverse_iterator copyIrbeg = copyI.rbegin();
 
 	COUT "Displaying in reverse order" ENDL;
-	for (;emprbeg != emp.rend(); emprbeg++)
+	for (;emprbeg != empI.rend(); emprbeg++)
 		COUT *emprbeg ENDL;
 	NL
-	for (;rangerbeg != range.rend(); rangerbeg++)
+	for (;rangerbeg != rangeI.rend(); rangerbeg++)
 		COUT *rangerbeg ENDL;
 	NL
-	for (;fillrbeg != fill.rend(); fillrbeg++)
+	for (;fillrbeg != fillI.rend(); fillrbeg++)
 		COUT *fillrbeg ENDL;
 	NL
-	for (;copyrbeg != copy.rend(); copyrbeg++)
-		COUT *copyrbeg ENDL;
+	for (;copyIrbeg != copyI.rend(); copyIrbeg++)
+		COUT *copyIrbeg ENDL;
 	NL
 	COUT "Original order" ENDL;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empI);
+	printVec(rangeI);
+	printVec(fillI);
+	printVec(copyI);
 	SEP
 #endif
 #if 1
 	COUT "****Reserve****" ENDL;
 
-	printVec(range);
-	COUT "range capacity is " << range.capacity() ENDL;
-	range.reserve(20);
-	COUT "range capacity is " << range.capacity() ENDL;
-	range.reserve(10);
-	COUT "range capacity is " << range.capacity() ENDL;
-	range.reserve(400);
-	//range.reserve(-20); /*************************************test si envoie exception car -20 = trop grand nombre(size_t)********/
-	COUT "range capacity is " << range.capacity() ENDL;
-	printVec(range);
+	printVec(rangeI);
+	COUT "rangeI capacity is " << rangeI.capacity() ENDL;
+	rangeI.reserve(20);
+	COUT "rangeI capacity is " << rangeI.capacity() ENDL;
+	rangeI.reserve(10);
+	COUT "rangeI capacity is " << rangeI.capacity() ENDL;
+	rangeI.reserve(400);
+	//rangeI.reserve(-20); /*************************************test si envoie exception car -20 = trop grand nombre(size_t)********/
+	COUT "rangeI capacity is " << rangeI.capacity() ENDL;
+	printVec(rangeI);
 	SEP
 #endif
 #if 1
 	COUT "****Resize****" ENDL;
 
-	printVec(range);
-	COUT "range size is " << range.size() ENDL;
-	range.resize(2);
-	printVec(range);
-	COUT "range size is " << range.size() ENDL;
-	range.resize(5, 55);
-	printVec(range);
-	COUT "range size is " << range.size() ENDL;
-	range.resize(10);
-	// range.resize(-20); /*************************************test si envoie exception car -20 = trop grand nombre(size_t)********/
-	printVec(range);
-	COUT "range size is " << range.size() ENDL;
+	printVec(rangeI);
+	COUT "rangeI size is " << rangeI.size() ENDL;
+	rangeI.resize(2);
+	printVec(rangeI);
+	COUT "rangeI size is " << rangeI.size() ENDL;
+	rangeI.resize(5, 55);
+	printVec(rangeI);
+	COUT "rangeI size is " << rangeI.size() ENDL;
+	rangeI.resize(10);
+	// rangeI.resize(-20); /*************************************test si envoie exception car -20 = trop grand nombre(size_t)********/
+	printVec(rangeI);
+	COUT "rangeI size is " << rangeI.size() ENDL;
 	NL
 	SEP
 #endif
 #if 1
 	COUT "****Vector::Swap****" ENDL;
 
-	printVec(range);
-	printVec(fill);
-	fill.swap(range);
-	printVec(range);
-	printVec(fill);
-	range.swap(fill);	
-	printVec(range);
-	printVec(fill);
+	printVec(rangeI);
+	printVec(fillI);
+	fillI.swap(rangeI);
+	printVec(rangeI);
+	printVec(fillI);
+	rangeI.swap(fillI);	
+	printVec(rangeI);
+	printVec(fillI);
 	SEP
 #endif
 #if 1
 	COUT "****Relational Operator****" ENDL;
-	COUT (range == fill) ENDL;
-	COUT (range != fill) ENDL;
-	COUT (range < fill) ENDL;
-	COUT (range > fill) ENDL;
-	COUT (range <= fill) ENDL;
-	COUT (range >= fill) ENDL;
+	COUT (rangeI == fillI) ENDL;
+	COUT (rangeI != fillI) ENDL;
+	COUT (rangeI < fillI) ENDL;
+	COUT (rangeI > fillI) ENDL;
+	COUT (rangeI <= fillI) ENDL;
+	COUT (rangeI >= fillI) ENDL;
 	
 	NL
 	
-	COUT (fill ==  range) ENDL;
-	COUT (fill !=  range) ENDL;
-	COUT (fill <  range) ENDL;
-	COUT (fill >  range) ENDL;
-	COUT (fill <=  range) ENDL;
-	COUT (fill >=  range) ENDL;
+	COUT (fillI ==  rangeI) ENDL;
+	COUT (fillI !=  rangeI) ENDL;
+	COUT (fillI <  rangeI) ENDL;
+	COUT (fillI >  rangeI) ENDL;
+	COUT (fillI <=  rangeI) ENDL;
+	COUT (fillI >=  rangeI) ENDL;
 
 	NL
 
-	COUT (fill ==  fill) ENDL;
-	COUT (fill !=  fill) ENDL;
-	COUT (fill <  fill) ENDL;
-	COUT (fill >  fill) ENDL;
-	COUT (fill <=  fill) ENDL;
-	COUT (fill >=  fill) ENDL;
+	COUT (fillI ==  fillI) ENDL;
+	COUT (fillI !=  fillI) ENDL;
+	COUT (fillI <  fillI) ENDL;
+	COUT (fillI >  fillI) ENDL;
+	COUT (fillI <=  fillI) ENDL;
+	COUT (fillI >=  fillI) ENDL;
 	NL
 	SEP
 #endif
 #if 1
 	COUT "****Generic swap overload****" ENDL;
 
-	printVec(range);
-	printVec(fill);
-	swap(fill, range);
-	printVec(range);
-	printVec(fill);
-	swap(range, fill);	
-	printVec(range);
-	printVec(fill);
+	printVec(rangeI);
+	printVec(fillI);
+	swap(fillI, rangeI);
+	printVec(rangeI);
+	printVec(fillI);
+	swap(rangeI, fillI);	
+	printVec(rangeI);
+	printVec(fillI);
 	SEP
 #endif
 
@@ -382,339 +381,335 @@ int main()
 #if 1
 	COUT "****Constructors****" ENDL ENDL;
 
-	vector<std::string>emp;
-	printVec(emp);
-	vector<std::string>fill (5, "Hello");
-	fill[2] = "Party";
-	printVec(fill);
-	vector<std::string>range (fill.begin(), fill.end());
-	range[3] = "Night";
-	printVec(range);
-	vector<std::string>copy (range);
-	printVec(copy);
-	copy[0] = "Tomorrow";
-	printVec(range);
-	printVec(copy);
+	vector<std::string>empS;
+	printVec(empS);
+	vector<std::string>fillS (5, "Hello");
+	fillS[2] = "Party";
+	printVec(fillS);
+	vector<std::string>rangeS (fillS.begin(), fillS.end());
+	rangeS[3] = "Night";
+	printVec(rangeS);
+	vector<std::string>copyS (rangeS);
+	printVec(copyS);
+	copyS[0] = "Tomorrow";
+	printVec(rangeS);
+	printVec(copyS);
 	SEP
 #endif
 #if 1
 	COUT "****Assign****" ENDL ENDL;
-	range.assign(copy.begin(), copy.end());
-	printVec(range);
-	fill.assign(10, "Pli");
-	printVec(fill);
+	rangeS.assign(copyS.begin(), copyS.end());
+	printVec(rangeS);
+	fillS.assign(10, "Pli");
+	printVec(fillS);
 	SEP
 #endif
 #if 1
 	COUT "****At****" ENDL ENDL;
 	COUT "Print using at " ENDL;
-	for (size_t i = 0; i < range.size(); i++)
-		COUT range.at(i) ENDL;
+	for (size_t i = 0; i < rangeS.size(); i++)
+		COUT rangeS.at(i) ENDL;
 	NL
-	printVec(range);
+	printVec(rangeS);
 	COUT "Print using at " ENDL;
-	for (size_t i = 0; i < fill.size(); i++)
-		COUT fill.at(i) ENDL;
+	for (size_t i = 0; i < fillS.size(); i++)
+		COUT fillS.at(i) ENDL;
 	NL
-	printVec(fill);
+	printVec(fillS);
 	SEP
 #endif
 #if 1
 	COUT "****Back****" ENDL ENDL;
-	copy[copy.size() - 1] = "Marty";
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	copyS[copyS.size() - 1] = "Marty";
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	printVec(copyS);
 	COUT "Back on empty ctnr is undefined behavior" ENDL;
-	COUT "Range back is " << range.back() ENDL;
-	COUT "Fill back is " << fill.back() ENDL;
-	COUT "Copy back is " << copy.back() ENDL;
+	COUT "Range back is " << rangeS.back() ENDL;
+	COUT "Fill back is " << fillS.back() ENDL;
+	COUT "Copy back is " << copyS.back() ENDL;
 	SEP
 #endif
 #if 1
 	COUT "****Capacity****" ENDL ENDL;
 
-	COUT "Emp capacity is " << emp.capacity() ENDL;
-	COUT "Range back is " << range.capacity() ENDL;
-	COUT "Fill back is " << fill.capacity() ENDL;
-	COUT "Copy back is " << copy.capacity() ENDL;
+	COUT "Emp capacity is " << empS.capacity() ENDL;
+	COUT "Range back is " << rangeS.capacity() ENDL;
+	COUT "Fill back is " << fillS.capacity() ENDL;
+	COUT "Copy back is " << copyS.capacity() ENDL;
 	SEP
 #endif
 #if 1
 	COUT "****Clear****" ENDL ENDL;
-	vector<std::string>t_emp = emp;
-	vector<std::string>t_range = range;
-	vector<std::string>t_fill = fill;
-	vector<std::string>t_copy = copy;
+	vector<std::string>t_empS = empS;
+	vector<std::string>t_rangeS = rangeS;
+	vector<std::string>t_fillS = fillS;
+	vector<std::string>t_copyS = copyS;
 
-	emp.clear();
-	range.clear();
-	fill.clear();
-	copy.clear();
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
-	COUT "Emp capacity is " << emp.capacity() << " and size is " << emp.size() ENDL;
-	COUT "Range capacity is " << range.capacity() << " and size is " << range.size() ENDL;
-	COUT "Fill capacity is " << fill.capacity() << " and size is " << fill.size() ENDL;
-	COUT "Copy capacity is " << copy.capacity() << " and size is " << copy.size() ENDL;
-	emp = t_emp;
-	range = t_range;
-	fill = t_fill;
-	copy = t_copy;
+	empS.clear();
+	rangeS.clear();
+	fillS.clear();
+	copyS.clear();
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	printVec(copyS);
+	COUT "Emp capacity is " << empS.capacity() << " and size is " << empS.size() ENDL;
+	COUT "Range capacity is " << rangeS.capacity() << " and size is " << rangeS.size() ENDL;
+	COUT "Fill capacity is " << fillS.capacity() << " and size is " << fillS.size() ENDL;
+	COUT "Copy capacity is " << copyS.capacity() << " and size is " << copyS.size() ENDL;
+	empS = t_empS;
+	rangeS = t_rangeS;
+	fillS = t_fillS;
+	copyS = t_copyS;
 	SEP
 #endif
 #if 1
 	COUT "****Erase****" ENDL ENDL;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
-	range.erase(range.begin(), range.end() - 2);
-	fill.erase(fill.begin());
-	copy.erase(copy.begin() + 1);
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	printVec(copyS);
+	rangeS.erase(rangeS.begin(), rangeS.end() - 2);
+	fillS.erase(fillS.begin());
+	copyS.erase(copyS.begin() + 1);
 	COUT "After deletion" ENDL ENDL;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	printVec(copyS);
 	SEP
 #endif
 #if 1
 	COUT "****Front****" ENDL ENDL;
 	COUT "Front on empty ctnr is undefined behavior" ENDL;
-	COUT "Range front is " << range.front() ENDL;
-	COUT "Fill front is " << fill.front() ENDL;
-	COUT "Copy front is " << copy.front() ENDL;
+	COUT "Range front is " << rangeS.front() ENDL;
+	COUT "Fill front is " << fillS.front() ENDL;
+	COUT "Copy front is " << copyS.front() ENDL;
 	SEP
 #endif
 #if 1
 	COUT "****Allocator****" ENDL ENDL;
-	std::string *lol;
+	std::string *lolS;
 
-	lol = range.get_allocator().allocate(3);
-	range.get_allocator().construct(&lol[0], "pif");
-	range.get_allocator().construct(&lol[1], "paf");
-	range.get_allocator().construct(&lol[2], "pouf");
-	COUT lol[0] ENDL;
-	COUT lol[1] ENDL;
-	COUT lol[2] ENDL;
-	range.get_allocator().destroy(&lol[0]);
-	range.get_allocator().destroy(&lol[1]);
-	range.get_allocator().destroy(&lol[2]);
-	range.get_allocator().deallocate(lol, 3);
+	lolS = rangeS.get_allocator().allocate(3);
+	rangeS.get_allocator().construct(&lolS[0], "pif");
+	rangeS.get_allocator().construct(&lolS[1], "paf");
+	rangeS.get_allocator().construct(&lolS[2], "pouf");
+	COUT lolS[0] ENDL;
+	COUT lolS[1] ENDL;
+	COUT lolS[2] ENDL;
+	rangeS.get_allocator().destroy(&lolS[0]);
+	rangeS.get_allocator().destroy(&lolS[1]);
+	rangeS.get_allocator().destroy(&lolS[2]);
+	rangeS.get_allocator().deallocate(lolS, 3);
 	SEP
 #endif
 #if 1
 	COUT "****Insert****" ENDL ENDL;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	emp.insert(emp.begin(), "pif");
-	emp.insert(emp.begin(), "paf");
-	emp.insert(emp.begin(), "anticonstitutionnellement");
-	range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
-	range.insert(range.begin() + 1, emp.begin() + 1, emp.begin() + 2);
-	printVec(fill);
-	fill.insert(fill.begin(), 3, "oiseau");
-	printVec(fill);
-	fill.insert(fill.begin(), 3, "voiture");
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	empS.insert(empS.begin(), "pif");
+	empS.insert(empS.begin(), "paf");
+	empS.insert(empS.begin(), "anticonstitutionnellement");
+	rangeS.insert(rangeS.begin() + 1, empS.begin(), empS.begin() + 1);
+	rangeS.insert(rangeS.begin() + 1, empS.begin() + 1, empS.begin() + 2);
+	printVec(fillS);
+	fillS.insert(fillS.begin(), 3, "oiseau");
+	printVec(fillS);
+	fillS.insert(fillS.begin(), 3, "voiture");
 	COUT "After insert" ENDL ENDL;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
 	SEP
 #endif
 #if 1
 	COUT "****Max_Size****" ENDL ENDL;
-	COUT "Max size is " << emp.max_size() ENDL;
-	COUT "Max size is " << range.max_size() ENDL;
-	COUT "Max size is " << fill.max_size() ENDL;
-	COUT "Max size is " << copy.max_size() ENDL;
+	COUT "Max size is " << empS.max_size() ENDL;
+	COUT "Max size is " << rangeS.max_size() ENDL;
+	COUT "Max size is " << fillS.max_size() ENDL;
+	COUT "Max size is " << copyS.max_size() ENDL;
 	NL
 	SEP
 #endif
 #if 1
 	COUT "****Operator=****" ENDL ENDL;
 
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
-	vector<std::string>rt_emp = emp;
-	vector<std::string>rt_fill = fill;
-	vector<std::string>rt_range = range;
-	vector<std::string>rt_copy = copy;
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	printVec(copyS);
+	vector<std::string>rt_emp = empS;
+	vector<std::string>rt_fill = fillS;
+	vector<std::string>rt_range = rangeS;
+	vector<std::string>rt_copy = copyS;
 	COUT "After assignement and modifications" ENDL ENDL;
 	rt_emp[1] = rt_fill[1] = rt_range[1] = rt_copy[1] = "aurevoir";
-	printVec(emp);
+	printVec(empS);
 	printVec(rt_emp);
-	printVec(range);
+	printVec(rangeS);
 	printVec(rt_range);
-	printVec(fill);
+	printVec(fillS);
 	printVec(rt_fill);
-	printVec(copy);	
+	printVec(copyS);	
 	printVec(rt_copy);
 	SEP
 #endif
 #if 1
 	COUT "****Pop_back****" ENDL ENDL;
 
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	printVec(copyS);
 	COUT "After 3 pop_backs each" ENDL;
 	for (int i = 0; i < 3; i++)
 	{
-		emp.pop_back();
-		range.pop_back();
-		fill.pop_back();
-		copy.pop_back();
+		empS.pop_back();
+		rangeS.pop_back();
+		fillS.pop_back();
+		copyS.pop_back();
 	}
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	printVec(copyS);
 	SEP
 #endif
 #if 1
 	COUT "****Push_back****" ENDL ENDL;
 
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	printVec(copyS);
 	COUT "After 3 push_backs each" ENDL;
 	for (int i = 0; i < 3; i++)
 	{
-		emp.push_back("avion");
-		range.push_back("poisson");
-		fill.push_back("comique");
-		copy.push_back("panneauxx");
+		empS.push_back("avion");
+		rangeS.push_back("poisson");
+		fillS.push_back("comique");
+		copyS.push_back("panneauxx");
 	}
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	printVec(copyS);
 	SEP
 #endif
 #if 1
 	COUT "****Rbegin/Rend****" ENDL;
 
-	vector<std::string>::reverse_iterator emprbeg = emp.rbegin();
-	vector<std::string>::reverse_iterator rangerbeg = range.rbegin();
-	vector<std::string>::reverse_iterator fillrbeg = fill.rbegin();
-	vector<std::string>::reverse_iterator copyrbeg = copy.rbegin();
+	vector<std::string>::reverse_iterator empSrbeg = empS.rbegin();
+	vector<std::string>::reverse_iterator rangeSrbeg = rangeS.rbegin();
+	vector<std::string>::reverse_iterator fillSrbeg = fillS.rbegin();
+	vector<std::string>::reverse_iterator copySrbeg = copyS.rbegin();
 
 	COUT "Displaying in reverse order" ENDL;
-	for (;emprbeg != emp.rend(); emprbeg++)
-		COUT *emprbeg ENDL;
+	for (;empSrbeg != empS.rend(); empSrbeg++)
+		COUT *empSrbeg ENDL;
 	NL
-	for (;rangerbeg != range.rend(); rangerbeg++)
-		COUT *rangerbeg ENDL;
+	for (;rangeSrbeg != rangeS.rend(); rangeSrbeg++)
+		COUT *rangeSrbeg ENDL;
 	NL
-	for (;fillrbeg != fill.rend(); fillrbeg++)
-		COUT *fillrbeg ENDL;
+	for (;fillSrbeg != fillS.rend(); fillSrbeg++)
+		COUT *fillSrbeg ENDL;
 	NL
-	for (;copyrbeg != copy.rend(); copyrbeg++)
-		COUT *copyrbeg ENDL;
+	for (;copySrbeg != copyS.rend(); copySrbeg++)
+		COUT *copySrbeg ENDL;
 	NL
 	COUT "Original order" ENDL;
-	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	printVec(empS);
+	printVec(rangeS);
+	printVec(fillS);
+	printVec(copyS);
 	SEP
 #endif
 #if 1
 	COUT "****Reserve****" ENDL;
 
-	printVec(range);
-	COUT "range capacity is " << range.capacity() ENDL;
-	range.reserve(20);
-	COUT "range capacity is " << range.capacity() ENDL;
-	range.reserve(10);
-	COUT "range capacity is " << range.capacity() ENDL;
-	range.reserve(400);
-	// range.reserve(-20); /*************************************test si envoie exception car -20 = trop grand nombre(size_t)********/
-	COUT "range capacity is " << range.capacity() ENDL;
-	printVec(range);
+	printVec(rangeS);
+	COUT "rangeS capacity is " << rangeS.capacity() ENDL;
+	rangeS.reserve(20);
+	COUT "rangeS capacity is " << rangeS.capacity() ENDL;
+	rangeS.reserve(10);
+	COUT "rangeS capacity is " << rangeS.capacity() ENDL;
+	rangeS.reserve(400);
+	// rangeS.reserve(-20); /*************************************test si envoie exception car -20 = trop grand nombre(size_t)********/
+	COUT "rangeS capacity is " << rangeS.capacity() ENDL;
+	printVec(rangeS);
 	SEP
 #endif
 #if 1
 	COUT "****Resize****" ENDL;
 
-	printVec(range);
-	COUT "range size is " << range.size() ENDL;
-	range.resize(2);
-	printVec(range);
-	COUT "range size is " << range.size() ENDL;
-	range.resize(5, "Pelouse");
-	printVec(range);
-	COUT "range size is " << range.size() ENDL;
-	range.resize(10);
-	// range.resize(-20); /*************************************test si envoie exception car -20 = trop grand nombre(size_t)********/
-	printVec(range);
-	COUT "range size is " << range.size() ENDL;
+	printVec(rangeS);
+	rangeS.resize(2);
+	printVec(rangeS);
+	rangeS.resize(5, "Pelouse");
+	printVec(rangeS);
+	rangeS.resize(10);
+	// rangeS.resize(-20); /*************************************test si envoie exception car -20 = trop grand nombre(size_t)********/
+	printVec(rangeS);
 	NL
 	SEP
 #endif
 #if 1
 	COUT "****Vector::Swap****" ENDL;
 
-	printVec(range);
-	printVec(fill);
-	fill.swap(range);
-	printVec(range);
-	printVec(fill);
-	range.swap(fill);	
-	printVec(range);
-	printVec(fill);
+	printVec(rangeS);
+	printVec(fillS);
+	fillS.swap(rangeS);
+	printVec(rangeS);
+	printVec(fillS);
+	rangeS.swap(fillS);	
+	printVec(rangeS);
+	printVec(fillS);
 	SEP
 #endif
 #if 1
 	COUT "****Relational Operator****" ENDL;
-	COUT (range == fill) ENDL;
-	COUT (range != fill) ENDL;
-	COUT (range < fill) ENDL;
-	COUT (range > fill) ENDL;
-	COUT (range <= fill) ENDL;
-	COUT (range >= fill) ENDL;
+	COUT (rangeS == fillS) ENDL;
+	COUT (rangeS != fillS) ENDL;
+	COUT (rangeS < fillS) ENDL;
+	COUT (rangeS > fillS) ENDL;
+	COUT (rangeS <= fillS) ENDL;
+	COUT (rangeS >= fillS) ENDL;
 	
 	NL
 	
-	COUT (fill ==  range) ENDL;
-	COUT (fill !=  range) ENDL;
-	COUT (fill <  range) ENDL;
-	COUT (fill >  range) ENDL;
-	COUT (fill <=  range) ENDL;
-	COUT (fill >=  range) ENDL;
+	COUT (fillS ==  rangeS) ENDL;
+	COUT (fillS !=  rangeS) ENDL;
+	COUT (fillS <  rangeS) ENDL;
+	COUT (fillS >  rangeS) ENDL;
+	COUT (fillS <=  rangeS) ENDL;
+	COUT (fillS >=  rangeS) ENDL;
 
 	NL
 
-	COUT (fill ==  fill) ENDL;
-	COUT (fill !=  fill) ENDL;
-	COUT (fill <  fill) ENDL;
-	COUT (fill >  fill) ENDL;
-	COUT (fill <=  fill) ENDL;
-	COUT (fill >=  fill) ENDL;
+	COUT (fillS ==  fillS) ENDL;
+	COUT (fillS !=  fillS) ENDL;
+	COUT (fillS <  fillS) ENDL;
+	COUT (fillS >  fillS) ENDL;
+	COUT (fillS <=  fillS) ENDL;
+	COUT (fillS >=  fillS) ENDL;
 	NL
 	SEP
 #endif
 #if 1
 	COUT "****Generic swap overload****" ENDL;
 
-	printVec(range);
-	printVec(fill);
-	swap(fill, range);
-	printVec(range);
-	printVec(fill);
-	swap(range, fill);	
-	printVec(range);
-	printVec(fill);
+	printVec(rangeS);
+	printVec(fillS);
+	swap(fillS, rangeS);
+	printVec(rangeS);
+	printVec(fillS);
+	swap(rangeS, fillS);	
+	printVec(rangeS);
+	printVec(fillS);
 	SEP
 #endif
 

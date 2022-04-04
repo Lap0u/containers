@@ -138,8 +138,9 @@ public:
 				this->_allocator.deallocate(this->_start, this->_capacity);
 			}
 			this->_allocator = other._allocator;
-            this->_capacity = other._capacity;
-            this->_filled = other._filled;
+			if (this->_capacity < other._filled)
+	            this->_capacity = other._filled;
+	        this->_filled = other._filled;
 			if (this->_capacity == 0)
 				return *this;
             this->_start = this->_allocator.allocate(this->_capacity);
@@ -340,7 +341,7 @@ template <class InputIterator>
 			if (this->_filled * 2 < this->_filled + n)
 				temp._capacity = this->_filled + n;
 			else
-				temp._capacity = this->_capacity * 2;
+				temp._capacity = this->_filled * 2;
 			
 			temp._filled = this->_filled + n;
 			temp._allocator = this->_allocator;
@@ -397,10 +398,10 @@ template <class InputIterator>
 			size_type				i;
 			size_type				j;
 
-			if (this->_capacity * 2 < this->_filled + n)
+			if (this->_filled * 2 < this->_filled + n)
 				temp._capacity = this->_filled + n;
 			else
-				temp._capacity = this->_capacity * 2;
+				temp._capacity = this->_filled * 2;
 			
 			temp._filled = this->_filled + n;
 			temp._allocator = this->_allocator;
@@ -539,11 +540,12 @@ template <class InputIterator>
 				temp._allocator.construct(temp._start + temp._filled, val);
 				temp._filled++;
 			}
-			*this = temp;
+			myCpy(temp);
 		}
 		else
 		{
 			ft::vector<value_type> temp;
+			size_type	i = this->_filled;
 
 			temp._allocator = this->_allocator;
 			temp._capacity = n;
@@ -551,12 +553,12 @@ template <class InputIterator>
 			temp._start = temp._allocator.allocate(temp._capacity);
 			for (size_type i = 0; i < this->_filled; i++)
 				temp._allocator.construct(temp._start + i, *(this->_start + i));
-			while (this->_filled < n)
+			while (i < n)
 			{
-				temp._allocator.construct(temp._start + this->_filled, val);
-				this->_filled++;
+				temp._allocator.construct(temp._start + i, val);
+				i++;
 			}
-			*this = temp;
+			myCpy(temp);
 		}
 	}
 	/*		Swap			*/
@@ -582,6 +584,30 @@ template <class InputIterator>
 
 		temp._filled = temp._capacity = 0; //protect destructor
 	}
+
+private:
+	void	myCpy(const vector& other )
+    {
+        if (this != &other)
+        {
+			COUT this->_filled <<" in " ENDL;
+			if (this->_start != NULL)
+			{
+				for (size_type i = 0; i < this->_filled; i++)
+					this->_allocator.destroy(this->_start + i);
+				this->_allocator.deallocate(this->_start, this->_capacity);
+			}
+			this->_allocator = other._allocator;
+			if (this->_capacity < other._capacity)
+	            this->_capacity = other._capacity;
+	        this->_filled = other._filled;
+			if (this->_capacity == 0)
+				return ;
+            this->_start = this->_allocator.allocate(this->_capacity);
+    		for(size_t i = 0; i < other._filled; i++)
+			    this->_allocator.construct(this->_start + i, other[i]);
+        }
+    }
 };
 
 /*==Operators overload==*/

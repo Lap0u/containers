@@ -118,7 +118,12 @@ public:
     /*      Destructor      */
 	// Destructs the vector. The destructors of the elements 
 	// are called and the used storage is deallocated. 
-	virtual ~vector() { _allocator.deallocate(_start, _capacity);}
+	virtual ~vector() 
+	{
+		for (size_type i = 0; i < _filled; i++)
+			_allocator.destroy(_start + i);
+		_allocator.deallocate(_start, _capacity);
+	}
     
     /*      Operator=       */
     // Copy assignment operator. Replaces the contents with a copy of the contents of other.
@@ -279,7 +284,7 @@ template <class InputIterator>
 			for (i = 0; this->begin() + i != position; i++)
 			{
 				temp._allocator.construct(temp._start + i, *(this->_start + i));
-				this->_allocator.destroy(this->_start + i);
+				// this->_allocator.destroy(this->_start + i);
 			}
 			temp._allocator.construct(temp._start + i, val);
 			ret = i;
@@ -287,7 +292,7 @@ template <class InputIterator>
 			while (i < temp._filled)
 			{
 				temp._allocator.construct(temp._start + i, *(this->_start + i - 1));
-				this->_allocator.destroy(this->_start + i - 1);
+				// this->_allocator.destroy(this->_start + i - 1);
 				i++;	
 			}
 			*this = temp;
@@ -303,12 +308,12 @@ template <class InputIterator>
 			COUT "go " << val ENDL;
 			this->_filled++;
 			save = *(this->_start + offset);
-			*(this->_start + offset) = val;
+			this->_allocator.construct(this->_start + offset, val);
 			offset++;
 			while(offset < this->_filled)
 			{
 				save_next = *(this->_start + offset);
-				*(this->_start + offset) = save;
+				this->_allocator.construct(this->_start + offset, save);
 				offset++;
 				save = save_next;
 			}
@@ -414,11 +419,12 @@ template <class InputIterator>
 			size_type	last_off = this->end() - position;
 			this->_filled += n;
 			for (size_type i = 0; i < last_off; i++)
-			{
 				this->_allocator.construct(this->_start + this->_filled - 1 - i, *(this->_start + this->_filled - 1 - i - n));
-			}
 			for (size_type j = 0; j < n; j++)
+			{
+				this->_allocator.destroy(this->_start + j + offset);
 				this->_allocator.construct(this->_start + j + offset, *(first++));
+			}
 		}
 	}
 
@@ -557,25 +563,25 @@ template <class InputIterator>
 	void swap (vector& x)
 	{
 		vector<value_type>	temp;
-		pointer				point;
+		pointer				xptr = x._start;
+		pointer				tptr = this->_start;
 
-		point = x._start;
 		temp._capacity = x._capacity;
 		temp._filled = x._filled;
 		temp._allocator = x._allocator;
 
-		x._start = this->_start;
+		x._start = tptr;
 		x._capacity = this->_capacity;
 		x._filled = this->_filled;
 		x._allocator = this->_allocator;
 
-		this->_start = point;
+		this->_start = xptr;
 		this->_capacity = temp._capacity;
 		this->_filled = temp._filled;
 		this->_allocator = temp._allocator;
 
+		temp._filled = temp._capacity = 0; //protect destructor
 	}
-
 };
 
 /*==Operators overload==*/

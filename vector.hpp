@@ -127,13 +127,19 @@ public:
         if (this != &other)
         {
 			if (this->_start != NULL)
-            	this->_allocator.deallocate(this->_start, this->_capacity);
-            this->_allocator = other._allocator;
+			{
+				for (size_type i = 0; i < this->_filled; i++)
+					this->_allocator.destroy(this->_start + i);
+				this->_allocator.deallocate(this->_start, this->_capacity);
+			}
+			this->_allocator = other._allocator;
             this->_capacity = other._capacity;
             this->_filled = other._filled;
+			if (this->_capacity == 0)
+				return *this;
             this->_start = this->_allocator.allocate(this->_capacity);
     		for(size_t i = 0; i < other._filled; i++)
-			    this->_allocator.construct(_start + i, other[i]);
+			    this->_allocator.construct(this->_start + i, other[i]);
         }
 		return *this;
     }
@@ -224,7 +230,7 @@ template <class InputIterator>
 			temp._filled = this->_filled;
 			temp._start = temp._start = temp._allocator.allocate(temp._capacity);
 			for (size_type i = 0; i < this->_filled; i++)
-				*(temp._start + i) = *(this->_start + i);
+				temp._allocator.construct(temp._start + i, *(this->_start + i));
 			// this->_allocator.deallocate(_start, _capacity);
 			*this = temp;
 		}
@@ -265,18 +271,23 @@ template <class InputIterator>
 			ft::vector<value_type>	temp;
 			size_type				i;
 			size_type				ret;
+
 			temp._capacity = this->_capacity * 2;
 			temp._filled = this->_filled + 1;
 			temp._allocator = this->_allocator;
 			temp._start = temp._allocator.allocate(temp._capacity);
 			for (i = 0; this->begin() + i != position; i++)
+			{
 				temp._allocator.construct(temp._start + i, *(this->_start + i));
+				this->_allocator.destroy(this->_start + i);
+			}
 			temp._allocator.construct(temp._start + i, val);
 			ret = i;
 			i++;
 			while (i < temp._filled)
 			{
 				temp._allocator.construct(temp._start + i, *(this->_start + i - 1));
+				this->_allocator.destroy(this->_start + i - 1);
 				i++;	
 			}
 			*this = temp;
@@ -289,6 +300,7 @@ template <class InputIterator>
 			value_type	save;
 			value_type	save_next;
 
+			COUT "go " << val ENDL;
 			this->_filled++;
 			save = *(this->_start + offset);
 			*(this->_start + offset) = val;
@@ -346,11 +358,7 @@ template <class InputIterator>
 			
 			this->_filled += n;
 			for (size_type i = 0; i < last_off; i++)
-			{
-				COUT "in" ENDL;
-				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - n);
-			}
-			COUT "died" ENDL;
+				this->_allocator.construct(this->_start + this->_filled - 1 - i, *(this->_start + this->_filled - 1 - i - n));
 			for (size_type j = 0; j < n; j++)
 				this->_allocator.construct(this->_start + j + offset, val);
 		}
@@ -402,13 +410,12 @@ template <class InputIterator>
 		}
 		else
 		{
-			DEB
 			size_type	offset = position - this->begin();
 			size_type	last_off = this->end() - position;
 			this->_filled += n;
 			for (size_type i = 0; i < last_off; i++)
 			{
-				*(this->_start + this->_filled - 1 - i) = *(this->_start + this->_filled - 1 - i - n);
+				this->_allocator.construct(this->_start + this->_filled - 1 - i, *(this->_start + this->_filled - 1 - i - n));
 			}
 			for (size_type j = 0; j < n; j++)
 				this->_allocator.construct(this->_start + j + offset, *(first++));
@@ -507,7 +514,7 @@ template <class InputIterator>
 		{
 			while (this->_filled < n)
 			{
-				*(this->_start + this->_filled) = val;
+				this->_allocator.construct(this->_start + this->_filled, val);
 				this->_filled++;
 			}
 		}
@@ -520,10 +527,10 @@ template <class InputIterator>
 			temp._capacity = this->_capacity * 2;
 			temp._start = temp._allocator.allocate(temp._capacity);
 			for (size_type i = 0; i < temp._filled; i++)
-				*(temp._start + i) = *(this->_start + i);
+				temp._allocator.construct(temp._start + i, *(this->_start + i));
 			while (temp._filled < n)
 			{
-				*(temp._start + temp._filled) = val;
+				temp._allocator.construct(temp._start + temp._filled, val);
 				temp._filled++;
 			}
 			*this = temp;
@@ -537,10 +544,10 @@ template <class InputIterator>
 			temp._filled = n;
 			temp._start = temp._allocator.allocate(temp._capacity);
 			for (size_type i = 0; i < this->_filled; i++)
-				*(temp._start + i) = *(this->_start + i);
+				temp._allocator.construct(temp._start + i, *(this->_start + i));
 			while (this->_filled < n)
 			{
-				*(temp._start + this->_filled) = val;
+				temp._allocator.construct(temp._start + this->_filled, val);
 				this->_filled++;
 			}
 			*this = temp;

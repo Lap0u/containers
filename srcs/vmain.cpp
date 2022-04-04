@@ -21,7 +21,7 @@ void	printVec(const vector<int> & vec)
 	NL
 }
 
-void	printVec(vector<std::string> vec)
+void	printVec(const vector<std::string> & vec)
 {
 	COUT "vec is empty = " << vec.empty() ENDL;
 	if (vec.empty())
@@ -510,25 +510,32 @@ int main()
 #if 1
 	COUT "****Insert****" ENDL ENDL;
 	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	// printVec(range);
+	// printVec(fill);
+	// printVec(copy);
 	emp.insert(emp.begin(), "pif");
-	emp.insert(emp.begin(), "paf");
-	emp.insert(emp.begin(), "anticonstitutionnellement");
-	range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
-	range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
-	fill.insert(fill.begin(), 3, "oiseau");
-	printVec(fill);
-	fill.insert(fill.begin(), 3, "voiture");
-	COUT "After insert" ENDL ENDL;
 	printVec(emp);
-	printVec(range);
-	printVec(fill);
-	printVec(copy);
+	emp.insert(emp.begin(), "paf");
+	printVec(emp);
+	emp.insert(emp.begin(), "anticonstitutionnellement");
+	printVec(emp);
+	// range.insert(range.begin() + 1, "lol");
+	// // printVec(range);
+	// // range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
+	// // range.insert(range.begin() + 1, emp.begin(), emp.begin() + 1);
+	// // NL NL NL
+	// // printVec(fill);
+	// // fill.insert(fill.begin(), 3, "oiseau");
+	// // printVec(fill);
+	// // fill.insert(fill.begin(), 3, "voiture");
+	// // COUT "After insert" ENDL ENDL;
+	// printVec(emp);
+	// printVec(range);
+	// printVec(fill);
+	// printVec(copy);
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Max_Size****" ENDL ENDL;
 	COUT "Max size is " << emp.max_size() ENDL;
 	COUT "Max size is " << range.max_size() ENDL;
@@ -537,7 +544,7 @@ int main()
 	NL
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Operator=****" ENDL ENDL;
 
 	printVec(emp);
@@ -560,7 +567,7 @@ int main()
 	printVec(rt_copy);
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Pop_back****" ENDL ENDL;
 
 	printVec(emp);
@@ -581,7 +588,7 @@ int main()
 	printVec(copy);
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Push_back****" ENDL ENDL;
 
 	printVec(emp);
@@ -602,7 +609,7 @@ int main()
 	printVec(copy);
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Rbegin/Rend****" ENDL;
 
 	vector<std::string>::reverse_iterator emprbeg = emp.rbegin();
@@ -630,7 +637,7 @@ int main()
 	printVec(copy);
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Reserve****" ENDL;
 
 	printVec(range);
@@ -645,7 +652,7 @@ int main()
 	printVec(range);
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Resize****" ENDL;
 
 	printVec(range);
@@ -663,7 +670,7 @@ int main()
 	NL
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Vector::Swap****" ENDL;
 
 	printVec(range);
@@ -676,7 +683,7 @@ int main()
 	printVec(fill);
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Relational Operator****" ENDL;
 	COUT (range == fill) ENDL;
 	COUT (range != fill) ENDL;
@@ -705,7 +712,7 @@ int main()
 	NL
 	SEP
 #endif
-#if 1
+#if 0
 	COUT "****Generic swap overload****" ENDL;
 
 	printVec(range);

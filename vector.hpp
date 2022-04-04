@@ -109,7 +109,7 @@ public:
 	}
 
 	// Copy constructor. Constructs the container with the copy of the contents of other.
-	vector(const vector & other) : _allocator(other._allocator), _capacity(other._capacity), _filled(other._filled)
+	vector(const vector & other) : _allocator(other._allocator), _capacity (other._filled), _filled(other._filled)
 	{
 		this->_start = _allocator.allocate(_capacity);
 		for(size_t i = 0; i < _filled; i++)
@@ -238,7 +238,7 @@ template <class InputIterator>
 			for (size_type i = 0; i < this->_filled; i++)
 				temp._allocator.construct(temp._start + i, *(this->_start + i));
 			// this->_allocator.deallocate(_start, _capacity);
-			*this = temp;
+			myCpy(temp);
 		}
 	}
     /*      _Capacity        */
@@ -296,7 +296,7 @@ template <class InputIterator>
 				// this->_allocator.destroy(this->_start + i - 1);
 				i++;	
 			}
-			*this = temp;
+			myCpy(temp);
 			return this->begin() + ret;
 		}
 		else
@@ -329,7 +329,7 @@ template <class InputIterator>
 			ft::vector<value_type> temp(n);
 			for (size_type i = 0; i < n; i++)
 				temp._allocator.construct(temp._start + i, val);
-			*this = temp;
+			myCpy(temp);
 			return ;
 		}
 		if (this->_filled + n > this->_capacity)
@@ -355,7 +355,7 @@ template <class InputIterator>
 				temp._allocator.construct(temp._start + j + i, *(this->_start + i));
 				i++;
 			}
-			*this = temp;
+			myCpy(temp);
 		}
 		else
 		{
@@ -412,7 +412,7 @@ template <class InputIterator>
 				temp._allocator.construct(temp._start + i + j, *first++);
 			for (; i + j < temp._filled; i++)
 				temp._allocator.construct(temp._start + i + j, *(this->_start + i));
-			*this = temp;
+			myCpy(temp);
 		}
 		else
 		{
@@ -483,7 +483,7 @@ template <class InputIterator>
 			temp._allocator.construct(temp._start + temp._filled, val);
 			temp._filled++;
 			// this->_allocator.deallocate(this->_start, this->_capacity);
-			*this = temp;
+			myCpy(temp);
 		}
 		else if (this->_capacity == 0)
 		{
@@ -590,7 +590,6 @@ private:
     {
         if (this != &other)
         {
-			COUT this->_filled <<" in " ENDL;
 			if (this->_start != NULL)
 			{
 				for (size_type i = 0; i < this->_filled; i++)

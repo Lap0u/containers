@@ -15,29 +15,29 @@ int main()
 {
 	using namespace NS;
 
-	vector<int>re (3, 13);
+	vector<int>re;
+	for (int i = 0; i < 5; i++)
+		re.push_back(i + 10);
 	stack<int, vector<int> >lol (re);
-	stack<int, vector<int> >temp = lol;
-	
-	for (int i = 0; i < 3; i++)
-	{
-		COUT temp.top() ENDL;
-		temp.pop();
-	}
-	NL
+	stack<int, vector<int> >rrr = lol;
 
-	temp = lol;
-	for (int i = 0; i < 3; i++)
+	COUT "size is " << lol.size() ENDL ENDL;
+	COUT "While empty" ENDL ENDL;
+	while (lol.size())
 	{
-		temp.push(15);
-		COUT temp.top() ENDL;
+		COUT lol.top() ENDL;
+		lol.pop();
+		COUT "is empty? : " << lol.empty() ENDL;
 	}
-	NL
-
-	for (int i = 0; i < 6; i++)
+	COUT std::endl << rrr.top() ENDL;
+	rrr.top() = 121;
+	COUT std::endl << rrr.top() ENDL;
+	for (size_t i = 0; i < rrr.size(); i++)
+		lol.push(i * 10);
+	while (lol.size())
 	{
-		COUT temp.top() ENDL;
-		temp.pop();
+		COUT lol.top() ENDL;
+		lol.pop();
+		COUT "is empty? : " << lol.empty() ENDL;
 	}
-	return 0;
 }

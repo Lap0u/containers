@@ -78,20 +78,34 @@ int main ()
 		SEP
 	#endif
 	#if 1
-		COUT "Count" ENDL ENDL;
+		COUT "Equal_range" ENDL ENDL;
 		
-		emp["E"] = 12;
-		COUT "is e part of a emp? " << emp.count("E") ENDL;
-		COUT "is e part of a range? " << range.count("E") ENDL;
-		COUT "is e part of a copy? " << copy.count("E") ENDL;
-		COUT "Adding E to range and removing it from emp" ENDL;
-		emp.erase("E");
-		range["E"];
-		COUT "is e part of a emp? " << emp.count("E") ENDL;
-		COUT "is e part of a range? " << range.count("E") ENDL;
-		COUT "is e part of a copy? " << copy.count("E") ENDL;
-		SEP
+		pair<std::map<std::string,int>::iterator,std::map<std::string,int>::iterator> ret;
+		ret = range.equal_range("E");
+		COUT "We looked for E in range" ENDL;
+		COUT "lower bound points to: ";
+  		COUT ret.first->first << " => " << ret.first->second << '\n';
+
+ 		// COUT "upper bound points to: "; E is last so this would crash
+ 		// COUT ret.second->first << " => " << ret.second->second << '\n';
+
+		ret = emp.equal_range("E");
+		COUT "We looked for E in emp(doesn't exist so it would crash)" ENDL;
+		// COUT "lower bound points to: "; (this will crash)
+  		// COUT ret.first->first << " => " << ret.first->second << '\n';
+
+ 		// COUT "upper bound points to: ";
+ 		// COUT ret.second->first << " => " << ret.second->second << '\n';
+
+		ret = copy.equal_range("C");
+		COUT "We looked for C in copy" ENDL;
+		COUT "lower bound points to: ";
+  		COUT ret.first->first << " => " << ret.first->second << '\n';
+
+ 		COUT "upper bound points to: ";
+ 		COUT ret.second->first << " => " << ret.second->second << '\n';
 	#endif
+
 	}
 #endif
 }

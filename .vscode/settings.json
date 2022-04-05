@@ -68,6 +68,16 @@
 		"type_traits": "cpp",
 		"typeinfo": "cpp",
 		"unordered_map": "cpp",
-		"utility": "cpp"
+		"utility": "cpp",
+		"*.tcc": "cpp",
+		"clocale": "cpp",
+		"compare": "cpp",
+		"concepts": "cpp",
+		"memory_resource": "cpp",
+		"numeric": "cpp",
+		"random": "cpp",
+		"fstream": "cpp",
+		"ranges": "cpp",
+		"cinttypes": "cpp"
 	}
 }

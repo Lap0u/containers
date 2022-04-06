@@ -6,6 +6,7 @@
 # include <exception>
 # include <iterator>
 # include <iostream>
+# include <stdexcept>
 
 # include "headers/v_iterator.hpp"
 # include "headers/enable_if.hpp"
@@ -229,7 +230,7 @@ template <class InputIterator>
 	void reserve(size_type n)
 	{
 		if (n > max_size())
-			throw std::length_error("Not enough space to allocate memory");
+			throw std::length_error("vector::reserve");
 		if (n > this->capacity())
 		{
 			ft::vector<value_type>temp;

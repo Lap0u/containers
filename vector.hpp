@@ -115,6 +115,7 @@ public:
 	// Copy constructor. Constructs the container with the copy of the contents of other.
 	vector(const vector & other) : _allocator(other._allocator), _start(NULL), _capacity (other._filled), _filled(other._filled)
 	{
+		COUT "oooyo" ENDL ENDL ENDL;
 		if (_capacity == 0)
 			return ;
 		this->_start = _allocator.allocate(_capacity);
@@ -135,13 +136,16 @@ public:
     // Copy assignment operator. Replaces the contents with a copy of the contents of other.
     vector& operator=( const vector& other )
     {
+		size_type	save_cap = this->_capacity;
         if (this != &other)
         {
+			// COUT "oooyo" ENDL ENDL ENDL;
 			if (this->_start != NULL)
 			{
 				for (size_type i = 0; i < this->_filled; i++)
 					this->_allocator.destroy(this->_start + i);
-				this->_allocator.deallocate(this->_start, this->_capacity);
+				if (save_cap < other._filled)
+					this->_allocator.deallocate(this->_start, this->_capacity);
 			}
 			this->_allocator = other._allocator;
 			if (this->_capacity < other._filled)
@@ -149,7 +153,8 @@ public:
 	        this->_filled = other._filled;
 			if (this->_capacity == 0)
 				return *this;
-            this->_start = this->_allocator.allocate(this->_capacity);
+			if (save_cap < other._filled)
+            	this->_start = this->_allocator.allocate(this->_capacity);
     		for(size_t i = 0; i < other._filled; i++)
 			    this->_allocator.construct(this->_start + i, other[i]);
         }
@@ -427,6 +432,7 @@ template <class InputIterator>
 			this->_filled += n;
 			for (size_type i = 0; i < last_off; i++)
 				this->_allocator.construct(this->_start + this->_filled - 1 - i, *(this->_start + this->_filled - 1 - i - n));
+			std::cerr << offset ENDL ENDL ENDL;
 			for (size_type j = 0; j < n; j++)
 			{
 				this->_allocator.destroy(this->_start + j + offset);

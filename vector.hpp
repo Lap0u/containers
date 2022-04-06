@@ -81,12 +81,13 @@ public:
 
 	// Constructs the container with count copies of elements with value value.
 	explicit vector(size_type count, const T& value = T(),
-		const Allocator& alloc = Allocator()) : _allocator(alloc), _capacity(count)
+		const Allocator& alloc = Allocator()) : _allocator(alloc), _start(NULL), _capacity(count), _filled(count)
 	{
+		if (count == 0)
+			return ;
 		this->_start = this->_allocator.allocate(count);
 		for (size_type i = 0; i < count; i++)
 			this->_allocator.construct(this->_start + i, value);
-		this->_filled = this->_capacity;
 	}
 
 	// Constructs the container with the contents of the range [first, last).
@@ -100,17 +101,20 @@ public:
 		while (temp++ != last)
 			diff++;
 		_capacity = diff;
+			_filled = _capacity;
+		_start = NULL;
+		if (_capacity == 0)
+			return ;
 		_start = _allocator.allocate(_capacity);
 		for (size_type i = 0; i < _capacity; i++)
 		{	
 			_allocator.construct(_start + i, *first);
 			first++;
 		}
-		_filled = _capacity;
 	}
 
 	// Copy constructor. Constructs the container with the copy of the contents of other.
-	vector(const vector & other) : _allocator(other._allocator), _capacity (other._filled), _filled(other._filled)
+	vector(const vector & other) : _allocator(other._allocator), _start(NULL), _capacity (other._filled), _filled(other._filled)
 	{
 		if (_capacity == 0)
 			return ;
@@ -125,7 +129,6 @@ public:
 	{
 		for (size_type i = 0; i < _filled; i++)
 			_allocator.destroy(_start + i);
-		// COUT _capacity ENDL;
 		_allocator.deallocate(_start, _capacity);
 	}
     
@@ -444,9 +447,11 @@ template <class InputIterator>
 		for (i = 0; beg + i != pos; i++);
 		this->_allocator.destroy(this->_start + i);
 		this->_filled--;
+		std::cerr << i ENDL ENDL ENDL;
 		for (size_type j = i; j != this->_filled; j++)
 		{
-			*(this->_start + j) = *(this->_start + (j + 1));
+			this->_allocator.construct(this->_start + j, *(this->_start + (j + 1)));
+			this->_allocator.destroy(this->_start + (j + 1));
 		}
 		return pos;
 	}
@@ -467,7 +472,8 @@ template <class InputIterator>
 		}
 		for (size_type j = i; beg + j != this->end() - (last - first); j++)
 		{
-			*(this->_start + j )= *(this->_start + j + (last - first));
+			this->_allocator.construct(this->_start + j, *(this->_start + j + (last - first)));
+			this->_allocator.destroy((this->_start + j + (last - first)));
 		}
 		this->_filled -= last - first;
 		return first;

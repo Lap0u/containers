@@ -26,7 +26,6 @@
 
 /*https://www.lirmm.fr/~ducour/Doc-objets/ISO+IEC+14882-1998.pdf*/
 
-
 namespace ft {
 
 template <class T, class Allocator = std::allocator<T> >

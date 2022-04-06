@@ -22,6 +22,8 @@ public:
 
 	explicit stack (const container_type & ctnr = container_type()) : _ctnr(ctnr){}
 
+	virtual ~stack () {};
+
 	bool empty () const {return _ctnr.empty();}
 
 	size_type size () const {return _ctnr.size();}

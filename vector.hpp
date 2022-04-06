@@ -111,6 +111,8 @@ public:
 	// Copy constructor. Constructs the container with the copy of the contents of other.
 	vector(const vector & other) : _allocator(other._allocator), _capacity (other._filled), _filled(other._filled)
 	{
+		if (_capacity == 0)
+			return ;
 		this->_start = _allocator.allocate(_capacity);
 		for(size_t i = 0; i < _filled; i++)
 			this->_allocator.construct(this->_start + i, other._start[i]);
@@ -122,6 +124,7 @@ public:
 	{
 		for (size_type i = 0; i < _filled; i++)
 			_allocator.destroy(_start + i);
+		// COUT _capacity ENDL;
 		_allocator.deallocate(_start, _capacity);
 	}
     

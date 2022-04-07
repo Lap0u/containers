@@ -115,7 +115,6 @@ public:
 	// Copy constructor. Constructs the container with the copy of the contents of other.
 	vector(const vector & other) : _allocator(other._allocator), _start(NULL), _capacity (other._filled), _filled(other._filled)
 	{
-		// COUT "oooyo" ENDL ENDL ENDL;
 		if (_capacity == 0)
 			return ;
 		this->_start = _allocator.allocate(_capacity);
@@ -139,7 +138,6 @@ public:
 		size_type	save_cap = this->_capacity;
         if (this != &other)
         {
-			// COUT "oooyo" ENDL ENDL ENDL;
 			if (this->_start != NULL)
 			{
 				for (size_type i = 0; i < this->_filled; i++)
@@ -317,7 +315,6 @@ template <class InputIterator>
 			value_type	save;
 			value_type	save_next;
 
-			// COUT "go " << val ENDL;
 			this->_filled++;
 			save = *(this->_start + offset);
 			this->_allocator.construct(this->_start + offset, val);
@@ -394,13 +391,23 @@ template <class InputIterator>
 		}
 		if (this->_filled == 0)
 		{
-			ft::vector<value_type> temp(n);
+			std::cerr << n ENDL ENDL;
+			if (this->_start != NULL && n > this->_capacity)
+			{
+				this->_allocator.deallocate(this->_start, this->_capacity);
+				this->_start = NULL;
+			}
+			if (n > this->_capacity)
+			{
+				this->_start = this->_allocator.allocate(n);
+				this->_capacity = n;
+			}
+			this->_filled = n;
 			for (size_type i = 0; i < n; i++)
 			{
-				temp._allocator.construct(temp._start + i, *first);
+				this->_allocator.construct(this->_start + i, *first);
 				first++;
 			}
-			*this = temp;
 			return ;
 		}
 		if (this->_filled + n > this->_capacity)

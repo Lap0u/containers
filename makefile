@@ -41,7 +41,7 @@ CC			= c++
 RM			= rm -rf
 
 FLAGS		= -Wall -Werror -Wextra -std=c++98 -g3
-# FLAGS		+= -fsanitize=address
+FLAGS		+= -fsanitize=address
 
 NAME		= containers
 

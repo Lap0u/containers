@@ -32,7 +32,7 @@ VDEP		= vector.hpp headers/v_iterator.hpp headers/enable_if.hpp \
 				headers/is_integral.hpp headers/equal.hpp headers/lexicographical_compare.hpp \
 				headers/iterator_traits.hpp headers/reverse_iterator.hpp
 
-SDEP		= stack.hpp
+SDEP		= stack.hpp vector.hpp
 
 MDEP		= map.hpp
 

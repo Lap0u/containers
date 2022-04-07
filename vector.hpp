@@ -115,7 +115,7 @@ public:
 	// Copy constructor. Constructs the container with the copy of the contents of other.
 	vector(const vector & other) : _allocator(other._allocator), _start(NULL), _capacity (other._filled), _filled(other._filled)
 	{
-		COUT "oooyo" ENDL ENDL ENDL;
+		// COUT "oooyo" ENDL ENDL ENDL;
 		if (_capacity == 0)
 			return ;
 		this->_start = _allocator.allocate(_capacity);
@@ -317,7 +317,7 @@ template <class InputIterator>
 			value_type	save;
 			value_type	save_next;
 
-			COUT "go " << val ENDL;
+			// COUT "go " << val ENDL;
 			this->_filled++;
 			save = *(this->_start + offset);
 			this->_allocator.construct(this->_start + offset, val);

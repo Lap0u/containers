@@ -455,7 +455,6 @@ template <class InputIterator>
 		for (i = 0; beg + i != pos; i++);
 		this->_allocator.destroy(this->_start + i);
 		this->_filled--;
-		std::cerr << i ENDL ENDL ENDL;
 		for (size_type j = i; j != this->_filled; j++)
 		{
 			this->_allocator.construct(this->_start + j, *(this->_start + (j + 1)));

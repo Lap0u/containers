@@ -275,7 +275,7 @@ int main ()
 		SEP
 	#endif
 	#if 1
-		COUT "Swap=" ENDL ENDL;
+		COUT "MapSwap" ENDL ENDL;
 		
 		COUT "Swapping copy and range twice" ENDL;
 		
@@ -346,6 +346,80 @@ int main ()
 		COUT range["L"] ENDL;
 		COUT "99 < -78? :" << myvcomp(*(--range.rbegin()),*(range.rbegin())) ENDL;
 		COUT "20 < -78? :" << myvcomp(*(++range.begin()),*(range.rbegin())) ENDL;
+		SEP
+	#endif
+	#if 1
+		COUT "Relation Operators" ENDL ENDL;
+		
+		printMap(emp);	
+		printMap(range);	
+		printMap(copy);
+
+		map<std::string, int>same (range);
+
+		COUT "Comparison between emp and range" ENDL;
+		COUT "emp == range ? :" << (emp == range) ENDL;
+		COUT "emp != range ? :" << (emp != range) ENDL;
+		COUT "emp < range ? :" << (emp < range) ENDL;
+		COUT "emp > range ? :" << (emp > range) ENDL;
+		COUT "emp <= range ? :" << (emp <= range) ENDL;
+		COUT "emp >= range ? :" << (emp >= range) ENDL ENDL;
+
+		COUT "Same but reversed" ENDL;
+		COUT "range == emp ? :" << (range == emp) ENDL;
+		COUT "range != emp ? :" << (range != emp) ENDL;
+		COUT "range < emp ? :" << (range < emp) ENDL;
+		COUT "range > emp ? :" << (range > emp) ENDL;
+		COUT "range <= emp ? :" << (range <= emp) ENDL;
+		COUT "range >= emp ? :" << (range >= emp) ENDL;
+
+		// COUT "Comparison between range and same" ENDL;
+		COUT "same == range ? :" << (same == range) ENDL;
+		COUT "same != range ? :" << (same != range) ENDL;
+		COUT "same < range ? :" << (same < range) ENDL;
+		COUT "same > range ? :" << (same > range) ENDL;
+		COUT "same <= range ? :" << (same <= range) ENDL;
+		COUT "same >= range ? :" << (same >= range) ENDL ENDL;
+
+		COUT "Same but reversed" ENDL;
+		COUT "range == same ? :" << (range == same) ENDL;
+		COUT "range != same ? :" << (range != same) ENDL;
+		COUT "range < same ? :" << (range < same) ENDL;
+		COUT "range > same ? :" << (range > same) ENDL;
+		COUT "range <= same ? :" << (range <= same) ENDL;
+		COUT "range >= same ? :" << (range >= same) ENDL;
+		SEP
+	#endif
+	#if 1
+		COUT "Swap overload" ENDL ENDL;
+		
+		COUT "Swapping copy and range twice" ENDL;
+		
+		printMap(copy);
+		printMap(range);
+		swap(copy, range);
+		COUT "After one swap" ENDL;
+		printMap(copy);
+		printMap(range);
+		swap(copy, range);
+		COUT "Original state" ENDL;
+		printMap(copy);
+		printMap(range);
+
+
+		COUT "Swapping copy and emp twice" ENDL;
+
+		printMap(emp);
+		printMap(copy);
+		swap(emp, copy);
+		COUT "After one swap" ENDL;
+		printMap(emp);
+		printMap(copy);
+		swap(emp, copy);	
+		COUT "Original state" ENDL;
+		printMap(emp);
+		printMap(copy);
+		NL
 		SEP
 	#endif
 	}

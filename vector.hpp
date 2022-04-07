@@ -302,6 +302,8 @@ template <class InputIterator>
 				temp._allocator.construct(temp._start + i, *(this->_start + i - 1));
 				i++;	
 			}
+			temp._allocator.construct(temp._start + ret, val);
+			myCpy(temp);
 			return this->begin() + ret;
 		}
 		else
@@ -385,7 +387,6 @@ template <class InputIterator>
 			return ;
 		if (this->_filled == 0)
 		{
-			std::cerr << n ENDL ENDL;
 			if (this->_start != NULL && n > this->_capacity)
 			{
 				this->_allocator.deallocate(this->_start, this->_capacity);

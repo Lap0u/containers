@@ -294,44 +294,36 @@ template <class InputIterator>
 			for (i = 0; this->begin() + i != position; i++)
 			{
 				temp._allocator.construct(temp._start + i, *(this->_start + i));
-				// this->_allocator.destroy(this->_start + i);
 			}
-			temp._allocator.construct(temp._start + i, val);
 			ret = i;
 			i++;
 			while (i < temp._filled)
 			{
 				temp._allocator.construct(temp._start + i, *(this->_start + i - 1));
-				// this->_allocator.destroy(this->_start + i - 1);
 				i++;	
 			}
-			myCpy(temp);
 			return this->begin() + ret;
 		}
 		else
 		{
 			size_type	offset = position - this->begin();
-			size_type	save_off = offset;
-			value_type	save;
-			value_type	save_next;
+			size_type	save_size = this->_filled + 1;
 
 			this->_filled++;
-			save = *(this->_start + offset);
-			this->_allocator.construct(this->_start + offset, val);
-			offset++;
-			while(offset < this->_filled)
+			while (save_size > offset)
 			{
-				save_next = *(this->_start + offset);
-				this->_allocator.construct(this->_start + offset, save);
-				offset++;
-				save = save_next;
+				this->_allocator.construct(this->_start + save_size, *(this->_start + save_size - 1));
+				save_size--;
 			}
-			return this->begin() + save_off;
+			this->_allocator.construct(this->_start + offset, val);
+			return this->begin() + offset;
 		}
 	}
 
 	void insert (iterator position, size_type n, const value_type& val)
 	{
+		if (!n)
+			return ;
 		if (this->_filled == 0)
 		{
 			ft::vector<value_type> temp(n);
@@ -389,6 +381,8 @@ template <class InputIterator>
 			n++;
 			temp++;
 		}
+		if (!n)
+			return ;
 		if (this->_filled == 0)
 		{
 			std::cerr << n ENDL ENDL;
@@ -436,13 +430,14 @@ template <class InputIterator>
 		{
 			size_type	offset = position - this->begin();
 			size_type	last_off = this->end() - position;
+			size_type	fill = this->_filled;
 			this->_filled += n;
 			for (size_type i = 0; i < last_off; i++)
 				this->_allocator.construct(this->_start + this->_filled - 1 - i, *(this->_start + this->_filled - 1 - i - n));
-			std::cerr << offset ENDL ENDL ENDL;
 			for (size_type j = 0; j < n; j++)
 			{
-				this->_allocator.destroy(this->_start + j + offset);
+				if (j + offset < fill)
+					this->_allocator.destroy(this->_start + j + offset);
 				this->_allocator.construct(this->_start + j + offset, *(first++));
 			}
 		}

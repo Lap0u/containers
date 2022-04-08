@@ -7,6 +7,9 @@ namespace ft{
 template<typename K, typename V>
 struct Node
 {
+	typedef	K		key_type;
+	typedef	V		mapped_type;
+	
 	Node*	parent;
 	Node*	childR;
 	Node*	childL;

@@ -7,6 +7,7 @@
 # include "./headers/pair.hpp"
 # include "./headers/reverse_iterator.hpp"
 # include "./headers/iterator_traits.hpp"
+# include "./headers/m_iterator.hpp"
 
 namespace ft {
 
@@ -32,7 +33,7 @@ class map
 	typedef					ft::reverse_iterator<iterator>				reverse_iterator;
     typedef					ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
-	typedef					iterator_traits<iterator>::difference_type	difference_type;
+	typedef		typename	iterator_traits<iterator>::difference_type	difference_type;
 	typedef					size_t										size_type;
 
 private:

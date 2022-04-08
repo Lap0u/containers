@@ -7,6 +7,11 @@
 
 int main()
 {
-	using namespace ft;
-	map<char, char>re;
+	bool lol = 0;
+
+	COUT lol ENDL;
+	lol++;
+	COUT lol ENDL;
+	lol++;
+	COUT lol ENDL;
 }

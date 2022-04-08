@@ -20,6 +20,21 @@ struct Node
 
 	Node(K key, V value) : 
 	parent(NULL), childR(NULL), childL(NULL), color (0), leftChild(0), key(key), value(value) {}
+
+	void	switchColor()
+	{
+		if (color == true)
+			color = false;
+		else
+			color = true;
+	}
+	void	switchChild()
+	{
+		if (leftChild == true)
+			leftChild = false;
+		else
+			leftChild = true;
+	}
 };
 }
 

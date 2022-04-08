@@ -37,11 +37,27 @@ class map
 	typedef					size_t										size_type;
 
 private:
-	redBlackTree<Key, T> rbt;
+	redBlackTree<Key, T> 	rbt;
+	allocator_type			_alloc;
+	key_compare				_comp;
 
 
 public:
 
+	explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+		: rbt(NULL), _alloc(alloc), _comp(comp) {}
+
+	template <class InputIterator> 
+	map(InputIterator first, InputIterator last,const key_compare& comp = key_compare(),
+    	const allocator_type& alloc = allocator_type()) : _alloc(alloc), _comp(comp)
+	{
+		this->insert(first, last);
+	}
+
+	map	(const map& x) : _alloc(x._alloc), _comp(x._comp)
+	{
+		this->insert(x.begin(), x.last());
+	}
 };
 }
 

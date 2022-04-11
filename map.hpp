@@ -44,6 +44,9 @@ private:
 
 public:
 
+/*==Basics==*/
+
+	/*		Constructor		*/
 	explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		: rbt(NULL), _alloc(alloc), _comp(comp) {}
 
@@ -58,7 +61,58 @@ public:
 	{
 		this->insert(x.begin(), x.last());
 	}
+
+	/*		Destructor		*/
+	/*		Operator=		*/
+
+/*==Iterators==*/
+
+	/*		Begin		*/
+	/*		End			*/
+	/*		Rbegin		*/
+	/*		Rend		*/
+
+/*==Capacity==*/
+
+	/*		Empty		*/
+	/*		Size		*/
+	/*		Max_size		*/
+
+/*==Element acces==*/
+
+	/*		Operator[]		*/
+
+/*==Modifiers==*/
+
+	/*		Insert		*/
+	/*		Erase		*/
+	/*		Swap		*/
+	/*		Clear		*/
+
+/*==Observers==*/
+
+	/*		Key_comp		*/
+	/*		Value_comp		*/
+
+/*==Operations==*/
+
+	/*		Find		*/
+	/*		Count		*/
+	/*		Lower_bound		*/
+	/*		Upper_bound		*/
+	/*		Equal_range		*/
+
+/*==Allocator==*/
+
+	/*		Get_allocator		*/
+
+
 };
 }
+
+/*==Relational operators==*/
+
+
+/*==Swap==*/
 
 #endif

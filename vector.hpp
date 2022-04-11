@@ -59,7 +59,7 @@ private:
 public:
 /*==Basics==*/
 
-    /*      Constructor     */
+    /*		Constructor		*/
 
 	// Default constructor. Constructs an empty container with 
 	// a default-constructed allocator.

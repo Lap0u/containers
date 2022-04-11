@@ -14,6 +14,8 @@ namespace ft {
 template<class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<pair<const Key,T> > >
 class map
 {
+
+public:
 	typedef					Key											key_type;
 	typedef					T											mapped_type;
 	typedef					pair<const key_type, mapped_type>			value_type;
@@ -44,6 +46,7 @@ private:
 
 public:
 
+	void	add(Key x, T y) {rbt.add(x, y);}
 /*==Basics==*/
 
 	/*		Constructor		*/
@@ -64,25 +67,60 @@ public:
 
 	/*		Destructor		*/
 	~map() {}
-	
+
 	/*		Operator=		*/
+	map& operator= (const map& other)
+	{
+		if (this != &other)
+		{
+			this->clear();
+			_alloc = other._alloc;
+			_comp = other.comp;
+			this->insert(other.begin(), other.last());
+		}
+	}
+
 
 /*==Iterators==*/
 
 	/*		Begin		*/
+	iterator begin() {return iterator(rbt.first());}
+	const_iterator begin() const {return const_iterator(rbt.first());}
+
+
 	/*		End			*/
+	iterator end() {return iterator(rbt.last());}
+	const_iterator end() const {return const_iterator(rbt.last());}
+	
+
 	/*		Rbegin		*/
 	/*		Rend		*/
 
 /*==Capacity==*/
 
 	/*		Empty		*/
+	bool empty() const {return !this->rbt._size;}
+
 	/*		Size		*/
+	size_type size() const {return !this->rbt._size;}
 	/*		Max_size		*/
+	size_type max_size() const {return allocator_type().max_size();}/////////////////////////////////voir vraie maxsize
+
 
 /*==Element acces==*/
 
 	/*		Operator[]		*/
+	mapped_type& operator[] (const key_type& k)
+	{
+		iterator	save = find(k);
+		if (k == end())
+		{
+			rbt.add(k, 0);///pb si paa int, quelle val donner???
+			return find(k).second;
+		}
+		return k.value();
+	}
+
 
 /*==Modifiers==*/
 

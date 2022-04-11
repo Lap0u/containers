@@ -13,13 +13,33 @@ namespace ft{
 template<typename K, typename V>
 struct redBlackTree
 {
-	Node<K, V>*			root;
+	Node<const K, V>*			root;
 	std::size_t			size;
 	redBlackTree() : root(NULL), size(0) {}
 
+	Node<const K, V> & first()
+	{
+		Node<const K, V>* temp = root;
+		if (root == NULL)
+			return *temp;
+		while (temp->childL != NULL)
+			temp = temp->childL;
+		return *temp;
+	}
+
+	Node<const K, V> & last()
+	{
+		Node<K, V>* temp = root;
+		if (root == NULL)
+			return *temp;
+		while (temp->childR != NULL)
+			temp = temp->childR;
+		return *temp;
+	}
+
 	void	add(K x, V y)
 	{
-		Node<K, V>* newNode = new Node<K, V> (x, y);//utiliser allocator
+		Node<const K, V>* newNode = new Node<const K, V> (x, y);//utiliser allocator
 		if (this->root == NULL)
 		{
 			this->root = newNode;
@@ -32,7 +52,7 @@ struct redBlackTree
 		
 	}
 
-	void print(Node<K, V> *current, int space)
+	void print(const Node<K, V> *current, int space)
 	{
 		if ( current != NULL ){
 			space += 10;
@@ -50,7 +70,7 @@ struct redBlackTree
 	}
 private:
 
-	void	add(Node<K, V> & parent, Node<K, V> & newNode)
+	void	add(Node<const K, V> & parent, Node<const K, V> & newNode)
 	{
 
 		if (newNode.key < parent.key)//utiliser comp

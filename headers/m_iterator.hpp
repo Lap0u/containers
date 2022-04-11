@@ -18,8 +18,25 @@ public:
 	typedef		std::bidirectional_iterator_tag 	iterator_category;
 
 	mapIterator() : _ptr(NULL){}
-	mapIterator(mapIterator<VT>& other) : _ptr(other._ptr){}
-	mapIterator(Node<typename VT::first_type, typename VT::second_type>& cpy) : _ptr(cpy){}
+	mapIterator(const mapIterator<VT>& other) : _ptr(other._ptr) {}
+	mapIterator(Node<typename VT::first_type, typename VT::second_type> & cpy)
+	{
+		_ptr = &cpy;
+	}
+
+	mapIterator & operator=(const mapIterator<VT>& other)
+	{
+		if (this != &other)
+		{
+			this->_ptr = other._ptr;
+		}
+		return *this;
+	}
+
+	pointer operator->()
+	{
+		return _ptr->getPair();
+	}
 };
 }
 

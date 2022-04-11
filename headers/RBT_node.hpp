@@ -2,6 +2,7 @@
 # define RBT_NODE_HPP
 
 # include <iostream>
+# include "pair.hpp"
 
 namespace ft{
 template<typename K, typename V>
@@ -34,6 +35,11 @@ struct Node
 			leftChild = false;
 		else
 			leftChild = true;
+	}
+	pair<K, V>*	getPair()
+	{
+		pair<K, V>*p = new pair<K, V>(key, value); //utiliser allocat
+		return p;
 	}
 };
 }

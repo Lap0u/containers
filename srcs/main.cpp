@@ -15,8 +15,10 @@ int main()
 	// re['e'] = 22;
 	re.add('e', 22);
 	map<char,int>::iterator ite = re.begin();
-	COUT ite->first ENDL; //fonction
+	map<char,int>::iterator ite2 = re.begin();
+	COUT ite->first ENDL;
 	COUT ite->second ENDL;
+	COUT (ite == ite2) ENDL;
+	COUT (ite != ite2) ENDL;
 
-	(void)ite;
 }

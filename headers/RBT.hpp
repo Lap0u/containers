@@ -1,6 +1,7 @@
 #define RESET   "\033[0m"
-#define BLACK   "\033[1m\033[30m"      /* Bold Black */
-#define RED     "\033[1m\033[31m"      /* Bold Red */
+#define BLACK   "\033[1m\033[30m"		/* Bold Black	*/
+#define RED     "\033[1m\033[31m"		/* Bold Red		*/
+#define CYAN    "\033[1m\033[36m" 		/* Bold Cyan	*/
 
 #ifndef RBT_HPP
 # define RBT_HPP
@@ -31,7 +32,24 @@ struct redBlackTree
 		
 	}
 
+	void print(Node<K, V> *current, int space)
+	{
+		if ( current != NULL ){
+			space += 10;
+			print(current->childR, space);
+			std::cout << std::endl;
+			for ( int _ = 0 ; _ < space ; _++ ){ std::cout << " "; }
+			if (current->black == 1)
+				COUT BLACK;
+			else
+				COUT RED;
+			COUT current->key << " : " << current->value ENDL;
+			COUT RESET;
+			print(current->childL, space);
+		}
+	}
 private:
+
 	void	add(Node<K, V> & parent, Node<K, V> & newNode)
 	{
 
@@ -59,7 +77,7 @@ private:
 				add(*parent.childR, newNode);
 			return ;
 		}
-		COUT BOLDRED << "Node is equal " << RESET ENDL;
+		COUT CYAN << "Node is equal " << RESET ENDL;
 	}
 };
 }

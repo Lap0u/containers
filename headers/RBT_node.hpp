@@ -19,8 +19,10 @@ struct Node
 	K		key;
 	V		value;
 
+
+	pair<K,V>	mypair;
 	Node(K key, V value) : 
-	parent(NULL), childR(NULL), childL(NULL), black (0), leftChild(0), key(key), value(value) {}
+	parent(NULL), childR(NULL), childL(NULL), black (0), leftChild(0), key(key), value(value), mypair(pair<K,V>(key,value)){}
 
 	void	switchColor()
 	{
@@ -38,8 +40,7 @@ struct Node
 	}
 	pair<K, V>*	getPair()
 	{
-		pair<K, V>*p = new pair<K, V>(key, value); //utiliser allocat
-		return p;
+		return &mypair; //utiliser allocat
 	}
 };
 }

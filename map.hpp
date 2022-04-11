@@ -48,7 +48,7 @@ public:
 
 	/*		Constructor		*/
 	explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-		: rbt(NULL), _alloc(alloc), _comp(comp) {}
+		: rbt(), _alloc(alloc), _comp(comp) {}
 
 	template <class InputIterator> 
 	map(InputIterator first, InputIterator last,const key_compare& comp = key_compare(),
@@ -63,6 +63,8 @@ public:
 	}
 
 	/*		Destructor		*/
+	~map() {}
+	
 	/*		Operator=		*/
 
 /*==Iterators==*/

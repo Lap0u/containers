@@ -4,14 +4,21 @@
 #define NL COUT std::endl;
 
 #include "../map.hpp"
+#include "../headers/RBT.hpp"
 
 int main()
 {
-	bool lol = 0;
+	using namespace ft;
 
-	COUT lol ENDL;
-	lol++;
-	COUT lol ENDL;
-	lol++;
-	COUT lol ENDL;
+	redBlackTree<char, int>lol;
+
+	lol.add('C', 22);
+	COUT lol.root->value ENDL;
+	lol.add('X', 50);
+	COUT lol.root->childR->value ENDL;
+	lol.add('W', 53);
+	COUT lol.root->childR->childL->value ENDL;
+	lol.add('C', 22);
+
+
 }

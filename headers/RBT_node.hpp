@@ -13,20 +13,20 @@ struct Node
 	Node*	parent;
 	Node*	childR;
 	Node*	childL;
-	bool	color;
+	bool	black;
 	bool	leftChild;
 	K		key;
 	V		value;
 
 	Node(K key, V value) : 
-	parent(NULL), childR(NULL), childL(NULL), color (0), leftChild(0), key(key), value(value) {}
+	parent(NULL), childR(NULL), childL(NULL), black (0), leftChild(0), key(key), value(value) {}
 
 	void	switchColor()
 	{
-		if (color == true)
-			color = false;
+		if (black == true)
+			black = false;
 		else
-			color = true;
+			black = true;
 	}
 	void	switchChild()
 	{

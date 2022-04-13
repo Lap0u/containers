@@ -82,6 +82,8 @@ public:
 			_ptr = _ptr->childR;
 			return *this;
 		}
+		if (_ptr->parent)
+			_ptr = _ptr->parent;
 		while (_ptr->parent && _ptr->parent->leftChild == 0)
 			_ptr = _ptr->parent;
 		_ptr = _ptr->parent;

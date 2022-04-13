@@ -20,4 +20,6 @@ int main()
 	map<char,int>::iterator ite = re.begin();
 	COUT ite++->first ENDL;
 	COUT ite->first ENDL;
+	COUT ite--->first ENDL;
+	COUT ite->first ENDL;
 }

@@ -23,6 +23,20 @@ private:
 		}
 		return (1);
 	}
+
+	int		isFirst() const
+	{
+		mapIterator<VT> temp = *this;
+
+		while (temp._ptr->parent)
+		{
+			if (temp._ptr->leftChild == 0)
+				return (0);
+			temp._ptr = temp._ptr->parent;
+		}
+		return (1);
+	}
+
 public:
 	typedef		VT									value_type;
 	typedef		std::ptrdiff_t						difference_type;
@@ -82,6 +96,25 @@ public:
 		return it;
 	}
 
+	mapIterator & operator--()
+	{
+		if (_ptr->childL || isFirst() == 1)
+		{
+			_ptr = _ptr->childL;
+			return *this;
+		}
+		while (_ptr->parent->leftChild == 1)
+			_ptr = _ptr->parent;
+		_ptr = _ptr->parent;
+		return *this;
+	}
+
+	mapIterator operator--(int)
+	{
+		mapIterator<VT>it = *this;
+		--(*this);
+		return it;
+	}
 };
 }
 

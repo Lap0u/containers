@@ -40,11 +40,10 @@ public:
 	typedef		typename	iterator_traits<iterator>::difference_type	difference_type;
 	typedef					size_t										size_type;
 
-public:
-// private:
-	redBlackTree<Key, T> 	rbt;
-	allocator_type			_alloc;
-	key_compare				_comp;
+private:
+	redBlackTree<Key, T, Compare>	rbt;
+	allocator_type					_alloc;
+	key_compare						_comp;
 
 
 public:

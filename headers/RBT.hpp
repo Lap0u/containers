@@ -10,16 +10,19 @@
 
 namespace ft{
 
-template<typename K, typename V, class Alloc = std::allocator<Node<const K, V> > >
+template<typename K, typename V, class Compare = std::less<K>, class Alloc = std::allocator<Node<const K, V> > >
 struct redBlackTree
 {
 	typedef	Alloc	allocator_type;
+	typedef	Compare	key_compare;
 
 	Node<const K, V>*			root;
 	std::size_t					size;
-	allocator_type	_allocator;
+	allocator_type			_allocator;
+	key_compare				_comp;
 
-	redBlackTree(const allocator_type & alloc = allocator_type()) : root(NULL), size(0), _allocator(alloc) {}
+	redBlackTree(const key_compare& compare = key_compare(), const allocator_type & alloc = allocator_type())
+	 : root(NULL), size(0), _allocator(alloc) , _comp(compare){}
 
 	Node<const K, V> & first()
 	{
@@ -78,7 +81,7 @@ private:
 	void	add(Node<const K, V> & parent, Node<const K, V> & newNode)
 	{
 
-		if (newNode.mypair.first < parent.mypair.first)//utiliser comp
+		if (_comp(newNode.mypair.first, parent.mypair.first))//utiliser comp
 		{
 			if (parent.childL == NULL)
 			{
@@ -90,7 +93,7 @@ private:
 				add(*parent.childL, newNode);
 			return ;
 		}
-		else if (newNode.mypair.first > parent.mypair.first)//utliser comp
+		else if (_comp(parent.mypair.first, newNode.mypair.first))//utliser comp
 		{
 			if (parent.childR == NULL)
 			{

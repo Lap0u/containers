@@ -16,13 +16,10 @@ struct Node
 	Node*	childL;
 	bool	black;
 	bool	leftChild;
-	K		key;
-	V		value;
-
 
 	pair<K,V>	mypair;
 	Node(K key, V value) : 
-	parent(NULL), childR(NULL), childL(NULL), black (0), leftChild(0), key(key), value(value), mypair(pair<K,V>(key,value)){}
+	parent(NULL), childR(NULL), childL(NULL), black (0), leftChild(0), mypair(pair<K,V>(key,value)){}
 
 	void	switchColor()
 	{

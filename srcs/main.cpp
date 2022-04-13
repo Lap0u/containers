@@ -13,11 +13,10 @@ int main()
 	using namespace ft;
 
 	map<char,int>re;
-	// re['e'] = 22;
-	// re['r'] = 23;
-	re.add('e', 22);
-	re.add('r', 23);
-	map<char,int>::iterator ite = re.find('r');
-	COUT ite->second ENDL;
+	char x = 'a';
+	for (;x != 'f';x++)
+		re.add(x, x + '0');
+	// re.add('e', 22);
+	// re.add('r', 23);
 	re.disp();
 }

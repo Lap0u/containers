@@ -17,6 +17,7 @@ class map
 
 public:
 	void	disp() {rbt.print(rbt.root, 0);}
+	void	add(Key x, T y) {rbt.add(x, y);}
 	typedef					Key											key_type;
 	typedef					T											mapped_type;
 	typedef					pair<const key_type, mapped_type>			value_type;
@@ -39,7 +40,8 @@ public:
 	typedef		typename	iterator_traits<iterator>::difference_type	difference_type;
 	typedef					size_t										size_type;
 
-private:
+public:
+// private:
 	redBlackTree<Key, T> 	rbt;
 	allocator_type			_alloc;
 	key_compare				_comp;
@@ -47,7 +49,6 @@ private:
 
 public:
 
-	void	add(Key x, T y) {rbt.add(x, y);}
 /*==Basics==*/
 
 	/*		Constructor		*/
@@ -114,12 +115,12 @@ public:
 	mapped_type& operator[] (const key_type& k)
 	{
 		iterator	save = find(k);
-		if (k == end())
+		if (save == end())
 		{
-			rbt.add(k, 0);///pb si paa int, quelle val donner???
-			return find(k).second;
+			rbt.add(k, mapped_type());
+			return find(k)->second;
 		}
-		return k.value();
+		return save->second;
 	}
 
 
@@ -141,7 +142,7 @@ public:
 	iterator find (const key_type& k)
 	{
 		iterator it;
-		
+
 		for (it = begin(); it != end(); it++)
 		{
 			if (it->first == k)

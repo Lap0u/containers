@@ -8,7 +8,7 @@
 			"name": "(gdb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/myvec",
+			"program": "${workspaceFolder}/containers",
 			"args": [],
 			"stopAtEntry": true,
 			"cwd": "${fileDirname}",

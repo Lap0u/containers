@@ -10,14 +10,16 @@
 
 namespace ft{
 
-template<typename K, typename V>
+template<typename K, typename V, class Alloc = std::allocator<Node<const K, V> > >
 struct redBlackTree
 {
+	typedef	Alloc	allocator_type;
+
 	Node<const K, V>*			root;
 	std::size_t					size;
+	allocator_type	_allocator;
 
-
-	redBlackTree() : root(NULL), size(0) {}
+	redBlackTree(const allocator_type & alloc = allocator_type()) : root(NULL), size(0), _allocator(alloc) {}
 
 	Node<const K, V> & first()
 	{
@@ -41,7 +43,8 @@ struct redBlackTree
 
 	void	add(K x, V y)
 	{
-		Node<const K, V>* newNode = new Node<const K, V> (x, y);//utiliser allocator
+		Node<const K, V>* newNode = _allocator.allocate(1);
+		_allocator.construct(newNode, Node<const K,V>(x,y));
 		if (this->root == NULL)
 		{
 			this->root = newNode;
@@ -65,7 +68,7 @@ struct redBlackTree
 				COUT BLACK;
 			else
 				COUT RED;
-			COUT current->key << " : " << current->value ENDL;
+			COUT current->mypair.first << " : " << current->mypair.second ENDL;
 			COUT RESET;
 			print(current->childL, space);
 		}
@@ -75,7 +78,7 @@ private:
 	void	add(Node<const K, V> & parent, Node<const K, V> & newNode)
 	{
 
-		if (newNode.key < parent.key)//utiliser comp
+		if (newNode.mypair.first < parent.mypair.first)//utiliser comp
 		{
 			if (parent.childL == NULL)
 			{
@@ -87,7 +90,7 @@ private:
 				add(*parent.childL, newNode);
 			return ;
 		}
-		else if (newNode.key > parent.key)//utliser comp
+		else if (newNode.mypair.first > parent.mypair.first)//utliser comp
 		{
 			if (parent.childR == NULL)
 			{

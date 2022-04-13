@@ -16,6 +16,7 @@ class map
 {
 
 public:
+	void	disp() {rbt.print(rbt.root, 0);}
 	typedef					Key											key_type;
 	typedef					T											mapped_type;
 	typedef					pair<const key_type, mapped_type>			value_type;
@@ -137,6 +138,18 @@ public:
 /*==Operations==*/
 
 	/*		Find		*/
+	iterator find (const key_type& k)
+	{
+		iterator it;
+		
+		for (it = begin(); it != end(); it++)
+		{
+			if (it->first == k)
+				return it;
+		}
+		return end();
+	}
+	const_iterator find (const key_type& k) const;
 	/*		Count		*/
 	/*		Lower_bound		*/
 	/*		Upper_bound		*/

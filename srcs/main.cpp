@@ -17,9 +17,7 @@ int main()
 	// re['r'] = 23;
 	re.add('e', 22);
 	re.add('r', 23);
-	map<char,int>::iterator ite = re.begin();
-	COUT ite++->first ENDL;
-	COUT ite->first ENDL;
-	COUT ite--->first ENDL;
-	COUT ite->first ENDL;
+	map<char,int>::iterator ite = re.find('r');
+	COUT ite->second ENDL;
+	re.disp();
 }

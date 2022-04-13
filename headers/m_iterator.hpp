@@ -66,7 +66,7 @@ public:
 	}
 	bool operator==(const mapIterator<VT> & rhs)
 	{
-		if (_ptr->key == rhs._ptr->key && _ptr->value == rhs._ptr->value)
+		if (_ptr == rhs._ptr)
 			return true;
 		return false;
 	}

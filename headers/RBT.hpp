@@ -14,7 +14,9 @@ template<typename K, typename V>
 struct redBlackTree
 {
 	Node<const K, V>*			root;
-	std::size_t			size;
+	std::size_t					size;
+
+
 	redBlackTree() : root(NULL), size(0) {}
 
 	Node<const K, V> & first()
@@ -29,10 +31,10 @@ struct redBlackTree
 
 	Node<const K, V> & last()
 	{
-		Node<K, V>* temp = root;
+		Node<const K, V>* temp = root;
 		if (root == NULL)
 			return *temp;
-		while (temp->childR != NULL)
+		while (temp != NULL)
 			temp = temp->childR;
 		return *temp;
 	}
@@ -52,7 +54,7 @@ struct redBlackTree
 		
 	}
 
-	void print(const Node<K, V> *current, int space)
+	void print(Node<const K, V> *current, int space)
 	{
 		if ( current != NULL ){
 			space += 10;

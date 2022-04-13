@@ -10,13 +10,14 @@
 
 int main()
 {
-	using namespace std;
+	using namespace ft;
 
 	map<char,int>re;
-	pair<char,int>pp('r', 10);
-	re['e'] = 22;
-	// re.add('e', 22);
+	// re['e'] = 22;
+	// re['r'] = 23;
+	re.add('e', 22);
+	re.add('r', 23);
 	map<char,int>::iterator ite = re.begin();
-	*ite = 21;
-
+	COUT ite++->first ENDL;
+	COUT ite->first ENDL;
 }

@@ -10,6 +10,19 @@ class mapIterator
 {
 private:
 	Node<typename VT::first_type, typename VT::second_type>*	_ptr;
+
+	int		isLast() const
+	{
+		mapIterator<VT> temp = *this;
+
+		while (temp._ptr->parent)
+		{
+			if (temp._ptr->leftChild == 1)
+				return (0);
+			temp._ptr = temp._ptr->parent;
+		}
+		return (1);
+	}
 public:
 	typedef		VT									value_type;
 	typedef		std::ptrdiff_t						difference_type;
@@ -47,6 +60,28 @@ public:
 	{
 		return !(*this == rhs);
 	}
+
+	mapIterator & operator++()
+	{
+		if (_ptr->childR || isLast() == 1)
+		{
+			_ptr = _ptr->childR;
+			return *this;
+		}
+		while (_ptr->parent->leftChild == 0)
+			_ptr = _ptr->parent;
+		_ptr = _ptr->parent;
+		return *this;
+		
+	}
+
+	mapIterator operator++(int)
+	{
+		mapIterator<VT>it = *this;
+		++(*this);
+		return it;
+	}
+
 };
 }
 

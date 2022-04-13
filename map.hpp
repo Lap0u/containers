@@ -126,6 +126,36 @@ public:
 /*==Modifiers==*/
 
 	/*		Insert		*/
+	pair<iterator, bool> insert (const value_type &val)
+	{
+		bool	ret = false;
+		iterator save;
+
+
+		if (find(val.first) == end())
+		{
+			rbt.add(val.first, val.second);
+			ret = true;
+		}
+		save = find(val.first);
+		return pair<iterator, bool>(save, ret);
+	}
+
+	iterator insert(iterator hint, const value_type &val)
+	{
+		(void)hint;
+		insert(val);
+		return find(val.first);
+	}
+template <class InputIterator>
+	void insert (InputIterator first, InputIterator last)
+	{
+		while (first != last)
+		{
+			add(first->first, first->second);
+			first++;
+		}
+	}
 	/*		Erase		*/
 	/*		Swap		*/
 	/*		Clear		*/

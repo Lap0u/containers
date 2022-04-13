@@ -34,7 +34,9 @@ VDEP		= vector.hpp headers/v_iterator.hpp headers/enable_if.hpp \
 
 SDEP		= stack.hpp vector.hpp
 
-MDEP		= map.hpp
+MDEP		= map.hpp headers/m_iterator.hpp headers/pair.hpp headers/RBT.hpp \
+				headers/RBT_node.hpp headers/make_pair.hpp headers/reverse_iterator.hpp \
+				headers/iterator_traits.hpp
 
 CC			= c++
 

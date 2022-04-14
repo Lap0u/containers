@@ -60,6 +60,17 @@ struct redBlackTree
 		
 	}
 
+	void clear(Node<const K, V> *toDel)
+	{
+		if (toDel->childL)
+			clear(toDel->childL);
+		if (toDel->childR)
+			clear(toDel->childR);
+		_allocator.destroy(toDel);
+		_allocator.deallocate(toDel, sizeof(Node<const K, V>));
+		
+	}
+
 	Node<const K, V>* search(Node<const K, V> & parent, K key)
 	{
 		if(parent.childR && _comp(parent.mypair.first, key))

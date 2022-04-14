@@ -14,17 +14,18 @@ int main()
 
 	map<char,int>re;
 	re.add('e', 22);
-	re.add('g', 22);
-	re.add('y', 22);
-	re.add('x', 22);
+	re.add('g', 26);
+	re.add('y', 24);
+	re.add('x', 21);
 
 	map<char,int>::iterator ite = re.begin();
 	COUT ite->first << " and " << ite->second ENDL;
 
-	re.find('g');
-	re.find('e');
-	re.find('y');
-	re.find('x');
-	re.find('s');
+	COUT re.find('g')->second ENDL;
+	COUT re.find('e')->second ENDL;
+	COUT re.find('y')->second ENDL;
+	COUT re.find('x')->second ENDL;
+	re.disp();
+	re.clear();
 
 }

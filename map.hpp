@@ -67,7 +67,7 @@ public:
 	}
 
 	/*		Destructor		*/
-	~map() {}
+	~map() {clear();}
 
 	/*		Operator=		*/
 	map& operator= (const map& other)

@@ -26,6 +26,5 @@ int main()
 	COUT re.find('y')->second ENDL;
 	COUT re.find('x')->second ENDL;
 	re.disp();
-	re.clear();
 
 }

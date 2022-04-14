@@ -61,7 +61,7 @@ public:
 
 	template <class InputIterator> 
 	map(InputIterator first, InputIterator last,const key_compare& comp = key_compare(),
-    	const allocator_type& alloc = allocator_type()) : _alloc(alloc), _comp(comp)
+    	const allocator_type& alloc = allocator_type()) : rbt(key_type(), mapped_type()), _alloc(alloc), _comp(comp)
 	{
 		this->insert(first, last);
 	}
@@ -165,7 +165,7 @@ template <class InputIterator>
 	/*		Swap		*/
 	void swap(map & x)
 	{
-		redBlackTree<Key, T, Compare> temp;
+		redBlackTree<Key, T, Compare> temp(rbt.root->mypair.first, rbt.root->mypair.second);
 
 		temp = rbt;
 		rbt = x.rbt;

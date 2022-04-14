@@ -45,13 +45,13 @@ struct redBlackTree
 
 	}
 
-	Node<const K, V> & first()
+	Node<const K, V> & first() const
 	{
 		return *sent_L->parent;
 
 	}
 
-	Node<const K, V> & last()
+	Node<const K, V> & last() const 
 	{
 		return *sent_R;
 	}

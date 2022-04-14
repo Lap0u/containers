@@ -60,17 +60,17 @@ public:
 		return *this;
 	}
 	// virtual ~mapIterator();
-	pointer operator->()
+	pointer operator->() const
 	{
 		return _ptr->getPair();
 	}
-	bool operator==(const mapIterator<VT> & rhs)
+	bool operator==(const mapIterator<VT> & rhs) const 
 	{
 		if (_ptr == rhs._ptr)
 			return true;
 		return false;
 	}
-	bool operator!=(const mapIterator<VT> & rhs)
+	bool operator!=(const mapIterator<VT> & rhs) const
 	{
 		return !(*this == rhs);
 	}
@@ -117,6 +117,8 @@ public:
 		--(*this);
 		return it;
 	}
+
+	operator mapIterator <const value_type>() { return mapIterator <const value_type> (_ptr);}
 };
 }
 

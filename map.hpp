@@ -210,7 +210,50 @@ template <class InputIterator>
 		return 1;
 	}
 	/*		Lower_bound		*/
+	iterator lower_bound(const key_type & k)
+	{
+		iterator res = begin();
+		for (; res != end(); res++)
+		{
+			if (_comp(res->first, k) == 0)
+				return res;
+		}
+		return end();
+	}
+
+	const_iterator lower_bound(const key_type & k) const
+	{
+		iterator res = begin();
+		for (; res != end(); res++)
+		{
+			if (_comp(res->first, k) == 0)
+				return res;
+		}
+		return end();
+	}
+
 	/*		Upper_bound		*/
+	iterator upper_bound(const key_type & k)
+	{
+		iterator res = begin();
+		for (; res != end(); res++)
+		{
+			if (_comp(k, res->first) == 1)
+				return res;
+		}
+		return end();
+	}
+
+	const_iterator upper_bound(const key_type & k) const
+	{
+		iterator res = begin();
+		for (; res != end(); res++)
+		{
+			if (_comp(k, res->first) == 1)
+				return res;
+		}
+		return end();
+	}
 	/*		Equal_range		*/
 
 /*==Allocator==*/

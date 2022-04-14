@@ -18,13 +18,11 @@ int main()
 	re.add('y', 24);
 	re.add('x', 21);
 
-	map<char,int>lol;
-	lol['r'] = 12;
-	lol['p'] = 9;
 	re.disp();
-	lol.disp();
-	re.swap(lol);
-	re.disp();
-	lol.disp();
+	map<char,int>::iterator low = re.lower_bound('g');
+	map<char,int>::iterator up = re.upper_bound('g');
+	COUT low->first << " and " << low->second ENDL;
+	COUT up->first << " and " << up->second ENDL;
+ 
 
 }

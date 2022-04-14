@@ -266,6 +266,17 @@ template <class InputIterator>
 		return pair<iterator, iterator>(res, res_e);
 	}
 
+	pair<const_iterator, const_iterator>	equal_range (const key_type& k) const
+	{
+		iterator 	res = find(k);
+		iterator	res_e;
+		if (res == end())
+			return pair<const_iterator, const_iterator>(upper_bound(k),upper_bound(k));
+		res_e = res;
+		res_e++;
+		return pair<const_iterator, const_iterator>(res, res_e);
+	}
+
 /*==Allocator==*/
 
 	/*		Get_allocator		*/

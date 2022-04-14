@@ -16,7 +16,7 @@ class map
 {
 
 public:
-	void	disp() {rbt.print(rbt.root, 0);}
+	void	disp() {rbt.print(rbt.root, 0); COUT "size is " << rbt.size ENDL << "#################################################" ENDL;}
 	void	add(Key x, T y) {rbt.add(x, y);}
 	typedef					Key											key_type;
 	typedef					T											mapped_type;
@@ -105,7 +105,7 @@ public:
 	/*		Size		*/
 	size_type size() const {return !this->rbt._size;}
 	/*		Max_size		*/
-	size_type max_size() const {return allocator_type().max_size();}/////////////////////////////////voir vraie maxsize
+	size_type max_size() const {return rbt._allocator.max_size();}/////////////////////////////////voir vraie maxsize
 
 
 /*==Element acces==*/
@@ -158,6 +158,15 @@ template <class InputIterator>
 	}
 	/*		Erase		*/
 	/*		Swap		*/
+	void swap(map & x)
+	{
+		redBlackTree<Key, T, Compare> temp;
+
+		temp = rbt;
+		rbt = x.rbt;
+		x.rbt = temp;
+
+	}
 	/*		Clear		*/
 	void clear()
 	{
@@ -174,6 +183,8 @@ template <class InputIterator>
 	/*		Find		*/
 	iterator find (const key_type& k)
 	{
+		if (rbt.root == NULL)
+			return end();
 		iterator res = *rbt.search(*rbt.root, k);
 		return res;
 	}

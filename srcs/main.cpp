@@ -18,13 +18,13 @@ int main()
 	re.add('y', 24);
 	re.add('x', 21);
 
-	map<char,int>::iterator ite = re.begin();
-	COUT ite->first << " and " << ite->second ENDL;
-
-	COUT re.find('g')->second ENDL;
-	COUT re.find('e')->second ENDL;
-	COUT re.find('y')->second ENDL;
-	COUT re.find('x')->second ENDL;
+	map<char,int>lol;
+	lol['r'] = 12;
+	lol['p'] = 9;
 	re.disp();
+	lol.disp();
+	re.swap(lol);
+	re.disp();
+	lol.disp();
 
 }

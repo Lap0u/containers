@@ -77,24 +77,21 @@ struct redBlackTree
 		}
 		add(*this->root, *newNode);
 		size++;
-		
+	}
+
+	void	clear_sent()
+	{
+		_allocator.destroy(sent_L);
+		_allocator.deallocate(sent_L, sizeof(Node<const K, V>));
+		_allocator.destroy(sent_R);
+		_allocator.deallocate(sent_R, sizeof(Node<const K, V>));
 	}
 
 	void clear(Node<const K, V> *toDel)
 	{
-		if (sent_L)
-		{
-			_allocator.destroy(sent_L);
-			_allocator.deallocate(sent_L, sizeof(Node<const K, V>));
-		}
-		if (sent_R)
-		{
-			_allocator.destroy(sent_R);
-			_allocator.deallocate(sent_R, sizeof(Node<const K, V>));
-		}
-		if (toDel->childL && toDel->childL != sent_L)
+		if (toDel->childL)
 			clear(toDel->childL);
-		if (toDel->childR && toDel->childR != sent_R)
+		if (toDel->childR)
 			clear(toDel->childR);
 		_allocator.destroy(toDel);
 		_allocator.deallocate(toDel, sizeof(Node<const K, V>));
@@ -134,22 +131,6 @@ private:
 
 	void	add(Node<const K, V> & parent, Node<const K, V> & newNode)
 	{
-		// if (&parent == sent_L)
-		// {
-		// 	parent.childL = &newNode;
-		// 	newNode.parent = parent.parent;
-		// 	newNode.leftChild = 1;
-		// 	newNode.childL = sent_L;
-		// 	return ;
-		// }
-		// if (&parent == sent_R)
-		// {
-		// 	parent.childR = &newNode;
-		// 	newNode.parent = parent.parent;
-		// 	newNode.leftChild = 0;
-		// 	newNode.childR = sent_R;
-		// 	return ;
-		// }
 		if (_comp(newNode.mypair.first, parent.mypair.first))
 		{
 			if (parent.childL == NULL)

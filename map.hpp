@@ -175,7 +175,10 @@ template <class InputIterator>
 	/*		Clear		*/
 	void clear()
 	{
-		rbt.clear(rbt.root);
+		if (rbt.root)
+			rbt.clear(rbt.root);
+		else
+			rbt.clear_sent();
 	}
 
 /*==Observers==*/

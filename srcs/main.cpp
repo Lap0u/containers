@@ -13,10 +13,14 @@ int main()
 	using namespace ft;
 
 	map<char,int>re;
-	re.add('e', 22);
-	re.add('t', 10);
+	map<char,int>re2;
 
+	for (char x = 'g';x < 'x';x++)
+		re2[x] = x + '0';
+	for (char x = 'a'; x < 'r';x++)
+		re2[x] = x + '0';
 
 	re.disp();
+	re2.disp();
 
 }

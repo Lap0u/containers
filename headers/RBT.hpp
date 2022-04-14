@@ -102,7 +102,7 @@ struct redBlackTree
 			return search(*parent.childL, key);
 		if (_comp(parent.mypair.first, key) == 0 && _comp(key, parent.mypair.first) == 0)
 			return &parent;
-		return NULL;
+		return sent_R;
 	}
 
 	void print(Node<const K, V> *current, int space)

@@ -10,21 +10,21 @@
 
 int main()
 {
-	int i = 0;
 	using namespace ft;
 
 	map<char,int>re;
-	char x = 'a';
-	for (;x != 'f';x++)
-		re.add(x, x + '0');
-	re.insert(pair<char,int>('r', 23));
-	re.insert(pair<char,int>('1', 20));
-	re.insert(pair<char,int>('4', 19));
+	re.add('e', 22);
+	re.add('g', 22);
+	re.add('y', 22);
+	re.add('x', 22);
 
-	for (map<char,int>::iterator ite = re.begin(); ite != re.end() && i < 4; ite++)
-	{
-		COUT ite->first << " and " << ite->second ENDL;
-		i++;
-	}
-	re.disp();
+	map<char,int>::iterator ite = re.begin();
+	COUT ite->first << " and " << ite->second ENDL;
+
+	re.find('g');
+	re.find('e');
+	re.find('y');
+	re.find('x');
+	re.find('s');
+
 }

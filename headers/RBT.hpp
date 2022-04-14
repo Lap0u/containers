@@ -60,6 +60,18 @@ struct redBlackTree
 		
 	}
 
+	Node<const K, V>* search(Node<const K, V> & parent, K key)
+	{
+		if(parent.childR && _comp(parent.mypair.first, key))
+			return search(*parent.childR, key);
+		
+		if(parent.childL && _comp(key, parent.mypair.first))
+			return search(*parent.childL, key);
+		if (_comp(parent.mypair.first, key) == 0 && _comp(key, parent.mypair.first) == 0)
+			return &parent;
+		return NULL;
+	}
+
 	void print(Node<const K, V> *current, int space)
 	{
 		if ( current != NULL ){
@@ -81,7 +93,7 @@ private:
 	void	add(Node<const K, V> & parent, Node<const K, V> & newNode)
 	{
 
-		if (_comp(newNode.mypair.first, parent.mypair.first))//utiliser comp
+		if (_comp(newNode.mypair.first, parent.mypair.first))
 		{
 			if (parent.childL == NULL)
 			{
@@ -93,7 +105,7 @@ private:
 				add(*parent.childL, newNode);
 			return ;
 		}
-		else if (_comp(parent.mypair.first, newNode.mypair.first))//utliser comp
+		else if (_comp(parent.mypair.first, newNode.mypair.first))
 		{
 			if (parent.childR == NULL)
 			{

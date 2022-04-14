@@ -40,7 +40,8 @@ public:
 	typedef		typename	iterator_traits<iterator>::difference_type	difference_type;
 	typedef					size_t										size_type;
 
-private:
+public:
+// private:
 	redBlackTree<Key, T, Compare>	rbt;
 	allocator_type					_alloc;
 	key_compare						_comp;
@@ -170,14 +171,12 @@ template <class InputIterator>
 	/*		Find		*/
 	iterator find (const key_type& k)
 	{
-		iterator it;
-
-		for (it = begin(); it != end(); it++)
-		{
-			if (it->first == k)
-				return it;
-		}
-		return end();
+		iterator res = *rbt.search(*rbt.root, k);
+		if (res == end())
+			COUT "key not found " << k ENDL;
+		else
+			COUT "key found " << res->first ENDL;
+		return res;
 	}
 	const_iterator find (const key_type& k) const;
 	/*		Count		*/

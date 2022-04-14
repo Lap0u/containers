@@ -30,8 +30,8 @@ struct redBlackTree
 	Node<const K, V>*			sent_R;
 
 	std::size_t					size;
-	allocator_type			_allocator;
-	key_compare				_comp;
+	allocator_type				_allocator;
+	key_compare					_comp;
 
 	redBlackTree(K key, V val, const key_compare& compare = key_compare(), const allocator_type & alloc = allocator_type())
 	 : root(NULL), size(0), _allocator(alloc) , _comp(compare)

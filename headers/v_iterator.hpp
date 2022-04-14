@@ -61,7 +61,7 @@ public:
 	myIterator	operator-(difference_type index) const
 	{
 		return myIterator(this->_m_ptr - index);
-	}	
+	}
 
 	myIterator& operator++()
 	{

@@ -66,9 +66,9 @@ public:
 		this->insert(first, last);
 	}
 
-	map	(const map& x) : _alloc(x._alloc), _comp(x._comp)
+	map	(const map& x) : rbt(key_type(), mapped_type()), _alloc(x._alloc), _comp(x._comp)
 	{
-		this->insert(x.begin(), x.last());
+		this->insert(x.begin(), x.end());
 	}
 
 	/*		Destructor		*/
@@ -81,9 +81,10 @@ public:
 		{
 			this->clear();
 			_alloc = other._alloc;
-			_comp = other.comp;
-			this->insert(other.begin(), other.last());
+			_comp = other._comp;
+			this->insert(other.begin(), other.end());
 		}
+		return *this;
 	}
 
 
@@ -105,7 +106,7 @@ public:
 /*==Capacity==*/
 
 	/*		Empty		*/
-	bool empty() const {return !this->rbt._size;}
+	bool empty() const {return !this->rbt.size;}
 
 	/*		Size		*/
 	size_type size() const {return !this->rbt.size;}

@@ -64,6 +64,12 @@ public:
 	{
 		return _ptr->getPair();
 	}
+
+	reference operator*() const
+	{
+		return *_ptr->getPair();
+	}
+
 	bool operator==(const mapIterator<VT> & rhs) const 
 	{
 		if (_ptr == rhs._ptr)

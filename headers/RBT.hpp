@@ -6,6 +6,15 @@
 #ifndef RBT_HPP
 # define RBT_HPP
 
+# define CIN >> std::cin
+# define COUT std::cout <<
+# define ENDL << std::endl
+# define NL COUT std::endl;
+# define RESET   "\033[0m"
+# define BLACK   "\033[1m\033[30m"		/* Bold Black	*/
+# define RED     "\033[1m\033[31m"		/* Bold Red		*/
+# define CYAN    "\033[1m\033[36m" 		/* Bold Cyan	*/
+
 # include "RBT_node.hpp"
 
 namespace ft{

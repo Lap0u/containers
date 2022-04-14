@@ -1,6 +1,11 @@
 #ifndef MAP_HPP
 # define MAP_HPP
 
+# define CIN >> std::cin
+# define COUT std::cout <<
+# define ENDL << std::endl
+# define NL COUT std::endl;
+
 # include <memory>
 # include <functional>
 # include "./headers/RBT.hpp"
@@ -103,7 +108,7 @@ public:
 	bool empty() const {return !this->rbt._size;}
 
 	/*		Size		*/
-	size_type size() const {return !this->rbt._size;}
+	size_type size() const {return !this->rbt.size;}
 	/*		Max_size		*/
 	size_type max_size() const {return rbt._allocator.max_size();}/////////////////////////////////voir vraie maxsize
 
@@ -194,6 +199,12 @@ template <class InputIterator>
 		return res;
 	}
 	/*		Count		*/
+	size_type count (const key_type& k) const
+	{
+		if (find(k) == end())
+			return 0;
+		return 1;
+	}
 	/*		Lower_bound		*/
 	/*		Upper_bound		*/
 	/*		Equal_range		*/
@@ -201,6 +212,10 @@ template <class InputIterator>
 /*==Allocator==*/
 
 	/*		Get_allocator		*/
+	allocator_type get_allocator() const
+	{
+		return _alloc;
+	}
 
 
 };

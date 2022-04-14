@@ -158,6 +158,13 @@ private:
 				newNode.parent = &parent;
 				newNode.leftChild = 1;
 			}
+			else if (parent.childL == sent_L)
+			{
+				parent.childL = &newNode;
+				newNode.parent = &parent;
+				newNode.leftChild = 1;
+				newNode.childL = sent_L;
+			}
 			else
 				add(*parent.childL, newNode);
 			return ;
@@ -169,6 +176,13 @@ private:
 				parent.childR = &newNode;
 				newNode.parent = &parent;
 				newNode.leftChild = 0;
+			}
+			else if (parent.childR == sent_R)
+			{
+				parent.childR = &newNode;
+				newNode.parent = &parent;
+				newNode.leftChild = 0;
+				newNode.childR = sent_R;
 			}
 			else
 				add(*parent.childR, newNode);

@@ -19,10 +19,8 @@ int main()
 	re.add('x', 21);
 
 	re.disp();
-	map<char,int>::iterator low = re.lower_bound('g');
-	map<char,int>::iterator up = re.upper_bound('g');
-	COUT low->first << " and " << low->second ENDL;
-	COUT up->first << " and " << up->second ENDL;
+	pair<map<char,int>::iterator, map<char,int>::iterator> up = re.equal_range('e');
+	COUT up.first->first << " and " << up.first->second ENDL;
  
 
 }

@@ -255,6 +255,16 @@ template <class InputIterator>
 		return end();
 	}
 	/*		Equal_range		*/
+	pair<iterator,iterator>	equal_range (const key_type& k)
+	{
+		iterator 	res = find(k);
+		iterator	res_e;
+		if (res == end())
+			return pair<iterator, iterator>(upper_bound(k),upper_bound(k));
+		res_e = res;
+		res_e++;
+		return pair<iterator, iterator>(res, res_e);
+	}
 
 /*==Allocator==*/
 

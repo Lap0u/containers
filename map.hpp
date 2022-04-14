@@ -181,6 +181,10 @@ template <class InputIterator>
 /*==Observers==*/
 
 	/*		Key_comp		*/
+	key_compare key_comp() const
+	{
+		return _comp;
+	}
 	/*		Value_comp		*/
 
 /*==Operations==*/

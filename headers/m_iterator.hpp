@@ -118,7 +118,7 @@ public:
 		return it;
 	}
 
-	operator mapIterator <const value_type>() { return mapIterator <const value_type> (_ptr);}
+	operator mapIterator <const value_type>() { return mapIterator <const value_type> (*_ptr);}
 };
 }
 

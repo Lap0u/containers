@@ -93,7 +93,7 @@ struct redBlackTree
 		_allocator.deallocate(toDel, sizeof(Node<const K, V>));
 	}
 
-	Node<const K, V>* search(Node<const K, V> & parent, K key)
+	Node<const K, V>* search(Node<const K, V> & parent, K key) const
 	{
 		if(parent.childR && _comp(parent.mypair.first, key))
 			return search(*parent.childR, key);

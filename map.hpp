@@ -226,7 +226,7 @@ template <class InputIterator>
 
 	const_iterator lower_bound(const key_type & k) const
 	{
-		iterator res = begin();
+		const_iterator res = begin();
 		for (; res != end(); res++)
 		{
 			if (_comp(res->first, k) == 0)
@@ -249,7 +249,7 @@ template <class InputIterator>
 
 	const_iterator upper_bound(const key_type & k) const
 	{
-		iterator res = begin();
+		const_iterator res = begin();
 		for (; res != end(); res++)
 		{
 			if (_comp(k, res->first) == 1)
@@ -271,8 +271,8 @@ template <class InputIterator>
 
 	pair<const_iterator, const_iterator>	equal_range (const key_type& k) const
 	{
-		iterator 	res = find(k);
-		iterator	res_e;
+		const_iterator 	res = find(k);
+		const_iterator	res_e;
 		if (res == end())
 			return pair<const_iterator, const_iterator>(upper_bound(k),upper_bound(k));
 		res_e = res;

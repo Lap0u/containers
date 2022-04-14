@@ -26,12 +26,21 @@ struct redBlackTree
 	typedef	Compare	key_compare;
 
 	Node<const K, V>*			root;
+	Node<const K, V>*			sent_L;
+	Node<const K, V>*			sent_R;
+
 	std::size_t					size;
 	allocator_type			_allocator;
 	key_compare				_comp;
 
-	redBlackTree(const key_compare& compare = key_compare(), const allocator_type & alloc = allocator_type())
-	 : root(NULL), size(0), _allocator(alloc) , _comp(compare){}
+	redBlackTree(K key, V val, const key_compare& compare = key_compare(), const allocator_type & alloc = allocator_type())
+	 : root(NULL), size(0), _allocator(alloc) , _comp(compare)
+	{
+		sent_L = _allocator.allocate(1);
+		_allocator.construct(sent_L, Node<const K,V>(key, val));
+		sent_R = _allocator.allocate(1);
+		_allocator.construct(sent_R, Node<const K,V>(key, val));
+	}
 
 	Node<const K, V> & first()
 	{
@@ -61,6 +70,8 @@ struct redBlackTree
 		{
 			this->root = newNode;
 			newNode->black = 1;
+			this->root->childL = sent_L;
+			this->root->childR = sent_R;
 			size++;
 			return ;
 		}
@@ -71,13 +82,22 @@ struct redBlackTree
 
 	void clear(Node<const K, V> *toDel)
 	{
-		if (toDel->childL)
+		if (sent_L)
+		{
+			_allocator.destroy(sent_L);
+			_allocator.deallocate(sent_L, sizeof(Node<const K, V>));
+		}
+		if (sent_R)
+		{
+			_allocator.destroy(sent_R);
+			_allocator.deallocate(sent_R, sizeof(Node<const K, V>));
+		}
+		if (toDel->childL && toDel->childL != sent_L)
 			clear(toDel->childL);
-		if (toDel->childR)
+		if (toDel->childR && toDel->childR != sent_R)
 			clear(toDel->childR);
 		_allocator.destroy(toDel);
 		_allocator.deallocate(toDel, sizeof(Node<const K, V>));
-		
 	}
 
 	Node<const K, V>* search(Node<const K, V> & parent, K key)

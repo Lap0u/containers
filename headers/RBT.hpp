@@ -38,28 +38,22 @@ struct redBlackTree
 	{
 		sent_L = _allocator.allocate(1);
 		_allocator.construct(sent_L, Node<const K,V>(key, val));
+		sent_L->leftChild = 1;
 		sent_R = _allocator.allocate(1);
 		_allocator.construct(sent_R, Node<const K,V>(key, val));
+		sent_R->leftChild = 0;
+
 	}
 
 	Node<const K, V> & first()
 	{
-		Node<const K, V>* temp = root;
-		if (root == NULL)
-			return *temp;
-		while (temp->childL != NULL)
-			temp = temp->childL;
-		return *temp;
+		return *sent_L->parent;
+
 	}
 
 	Node<const K, V> & last()
 	{
-		Node<const K, V>* temp = root;
-		if (root == NULL)
-			return *temp;
-		while (temp != NULL)
-			temp = temp->childR;
-		return *temp;
+		return *sent_R;
 	}
 
 	void	add(K x, V y)
@@ -71,7 +65,9 @@ struct redBlackTree
 			this->root = newNode;
 			newNode->black = 1;
 			this->root->childL = sent_L;
+			sent_L->parent = this->root;
 			this->root->childR = sent_R;
+			sent_R->parent = this->root;
 			size++;
 			return ;
 		}
@@ -111,6 +107,11 @@ struct redBlackTree
 
 	void print(Node<const K, V> *current, int space)
 	{
+		if (space == 0)
+		{
+			COUT sent_L->leftChild << "  Sent_L parent is " << sent_L->parent->mypair.first << " and " << sent_L->parent->mypair.second ENDL;
+			COUT sent_R->leftChild << "  Sent_R parent is " << sent_R->parent->mypair.first << " and " << sent_R->parent->mypair.second ENDL;
+		}
 		if ( current != NULL ){
 			space += 10;
 			print(current->childR, space);
@@ -145,6 +146,7 @@ private:
 				newNode.parent = &parent;
 				newNode.leftChild = 1;
 				newNode.childL = sent_L;
+				sent_L->parent = &newNode;
 			}
 			else
 				add(*parent.childL, newNode);
@@ -164,6 +166,7 @@ private:
 				newNode.parent = &parent;
 				newNode.leftChild = 0;
 				newNode.childR = sent_R;
+				sent_R->parent = &newNode;
 			}
 			else
 				add(*parent.childR, newNode);

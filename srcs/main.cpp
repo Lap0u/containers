@@ -12,15 +12,14 @@ int main()
 {
 	using namespace ft;
 
-	map<char,int>re;
 	map<char,int>re2;
 
-	for (char x = 'g';x < 'x';x++)
-		re2[x] = x + '0';
-	for (char x = 'a'; x < 'r';x++)
-		re2[x] = x + '0';
+	re2.add('r', 32);
+	re2.add('x', 32);
 
-	re.disp();
 	re2.disp();
-
+	map<char,int>::iterator ite = re2.end();
+	ite--;
+	COUT ite->first ENDL;
+	COUT ite->second ENDL;
 }

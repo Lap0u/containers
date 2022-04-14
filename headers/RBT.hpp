@@ -123,6 +123,8 @@ struct redBlackTree
 				COUT BLACK;
 			else
 				COUT RED;
+			if (current == sent_L || current == sent_R)
+				COUT CYAN;
 			COUT current->mypair.first << " : " << current->mypair.second ENDL;
 			COUT RESET;
 			print(current->childL, space);
@@ -132,7 +134,22 @@ private:
 
 	void	add(Node<const K, V> & parent, Node<const K, V> & newNode)
 	{
-
+		// if (&parent == sent_L)
+		// {
+		// 	parent.childL = &newNode;
+		// 	newNode.parent = parent.parent;
+		// 	newNode.leftChild = 1;
+		// 	newNode.childL = sent_L;
+		// 	return ;
+		// }
+		// if (&parent == sent_R)
+		// {
+		// 	parent.childR = &newNode;
+		// 	newNode.parent = parent.parent;
+		// 	newNode.leftChild = 0;
+		// 	newNode.childR = sent_R;
+		// 	return ;
+		// }
 		if (_comp(newNode.mypair.first, parent.mypair.first))
 		{
 			if (parent.childL == NULL)

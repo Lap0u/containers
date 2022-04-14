@@ -14,9 +14,8 @@ int main()
 
 	map<char,int>re;
 	re.add('e', 22);
-	re.add('g', 26);
-	re.add('y', 24);
-	re.add('x', 21);
+	re.add('t', 10);
+
 
 	re.disp();
 

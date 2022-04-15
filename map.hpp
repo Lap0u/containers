@@ -137,8 +137,7 @@ public:
 		bool	ret = false;
 		iterator save;
 
-
-		if (find(val.first) == end())
+		if (rbt.root == NULL || find(val.first) == end())
 		{
 			rbt.add(val.first, val.second);
 			ret = true;
@@ -158,7 +157,7 @@ template <class InputIterator>
 	{
 		while (first != last)
 		{
-			if (find(first->first) == end())
+			if (rbt.root == NULL || find(first->first) == end())
 				rbt.add(first->first, first->second);
 			first++;
 		}
@@ -178,7 +177,10 @@ template <class InputIterator>
 	void clear()
 	{
 		if (rbt.root)
+		{
 			rbt.clear(rbt.root);
+			rbt.root = NULL;
+		}
 		else
 			rbt.clear_sent();
 	}

@@ -5,6 +5,7 @@
 
 #include <utility>
 #include <map>
+#include <list>
 #include "../map.hpp"
 #include "../headers/RBT.hpp"
 
@@ -12,14 +13,13 @@ int main()
 {
 	using namespace ft;
 
-	map<char,int>re2;
 
-	re2.add('r', 32);
-	re2.add('x', 32);
+	std::list<pair<char,int> >lol;
+
+	for (int i = 0; i < 10; i++)
+		lol.push_back(pair<char,int>(i + '0', i));
+	map<char,int>re2(lol.begin(), lol.end());
 
 	re2.disp();
-	map<char,int>::iterator ite = re2.end();
-	ite--;
-	COUT ite->first ENDL;
-	COUT ite->second ENDL;
+
 }

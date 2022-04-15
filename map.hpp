@@ -21,7 +21,7 @@ class map
 {
 
 public:
-	void	disp() {rbt.print(rbt.root, 0); COUT "size is " << rbt.size ENDL << "#################################################" ENDL;}
+	void	disp() {rbt.print(rbt.root, 0); COUT "size is " << size() ENDL << "#################################################" ENDL;}
 	void	add(Key x, T y) {rbt.add(x, y);}
 	typedef					Key											key_type;
 	typedef					T											mapped_type;
@@ -109,7 +109,7 @@ public:
 	bool empty() const {return !this->rbt.size;}
 
 	/*		Size		*/
-	size_type size() const {return !this->rbt.size;}
+	size_type size() const {return this->rbt.size;}
 	/*		Max_size		*/
 	size_type max_size() const {return rbt._allocator.max_size();}/////////////////////////////////voir vraie maxsize
 

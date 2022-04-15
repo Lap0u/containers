@@ -158,7 +158,8 @@ template <class InputIterator>
 	{
 		while (first != last)
 		{
-			add(first->first, first->second);
+			if (find(first->first) == end())
+				rbt.add(first->first, first->second);
 			first++;
 		}
 	}

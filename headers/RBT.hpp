@@ -123,7 +123,11 @@ struct redBlackTree
 				COUT RED;
 			if (current == sent_L || current == sent_R)
 				COUT CYAN;
-			COUT current->mypair.first << " : " << current->mypair.second ENDL;
+			COUT current->mypair.first << " : " << current->mypair.second;
+			if (current->leftChild == 1)
+				COUT "  L" ENDL;
+			else
+				COUT "  R" ENDL;
 			COUT RESET;
 			print(current->childL, space);
 		}

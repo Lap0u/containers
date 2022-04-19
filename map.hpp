@@ -103,6 +103,8 @@ public:
 	
 
 	/*		Rbegin		*/
+	reverse_iterator rbegin() {return reverse_iterator(end());}
+	const_reverse_iterator rbegin() const {return const_reverse_iterator(end());}
 	/*		Rend		*/
 
 /*==Capacity==*/

@@ -25,7 +25,7 @@ template <class Iter>
 
 	iterator_type base() const { return this->_base;}
 	
-	reference operator*() const { return *(this->_base - 1);}
+	reference operator*() const { iterator_type tmp = _base; return (*(--tmp));}
 
 	reverse_iterator operator+ (difference_type n) const { return reverse_iterator(this->_base - n);}
 

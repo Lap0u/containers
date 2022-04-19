@@ -19,16 +19,13 @@ int main()
 {
 	using namespace ft;
 
-	vector<int>lol(8, 12);
+	map<char,int>re;
 
-	lol.reserve(10);
-	for (vector<int>::iterator re = lol.begin(); re != lol.end(); re++)
-		COUT *re ENDL;
-	lol.insert(lol.begin() + 5, 3);
-	COUT std::endl;
-	for (vector<int>::iterator re = lol.begin(); re != lol.end(); re++)
-		COUT *re ENDL;
-	lol.insert(lol.begin() + 5, 32);
-	for (vector<int>::iterator re = lol.begin(); re != lol.end(); re++)
-		COUT *re ENDL;
+	re.insert(pair<char,int>('r', 23));
+	re.insert(pair<char,int>('x', 25));
+	re.insert(pair<char,int>('s', 2252));
+	re.insert(pair<char,int>('a', 13));
+	re.disp();
+	re.erase('s');
+	re.disp();
 }

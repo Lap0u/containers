@@ -51,6 +51,11 @@ public:
 		_ptr = &cpy;
 	}
 
+	Node<typename VT::first_type, typename VT::second_type>* get_node()const
+	{
+		return _ptr;
+	}
+	
 	mapIterator & operator=(const mapIterator<VT>& other)
 	{
 		if (this != &other)

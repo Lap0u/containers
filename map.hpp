@@ -169,6 +169,29 @@ template <class InputIterator>
 		}
 	}
 	/*		Erase		*/
+	void erase (iterator position)
+	{
+		rbt.erase(position.get_node());
+	}
+
+	size_type erase (const key_type& k)
+	{
+		iterator temp = find(k);
+
+		if (temp == end())
+			return 0;
+		rbt.erase(temp.get_node());
+		return 1;
+	}
+
+	void erase (iterator first, iterator last)
+	{
+		while (first != last)
+		{
+			rbt.erase(first.get_node());
+			first++;
+		}
+	}
 	/*		Swap		*/
 	void swap(map & x)
 	{

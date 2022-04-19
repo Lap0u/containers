@@ -58,6 +58,38 @@ struct redBlackTree
 		return *sent_R;
 	}
 
+	void	erase(Node<const K, V>* toDel)
+	{
+		COUT "YO" ENDL;
+		if (toDel == root && size == 1)
+		{
+			_allocator.destroy(toDel);
+			_allocator.deallocate(toDel, sizeof(toDel));
+			root = NULL;
+			return ;
+		}
+		if ((toDel->childL == NULL || toDel->childL == sent_L ) && (toDel->childR == NULL || toDel->childR == sent_R))
+		{
+			if (toDel->childL == sent_L)
+			{	
+				sent_L->parent = toDel->parent;
+				sent_L->parent->childL = sent_L;
+			}
+			if (toDel->childR == sent_R)
+			{	
+				sent_R->parent = toDel->parent;
+				sent_R->parent->childR = sent_R;
+			}
+			if (toDel->leftChild == 1)
+				toDel->parent->childL = NULL;
+			else
+				toDel->parent->childR = NULL;
+			_allocator.destroy(toDel);
+			_allocator.deallocate(toDel, sizeof(toDel));
+			return ;
+		}
+	}
+
 	void	add(K x, V y)
 	{
 		Node<const K, V>* newNode = _allocator.allocate(1);

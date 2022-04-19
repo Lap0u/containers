@@ -168,6 +168,7 @@ template <class InputIterator>
 	{
 		redBlackTree<Key, T, Compare> temp(rbt.root->mypair.first, rbt.root->mypair.second);
 
+		temp.clear_sent();
 		temp = rbt;
 		rbt = x.rbt;
 		x.rbt = temp;

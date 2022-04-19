@@ -65,10 +65,12 @@ struct redBlackTree
 		while(temp->childL)
 			temp = temp->childL;
 		temp->childL = sent_L;
+		sent_L->parent = temp;
 		temp = root;
 		while(temp->childR)
 			temp = temp->childR;
 		temp->childR = sent_R;
+		sent_R->parent = temp;
 	}
 
 	Node<const K, V> & last() const 
@@ -79,6 +81,7 @@ struct redBlackTree
 	void	erase(Node<const K, V>* toDel)
 	{
 		hideSent();
+		size--;
 		if (toDel == root && size == 1)
 		{
 			_allocator.destroy(toDel);
@@ -95,7 +98,32 @@ struct redBlackTree
 			_allocator.destroy(toDel);
 			_allocator.deallocate(toDel, sizeof(toDel));
 			revealSent();
-
+			return ;
+		}
+		if (toDel->childL == NULL)
+		{
+			if (toDel->leftChild == 1)
+				toDel->parent->childL = toDel->childR;
+			else
+				toDel->parent->childR = toDel->childR;
+			toDel->childR->parent = toDel->parent;
+			toDel->childR->leftChild = toDel->leftChild;
+			_allocator.destroy(toDel);
+			_allocator.deallocate(toDel, sizeof(toDel));
+			revealSent();
+			return ;
+		}
+		if (toDel->childR == NULL)
+		{
+			if (toDel->leftChild == 1)
+				toDel->parent->childL = toDel->childL;
+			else
+				toDel->parent->childR = toDel->childL;
+			toDel->childL->parent = toDel->parent;
+			toDel->childL->leftChild = toDel->leftChild;
+			_allocator.destroy(toDel);
+			_allocator.deallocate(toDel, sizeof(toDel));			
+			revealSent();
 			return ;
 		}
 	}

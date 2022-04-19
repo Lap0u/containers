@@ -180,9 +180,17 @@ template <class InputIterator>
 		{
 			rbt.clear(rbt.root);
 			rbt.root = NULL;
+			rbt.sent_L = NULL;
+			rbt.sent_R = NULL;
 		}
 		else
+		{
 			rbt.clear_sent();
+			rbt.root = NULL;
+			rbt.sent_L = NULL;
+			rbt.sent_R = NULL;
+		}
+		rbt.size = 0;
 	}
 
 /*==Observers==*/

@@ -47,6 +47,8 @@ struct redBlackTree
 
 	Node<const K, V> & first() const
 	{
+		if (sent_L == NULL)
+			return *sent_L;
 		return *sent_L->parent;
 
 	}
@@ -62,12 +64,24 @@ struct redBlackTree
 		_allocator.construct(newNode, Node<const K,V>(x,y));
 		if (this->root == NULL)
 		{
+			if (sent_L == NULL)
+			{
+				sent_L = _allocator.allocate(1);
+				_allocator.construct(sent_L, Node<const K,V>(x, y));
+				sent_L->leftChild = 1;
+			}
+			if (sent_R == NULL)
+			{
+				sent_R = _allocator.allocate(1);
+				_allocator.construct(sent_R, Node<const K,V>(x, y));
+				sent_R->leftChild = 0;	
+			}
 			this->root = newNode;
 			newNode->black = 1;
 			this->root->childL = sent_L;
-			sent_L->parent = this->root;
+			sent_L->parent = newNode;
 			this->root->childR = sent_R;
-			sent_R->parent = this->root;
+			sent_R->parent = newNode;
 			size++;
 			return ;
 		}

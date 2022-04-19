@@ -30,4 +30,6 @@ int main()
 	re.disp();
 	re.erase('r');
 	re.disp();
+	re.erase('s');
+	re.disp();
 }

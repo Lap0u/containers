@@ -91,6 +91,8 @@ struct redBlackTree
 
 	void	erase(Node<const K, V>* toDel)
 	{
+		if (toDel == NULL)
+			return ;
 		hideSent();
 		size--;
 		if (toDel == root && size == 1)

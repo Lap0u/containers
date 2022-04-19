@@ -24,7 +24,9 @@ int main()
 	re.insert(pair<char,int>('r', 23));
 	re.insert(pair<char,int>('x', 25));
 	re.insert(pair<char,int>('s', 2252));
-	re.insert(pair<char,int>('a', 13));
+	re.insert(pair<char,int>('b', 13));
+	re.insert(pair<char,int>('d', 16));
+	re.insert(pair<char,int>('c', 1));
 	re.disp();
 	re.erase('r');
 	re.disp();

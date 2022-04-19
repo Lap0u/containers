@@ -148,13 +148,20 @@ struct redBlackTree
 		if (temp->leftChild == 1)
 			temp->parent->childL = temp->childL;
 		else
-			temp->parent->childR = temp->childR;
+			temp->parent->childR = temp->childL;
 		temp->parent = toDel->parent;
 		temp->leftChild = toDel->leftChild;
-		temp->childL = toDel->childL;
+		if (toDel->childL != temp)
+			temp->childL = toDel->childL;
+		else
+			temp->childL = NULL;
 		temp->childR = toDel->childR;
 		if (toDel == root)
+		{
 			root = temp;
+			root->childL = temp->childL;
+			root->childR = temp->childR;
+		}
 		_allocator.destroy(toDel);
 		_allocator.deallocate(toDel, sizeof(toDel));
 		toDel = NULL;	

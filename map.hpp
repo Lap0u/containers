@@ -197,11 +197,29 @@ template <class InputIterator>
 /*==Observers==*/
 
 	/*		Key_comp		*/
-	key_compare key_comp() const
+	key_compare key_comp() const //code from cplusplus.com
 	{
 		return _comp;
 	}
 	/*		Value_comp		*/
+	class value_compare : std::binary_function<value_type,value_type,bool> //code from cplusplus.com
+	{
+		friend class map;
+	protected:
+		Compare comp;
+		value_compare (Compare c) : comp(c) {}  // constructed with map's comparison object
+	public:
+		typedef bool result_type;
+		typedef value_type first_argument_type;
+		typedef value_type second_argument_type;
+		bool operator() (const value_type& x, const value_type& y) const
+		{
+			return comp(x.first, y.first);
+		}
+	};
+
+	value_compare value_comp() const { return (value_compare(Compare())); };
+
 
 /*==Operations==*/
 

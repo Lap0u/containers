@@ -309,7 +309,7 @@ template <class InputIterator>
 		else
 		{
 			size_type	offset = position - this->begin();
-			size_type	save_size = this->_filled + 1;
+			size_type	save_size = this->_filled;
 
 			this->_filled++;
 			while (save_size > offset)

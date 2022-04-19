@@ -117,7 +117,7 @@ public:
 	/*		Size		*/
 	size_type size() const {return this->rbt.size;}
 	/*		Max_size		*/
-	size_type max_size() const {return rbt._allocator.max_size();}/////////////////////////////////voir vraie maxsize
+	size_type max_size() const {return rbt._allocator.max_size();}
 
 
 /*==Element acces==*/

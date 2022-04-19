@@ -26,6 +26,6 @@ int main()
 	re.insert(pair<char,int>('s', 2252));
 	re.insert(pair<char,int>('a', 13));
 	re.disp();
-	re.erase('x');
+	re.erase('r');
 	re.disp();
 }

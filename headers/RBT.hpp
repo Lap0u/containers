@@ -73,10 +73,21 @@ struct redBlackTree
 		sent_R->parent = temp;
 	}
 
+
+
 	Node<const K, V> & last() const 
 	{
 		return *sent_R;
 	}
+
+	Node<const K, V>* maxLeft(Node<const K, V>* N) const
+	{
+		N = N->childL;
+		while (N->childR)
+			N = N->childR;
+		return N;
+		
+	} 
 
 	void	erase(Node<const K, V>* toDel)
 	{
@@ -97,6 +108,7 @@ struct redBlackTree
 				toDel->parent->childR = NULL;
 			_allocator.destroy(toDel);
 			_allocator.deallocate(toDel, sizeof(toDel));
+			toDel = NULL;		
 			revealSent();
 			return ;
 		}
@@ -107,9 +119,10 @@ struct redBlackTree
 			else
 				toDel->parent->childR = toDel->childR;
 			toDel->childR->parent = toDel->parent;
-			toDel->childR->leftChild = toDel->leftChild;
+			toDel->childR->leftChild = toDel->leftChild;		
 			_allocator.destroy(toDel);
 			_allocator.deallocate(toDel, sizeof(toDel));
+			toDel = NULL;		
 			revealSent();
 			return ;
 		}
@@ -120,12 +133,32 @@ struct redBlackTree
 			else
 				toDel->parent->childR = toDel->childL;
 			toDel->childL->parent = toDel->parent;
-			toDel->childL->leftChild = toDel->leftChild;
+			toDel->childL->leftChild = toDel->leftChild;	
+
 			_allocator.destroy(toDel);
-			_allocator.deallocate(toDel, sizeof(toDel));			
+			_allocator.deallocate(toDel, sizeof(toDel));
+			toDel = NULL;		
 			revealSent();
 			return ;
 		}
+		Node<const K,V>* temp = maxLeft(toDel);
+
+		toDel->childR->parent = temp;
+		toDel->childL->parent = temp;
+		if (temp->leftChild == 1)
+			temp->parent->childL = temp->childL;
+		else
+			temp->parent->childR = temp->childR;
+		temp->parent = toDel->parent;
+		temp->leftChild = toDel->leftChild;
+		temp->childL = toDel->childL;
+		temp->childR = toDel->childR;
+		if (toDel == root)
+			root = temp;
+		_allocator.destroy(toDel);
+		_allocator.deallocate(toDel, sizeof(toDel));
+		toDel = NULL;	
+		revealSent();
 	}
 
 	void	add(K x, V y)

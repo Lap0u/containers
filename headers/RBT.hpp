@@ -61,18 +61,15 @@ struct redBlackTree
 
 	void	revealSent()
 	{
-		COUT "1" ENDL;
 		Node<const K, V>* temp = root;
 		while(temp->childL)
 			temp = temp->childL;
 		temp->childL = sent_L;
-		COUT "2" ENDL;
 		sent_L->parent = temp;
 		temp = root;
 		while(temp->childR)
 			temp = temp->childR;
 		temp->childR = sent_R;
-		COUT "3" ENDL;
 		sent_R->parent = temp;
 	}
 
@@ -166,7 +163,8 @@ struct redBlackTree
 		if (temp->childL)
 		{
 			temp->parent->childR = temp->childL;
-			temp->parent->childR->leftChild = 0;
+			temp->parent->childR->leftChild = temp->leftChild;
+			temp->childL->parent = temp->parent;
 		}
 		if (toDel->leftChild == 1 && toDel->parent)
 			toDel->parent->childL = temp;

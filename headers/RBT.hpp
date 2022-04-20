@@ -147,10 +147,14 @@ struct redBlackTree
 
 		toDel->childR->parent = temp;
 		toDel->childL->parent = temp;
-		if (temp->leftChild == 1)
+		if (temp->leftChild == 1 && toDel != temp->parent)
 			temp->parent->childL = temp->childL;
-		else
+		else if (toDel != temp->parent)
 			temp->parent->childR = temp->childL;
+		if (toDel->leftChild == 1 && toDel->parent)
+			toDel->parent->childL = temp;
+		else if (toDel->parent)
+			toDel->parent->childR = temp;
 		temp->parent = toDel->parent;
 		temp->leftChild = toDel->leftChild;
 		if (toDel->childL != temp)

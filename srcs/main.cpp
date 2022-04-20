@@ -26,10 +26,10 @@ int main()
 	re.insert(pair<char,int>('s', 2252));
 	re.insert(pair<char,int>('b', 13));
 	re.insert(pair<char,int>('d', 16));
-	re.insert(pair<char,int>('c', 1));
+	re.insert(pair<char,int>('a', 1));
+	// re.insert(pair<char,int>('a', 0));
 	re.disp();
-	re.erase('r');
+	re.erase('b');
 	re.disp();
-	re.erase('s');
-	re.disp();
+	
 }

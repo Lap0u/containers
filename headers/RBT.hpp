@@ -100,13 +100,16 @@ struct redBlackTree
 			_allocator.destroy(toDel);
 			_allocator.deallocate(toDel, sizeof(toDel));
 			root = NULL;
+			// root->childL = NULL;
+			// root->childR = NULL;
+			// revealSent();
 			return ;
 		}
 		if (toDel->childL == NULL && toDel->childR == NULL)
 		{
-			if (toDel->leftChild == 1)
+			if (toDel->leftChild == 1 && toDel->parent)
 				toDel->parent->childL = NULL;
-			else
+			else if (toDel->parent)
 				toDel->parent->childR = NULL;
 			_allocator.destroy(toDel);
 			_allocator.deallocate(toDel, sizeof(toDel));
@@ -116,12 +119,19 @@ struct redBlackTree
 		}
 		if (toDel->childL == NULL)
 		{
-			if (toDel->leftChild == 1)
+			if (toDel->leftChild == 1 && toDel->parent)
 				toDel->parent->childL = toDel->childR;
-			else
+			else if (toDel->parent)
 				toDel->parent->childR = toDel->childR;
 			toDel->childR->parent = toDel->parent;
-			toDel->childR->leftChild = toDel->leftChild;		
+			toDel->childR->leftChild = toDel->leftChild;
+			if (toDel == root)
+			if (toDel == root)
+			{
+				root = toDel->childR;		
+				root->childL = toDel->childR->childL;
+				root->childR = toDel->childR->childR;
+			}
 			_allocator.destroy(toDel);
 			_allocator.deallocate(toDel, sizeof(toDel));
 			toDel = NULL;		
@@ -130,13 +140,14 @@ struct redBlackTree
 		}
 		if (toDel->childR == NULL)
 		{
-			if (toDel->leftChild == 1)
+			if (toDel->leftChild == 1 && toDel->parent)
 				toDel->parent->childL = toDel->childL;
-			else
+			else if (toDel->parent)
 				toDel->parent->childR = toDel->childL;
 			toDel->childL->parent = toDel->parent;
 			toDel->childL->leftChild = toDel->leftChild;	
-
+			if (toDel == root)
+				root = toDel->childL;
 			_allocator.destroy(toDel);
 			_allocator.deallocate(toDel, sizeof(toDel));
 			toDel = NULL;		
@@ -144,6 +155,7 @@ struct redBlackTree
 			return ;
 		}
 		Node<const K,V>* temp = maxLeft(toDel);
+		Node<const K,V>* temp_b = maxLeft(toDel);
 
 		toDel->childR->parent = temp;
 		toDel->childL->parent = temp;
@@ -157,10 +169,15 @@ struct redBlackTree
 			toDel->parent->childR = temp;
 		temp->parent = toDel->parent;
 		temp->leftChild = toDel->leftChild;
+		temp_b = temp;
 		if (toDel->childL != temp)
-			temp->childL = toDel->childL;
-		else
-			temp->childL = NULL;
+		{
+			while (temp_b->childL)
+				temp_b = temp_b->childL;
+			temp_b->childL = toDel->childL;
+		}
+		// else
+		// 	temp->childL = NULL;
 		temp->childR = toDel->childR;
 		if (toDel == root)
 		{
@@ -207,10 +224,16 @@ struct redBlackTree
 
 	void	clear_sent()
 	{
-		_allocator.destroy(sent_L);
-		_allocator.deallocate(sent_L, sizeof(Node<const K, V>));
-		_allocator.destroy(sent_R);
-		_allocator.deallocate(sent_R, sizeof(Node<const K, V>));
+		if (sent_L)
+		{
+			_allocator.destroy(sent_L);
+			_allocator.deallocate(sent_L, sizeof(Node<const K, V>));
+		}
+		if (sent_R)
+		{
+			_allocator.destroy(sent_R);
+			_allocator.deallocate(sent_R, sizeof(Node<const K, V>));
+		}
 	}
 
 	void clear(Node<const K, V> *toDel)

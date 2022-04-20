@@ -186,10 +186,15 @@ template <class InputIterator>
 
 	void erase (iterator first, iterator last)
 	{
+		iterator temp;
+		if (first == begin() && last == end())
+			return clear();
 		while (first != last)
 		{
+			temp = first;
+			temp++;
 			rbt.erase(first.get_node());
-			first++;
+			first = temp;
 		}
 	}
 	/*		Swap		*/

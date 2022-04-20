@@ -74,7 +74,63 @@ struct redBlackTree
 		sent_R->parent = temp;
 	}
 
+	void	switch_col(Node<const K, V>* node)
+	{
+		if (node->parent->leftChild)
+		{
+			if (node->parent->parent->childR != NULL)
+				node->parent->parent->childR->black = 1;
+		}
+		else if (node->parent->leftChild == 0)
+		{
+			if (node->parent->parent->childL != NULL)
+				node->parent->parent->childL->black = 1;
+		}
+		node->parent->parent->black = 0;
+		node->parent->black = 1;
+		root->black = 1;
+	}
 
+	void	correctTree(Node<const K, V>* node)
+	{
+		if (node->parent->leftChild)
+		{
+			if (node->parent->parent->childR == NULL || node->parent->parent->childR->black)
+				COUT MAG << "We need to rotate" RESET ENDL;
+			else
+			{
+				COUT MAG << "We need to switch" RESET ENDL;
+				return switch_col(node);
+			}
+		}
+		else
+		{
+			if (node->parent->parent->childL == NULL || node->parent->parent->childL->black)
+				COUT MAG << "We need to rotate" RESET ENDL;
+			else
+			{
+				COUT MAG << "We need to switch" RESET ENDL;			
+				return switch_col(node);
+			}
+		}
+	}
+
+	void	checkColor(Node<const K, V>* node)
+	{
+		if (node == root)
+			return ;
+		if (node->black == 0 && node->parent->black == 0)
+			correctTree(node);
+		if (node->black == 0 && node->parent->black == 0)
+			return;
+		checkColor(node->parent);
+	}
+
+	void	balance(Node<const K, V>*start)
+	{
+		root->black = 1;
+		checkColor(start);
+	}
 
 	Node<const K, V> & last() const 
 	{
@@ -216,6 +272,7 @@ struct redBlackTree
 			this->root->childR = sent_R;
 			sent_R->parent = newNode;
 			size++;
+			balance(newNode);
 			return ;
 		}
 		add(*this->root, *newNode);
@@ -296,6 +353,7 @@ private:
 				parent.childL = &newNode;
 				newNode.parent = &parent;
 				newNode.leftChild = 1;
+				balance(&newNode);
 			}
 			else if (parent.childL == sent_L)
 			{
@@ -304,6 +362,7 @@ private:
 				newNode.leftChild = 1;
 				newNode.childL = sent_L;
 				sent_L->parent = &newNode;
+				balance(&newNode);
 			}
 			else
 				add(*parent.childL, newNode);
@@ -316,6 +375,7 @@ private:
 				parent.childR = &newNode;
 				newNode.parent = &parent;
 				newNode.leftChild = 0;
+				balance(&newNode);
 			}
 			else if (parent.childR == sent_R)
 			{
@@ -324,6 +384,7 @@ private:
 				newNode.leftChild = 0;
 				newNode.childR = sent_R;
 				sent_R->parent = &newNode;
+				balance(&newNode);
 			}
 			else
 				add(*parent.childR, newNode);

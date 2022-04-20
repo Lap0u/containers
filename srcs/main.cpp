@@ -32,12 +32,19 @@ int main()
 
 	map<int,int>re;
 
-	int i = 0;
-	while (i++ < 10000)
-		re[i] = i;
-	re.erase(100);
+	re[12] = 12;
+	re[13] = 13;
+	re[11] = 11;
+	re.disp();
+	re[10] = 10;
+	re.disp();
 
-  std::clock_t c_end = std::clock();
+ 	
+	 
+	 
+	 
+	 
+	std::clock_t c_end = std::clock();
     auto t_end = std::chrono::high_resolution_clock::now();
  
     std::cout << std::fixed << std::setprecision(2) << "CPU time used: "

@@ -91,7 +91,7 @@ public:
 		if (_ptr->childR || isLast() == 1)
 		{
 			_ptr = _ptr->childR;
-			while (_ptr->childL)
+			while (_ptr && _ptr->childL)
 				_ptr = _ptr->childL;
 			return *this;
 		}
@@ -119,7 +119,7 @@ public:
 		if (_ptr->childL || isFirst() == 1)
 		{
 			_ptr = _ptr->childL;
-			while (_ptr->childR)
+			while (_ptr && _ptr->childR)
 				_ptr = _ptr->childR;
 			return *this;
 		}

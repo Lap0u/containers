@@ -38,6 +38,9 @@ int main()
 	re.disp();
 	re[10] = 10;
 	re.disp();
+	re[9] = 9;
+	re.disp();
+
 
  	
 	 

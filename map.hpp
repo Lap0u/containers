@@ -89,8 +89,8 @@ public:
 /*==Iterators==*/
 
 	/*		Begin		*/
-	iterator begin() {return iterator(rbt.first());}
-	const_iterator begin() const {return const_iterator(rbt.first());}
+	iterator begin() {if (!size()){return end();} return iterator(rbt.first());}
+	const_iterator begin() const {if (!size()){return end();} return const_iterator(rbt.first());}
 
 
 	/*		End			*/

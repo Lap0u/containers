@@ -91,25 +91,146 @@ struct redBlackTree
 		root->black = 1;
 	}
 
+	void	left_rotate(Node<const K, V>* node)
+	{
+		Node<const K, V>* temp = node->childR;
+		node->childR = temp->childL;
+		if (node->childR)
+		{
+			node->childR->parent = node;
+			node->childR->leftChild = 0;
+		}
+		if (node->parent == NULL) // we are root
+		{
+			root = temp;
+			temp->parent = NULL;
+		}
+		else
+		{
+			temp->parent = node->parent;
+			if (node->leftChild)
+			{
+				temp->leftChild = 1;
+				temp->parent->childL = temp;
+			}
+			else
+			{
+				temp->leftChild = 0;
+				temp->parent->childR = temp;
+			}
+		}
+		temp->childL = node;
+		node->leftChild = 1;
+		node->parent = temp; 
+	}
+
+	void	right_rotate(Node<const K, V>* node)
+	{
+		Node<const K, V>* temp = node->childL;
+		node->childL = temp->childR;
+		if (node->childL)
+		{
+			node->childL->parent = node;
+			node->childL->leftChild = 1;
+		}
+		if (node->parent == NULL) // we are root
+		{
+			root = temp;
+			temp->parent = NULL;
+		}
+		else
+		{
+			temp->parent = node->parent;
+			if (node->leftChild)
+			{
+				temp->leftChild = 1;
+				temp->parent->childL = temp;
+			}
+			else
+			{
+				temp->leftChild = 0;
+				temp->parent->childR = temp;
+			}
+		}
+		temp->childR = node;
+		node->leftChild = 0;
+		node->parent = temp; 
+	}
+
+	void	right_left_rotate(Node<const K, V>* node)
+	{
+		right_rotate(node->childR);
+		left_rotate(node);
+	}
+
+	void	left_right_rotate(Node<const K, V>* node)
+	{
+		left_rotate(node->childL);
+		right_rotate(node);
+	}
+
+	void	rotate(Node<const K, V>* node)
+	{
+		if (node->leftChild)
+		{
+			if (node->parent->leftChild)
+			{
+				// COUT MAG << "We need to right rotate" RESET ENDL;
+				right_rotate(node->parent->parent);
+				node->black = 0;
+				node->parent->black = 1;
+				if (node->parent->childR)
+					node->parent->childR->black = 0;
+				return ;
+			}
+			// COUT MAG << "We need to right_left rotate" RESET ENDL;
+			right_left_rotate(node->parent->parent);
+			node->black = 1;
+			node->childR->black = 0;
+			node->childL->black = 0;
+			return ;
+		}
+		if (node->parent->leftChild)
+		{
+			// COUT MAG << "We need to left_right rotate" RESET ENDL;
+			left_right_rotate(node->parent->parent);
+			node->black = 1;
+			node->childR->black = 0;
+			node->childL->black = 0;
+			return ;
+		}
+		// COUT MAG << "We need to left rotate" RESET ENDL;
+		left_rotate(node->parent->parent);
+		node->black = 0;
+		node->parent->black = 1;
+		if (node->parent->childL)
+			node->parent->childL->black = 0;
+		return ;
+	}
+
 	void	correctTree(Node<const K, V>* node)
 	{
 		if (node->parent->leftChild)
 		{
 			if (node->parent->parent->childR == NULL || node->parent->parent->childR->black)
-				COUT MAG << "We need to rotate" RESET ENDL;
+			{
+				return rotate(node);
+			}
 			else
 			{
-				COUT MAG << "We need to switch" RESET ENDL;
+				// COUT MAG << "We need to switch" RESET ENDL;
 				return switch_col(node);
 			}
 		}
 		else
 		{
 			if (node->parent->parent->childL == NULL || node->parent->parent->childL->black)
-				COUT MAG << "We need to rotate" RESET ENDL;
+			{
+				return rotate(node);
+			}
 			else
 			{
-				COUT MAG << "We need to switch" RESET ENDL;			
+				// COUT MAG << "We need to switch" RESET ENDL;			
 				return switch_col(node);
 			}
 		}

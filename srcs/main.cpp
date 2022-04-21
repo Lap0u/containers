@@ -28,13 +28,16 @@ int main()
 	auto t_start = std::chrono::high_resolution_clock::now();
 	
 	
-	using namespace std;
+	using namespace ft;
 
 	map<int,int>re;
 	
 	int i = 0;
-	while (i++ < 1000000)
+	while (i++ < 20)
 		re[i] = i;
+	re.disp();
+	re.erase(19);
+	re.disp();
 
 
  	

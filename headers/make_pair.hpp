@@ -1,5 +1,5 @@
 #ifndef MAKE_PAIR_HPP
-# define MAPE_PAIR_HPP
+# define MAKE_PAIR_HPP
 
 # include "pair.hpp"
 

@@ -4,23 +4,25 @@
 #include <vector>
 #include <string>
 #include <locale>
+#include "../map.hpp"
+#include "../headers/make_pair.hpp"
 
 # define COUT std::cout <<
 # define ENDL << std::endl
 # define NL std::cout << std::endl;
 # define SEP COUT "###############################" ENDL ENDL;
 
-using namespace std;
+using namespace NS;
 
-void	printMap(const std::map<std::string, int> & map)
+void	printMap(const map<std::string, int> & cont)
 {
-	if (map.empty())
+	if (cont.empty())
 	{
 		COUT "Container is empty" ENDL;
 		return ;
 	}
-	COUT "Container size is " << map.size() ENDL;
-	for (std::map<std::string, int>::const_iterator beg = map.begin(); beg != map.end(); beg++)
+	COUT "Container size is " << cont.size() ENDL;
+	for (map<std::string, int>::const_iterator beg = cont.begin(); beg != cont.end(); beg++)
 		COUT beg->first << "   " << beg->second ENDL;
 	NL
 }
@@ -44,7 +46,7 @@ int main ()
 		printMap(emp);
 		printMap(range);
 		printMap(copy);
-		range.at("B") = 20;
+		range["B"] = 20;
 		printMap(range);
 		printMap(copy);
 		SEP
@@ -81,7 +83,7 @@ int main ()
 	#if 1
 		COUT "Equal_range" ENDL ENDL;
 		
-		pair<std::map<std::string,int>::iterator,std::map<std::string,int>::iterator> ret;
+		pair<map<std::string,int>::iterator,map<std::string,int>::iterator> ret;
 		ret = range.equal_range("E");
 		COUT "We looked for E in range" ENDL;
 		COUT "lower bound points to: ";

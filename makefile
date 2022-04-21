@@ -60,9 +60,10 @@ $(NAME):	$(OBJS) $(VDEP)
 			$(CC) $(FLAGS) -o $(NAME) $(OBJS)
 
 test:		$(V)$(S)$(M)
-			diff log/myvec log/stdvec > log/vec_diff
-			diff log/mystack log/stdstack > log/stack_diff
-			diff log/mymap log/stdmap > log/map_diff
+			diff log/myv_log log/stdv_log > log/vec_diff
+			diff log/mys_log log/stds_log > log/stack_diff
+			diff log/mym_log log/stdm_log > log/map_diff
+			cat log/*diff*
 			echo "Diff files available in ./log"
 
 v:			

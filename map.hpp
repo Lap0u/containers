@@ -69,6 +69,7 @@ public:
 
 	map	(const map& x) : rbt(key_type(), mapped_type()), _alloc(x._alloc), _comp(x._comp)
 	{
+		if (x.size())
 		this->insert(x.begin(), x.end());
 	}
 

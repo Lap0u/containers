@@ -32,13 +32,9 @@ int main()
 
 	map<int,int>re;
 	
-	int i = 0;
-	while (i++ < 20)
-		re[i] = i;
-	re.disp();
-	re.erase(19);
-	re.disp();
-
+	re[1] = 1;
+	COUT re.size() << " inm" ENDL;
+	re.erase(1);
 
  	
 	 

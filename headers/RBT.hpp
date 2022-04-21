@@ -265,7 +265,6 @@ struct redBlackTree
 	{
 		root->black = 1;
 		checkColor(start);
-		// blackNode(root);
 	}
 
 	Node<const K, V> & last() const 
@@ -291,6 +290,7 @@ struct redBlackTree
 		size--;
 		if (toDel == root && size == 1)
 		{
+			COUT "lel" ENDL;
 			_allocator.destroy(toDel);
 			_allocator.deallocate(toDel, sizeof(toDel));
 			root = NULL;
@@ -298,6 +298,8 @@ struct redBlackTree
 		}
 		if (toDel->childL == NULL && toDel->childR == NULL)
 		{
+			COUT "size" << size ENDL;
+			COUT "leeeeeel" ENDL;
 			update = toDel->parent;
 			if (toDel->leftChild == 1 && toDel->parent)
 				toDel->parent->childL = NULL;

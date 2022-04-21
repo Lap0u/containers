@@ -59,7 +59,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS) $(VDEP)
 			$(CC) $(FLAGS) -o $(NAME) $(OBJS)
 
-test:		$(V)$(S)$(M)
+test:		v s m
 			diff log/myv_log log/stdv_log > log/vec_diff
 			diff log/mys_log log/stds_log > log/stack_diff
 			diff log/mym_log log/stdm_log > log/map_diff

@@ -3,11 +3,6 @@
 
 # include "vector.hpp"
 
-
-# define COUT std::cout <<
-# define ENDL << std::endl
-# define DEB COUT "yo" ENDL ENDL;
-
 namespace ft {
 
 template<class T, class Container = ft::vector<T> >

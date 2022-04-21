@@ -1,16 +1,13 @@
 #ifndef I_ITERATOR_HPP
 # define I_ITERATOR_HPP
 
-// # include "vector.hpp"
-// # include <vector>
-// # include "iterator_traits.hpp"
 namespace ft {
 
 template<class Iterator>
 class iterator_traits;
 
 template<typename T>
-class myIterator /*: public iterator_traits<myIterator<T> >*/
+class myIterator
 {
 public:
 

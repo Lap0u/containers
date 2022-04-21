@@ -16,10 +16,6 @@
 # include "headers/iterator_traits.hpp"
 # include "headers/reverse_iterator.hpp"
 
-# define COUT std::cout <<
-# define ENDL << std::endl
-# define DEB COUT "yo" ENDL ENDL;
-
 /*https://en.cppreference.com/w/cpp/container/vector*/
 
 /*https://www.cplusplus.com/reference/vector/vector/?kw=vector*/

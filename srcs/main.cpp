@@ -28,14 +28,19 @@ int main()
 	auto t_start = std::chrono::high_resolution_clock::now();
 	
 	
-	using namespace ft;
+	using namespace std;
 
 	map<int,int>re;
-	
-	re[1] = 1;
-	COUT re.size() << " inm" ENDL;
-	re.erase(1);
 
+	re[0] = 0;
+	re[1] = 1;
+	re[2] = 2;
+	re[3] = 3;
+	re[4] = 4;
+	map<int,int>::reverse_iterator it = re.rbegin();
+	COUT it->first << " and " << it->second ENDL;
+	it++;
+	COUT it->first << " andwww " << it->second ENDL;
  	
 	 
 	 

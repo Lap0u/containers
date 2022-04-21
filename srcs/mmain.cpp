@@ -346,8 +346,8 @@ int main ()
 
 		COUT "Comparing values of range (the key is compared)" ENDL ENDL;
 		COUT range["L"] ENDL;
-		COUT "99 < -78? :" << myvcomp(*(--range.rbegin()),*(range.rbegin())) ENDL;
-		COUT "20 < -78? :" << myvcomp(*(++range.begin()),*(range.rbegin())) ENDL;
+		COUT "99 < -78? :" << myvcomp(*(++range.rbegin()),*(range.rbegin())) ENDL;
+		COUT "20 < -78? :" << myvcomp(*(--range.begin()),*(range.rbegin())) ENDL;
 		SEP
 	#endif
 	#if 1

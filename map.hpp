@@ -1,10 +1,6 @@
 #ifndef MAP_HPP
 # define MAP_HPP
 
-# define CIN >> std::cin
-# define COUT std::cout <<
-# define ENDL << std::endl
-
 # include <memory>
 # include <functional>
 # include "./headers/RBT.hpp"
@@ -20,9 +16,9 @@ namespace ft {
 template<class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<pair<const Key,T> > >
 class map
 {
-
+private:
+	void	disp() {rbt.print(rbt.root, 0); std::cout << "size is " << size() << std::endl << "#################################################" << std::endl;}
 public:
-	void	disp() {rbt.print(rbt.root, 0); COUT "size is " << size() ENDL << "#################################################" ENDL;}
 	void	add(Key x, T y) {rbt.add(x, y);}
 	typedef					Key											key_type;
 	typedef					T											mapped_type;
@@ -260,13 +256,15 @@ template <class InputIterator>
 	/*		Find		*/
 	iterator find (const key_type& k)
 	{
-		if (rbt.root == NULL)
+		if (rbt.size == 0)
 			return end();
 		iterator res = *rbt.search(*rbt.root, k);
 		return res;
 	}
 	const_iterator find (const key_type& k) const
 	{
+		if (rbt.size == 0)
+			return end();
 		iterator res = *rbt.search(*rbt.root, k);
 		return res;
 	}
@@ -303,6 +301,8 @@ template <class InputIterator>
 	/*		Upper_bound		*/
 	iterator upper_bound(const key_type & k)
 	{
+		if (rbt.size == 0)
+			return end();
 		iterator res = begin();
 		for (; res != end(); res++)
 		{

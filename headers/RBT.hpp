@@ -7,10 +7,6 @@
 #ifndef RBT_HPP
 # define RBT_HPP
 
-# define CIN >> std::cin
-# define COUT std::cout <<
-# define ENDL << std::endl
-
 # define RESET   "\033[0m"
 # define BLACK   "\033[1m\033[30m"		/* Bold Black	*/
 # define RED     "\033[1m\033[31m"		/* Bold Red		*/
@@ -175,7 +171,6 @@ struct redBlackTree
 		{
 			if (node->parent->leftChild)
 			{
-				// COUT MAG << "We need to right rotate" RESET ENDL;
 				right_rotate(node->parent->parent);
 				node->black = 0;
 				node->parent->black = 1;
@@ -183,7 +178,6 @@ struct redBlackTree
 					node->parent->childR->black = 0;
 				return ;
 			}
-			// COUT MAG << "We need to right_left rotate" RESET ENDL;
 			right_left_rotate(node->parent->parent);
 			node->black = 1;
 			node->childR->black = 0;
@@ -192,14 +186,12 @@ struct redBlackTree
 		}
 		if (node->parent->leftChild)
 		{
-			// COUT MAG << "We need to left_right rotate" RESET ENDL;
 			left_right_rotate(node->parent->parent);
 			node->black = 1;
 			node->childR->black = 0;
 			node->childL->black = 0;
 			return ;
 		}
-		// COUT MAG << "We need to left rotate" RESET ENDL;
 		left_rotate(node->parent->parent);
 		node->black = 0;
 		node->parent->black = 1;
@@ -218,7 +210,6 @@ struct redBlackTree
 			}
 			else
 			{
-				// COUT MAG << "We need to switch" RESET ENDL;
 				return switch_col(node);
 			}
 		}
@@ -230,7 +221,6 @@ struct redBlackTree
 			}
 			else
 			{
-				// COUT MAG << "We need to switch" RESET ENDL;			
 				return switch_col(node);
 			}
 		}
@@ -288,9 +278,8 @@ struct redBlackTree
 			return ;
 		hideSent();
 		size--;
-		if (toDel == root && size == 1)
+		if (toDel == root && size == 0)
 		{
-			COUT "lel" ENDL;
 			_allocator.destroy(toDel);
 			_allocator.deallocate(toDel, sizeof(toDel));
 			root = NULL;
@@ -298,8 +287,6 @@ struct redBlackTree
 		}
 		if (toDel->childL == NULL && toDel->childR == NULL)
 		{
-			COUT "size" << size ENDL;
-			COUT "leeeeeel" ENDL;
 			update = toDel->parent;
 			if (toDel->leftChild == 1 && toDel->parent)
 				toDel->parent->childL = NULL;
@@ -469,8 +456,8 @@ struct redBlackTree
 	{
 		if (space == 0)
 		{
-			COUT sent_L->leftChild << "  Sent_L parent is " << sent_L->parent->mypair.first << " and " << sent_L->parent->mypair.second ENDL;
-			COUT sent_R->leftChild << "  Sent_R parent is " << sent_R->parent->mypair.first << " and " << sent_R->parent->mypair.second ENDL;
+			std::cout << sent_L->leftChild << "  Sent_L parent is " << sent_L->parent->mypair.first << " and " << sent_L->parent->mypair.second << std::endl;
+			std::cout << sent_R->leftChild << "  Sent_R parent is " << sent_R->parent->mypair.first << " and " << sent_R->parent->mypair.second << std::endl;
 		}
 		if ( current != NULL ){
 			space += 10;
@@ -478,17 +465,17 @@ struct redBlackTree
 			std::cout << std::endl;
 			for ( int _ = 0 ; _ < space ; _++ ){ std::cout << " "; }
 			if (current->black == 1)
-				COUT BLACK;
+				std::cout << BLACK;
 			else
-				COUT RED;
+				std::cout << RED;
 			if (current == sent_L || current == sent_R)
-				COUT CYAN;
-			COUT current->mypair.first << " : " << current->mypair.second;
+				std::cout << CYAN;
+			std::cout << current->mypair.first << " : " << current->mypair.second;
 			if (current->leftChild == 1)
-				COUT "  L" ENDL;
+				std::cout << "  L" << std::endl;
 			else
-				COUT "  R" ENDL;
-			COUT RESET;
+				std::cout << "  R" << std::endl;
+			std::cout << RESET;
 			print(current->childL, space);
 		}
 	}
@@ -540,7 +527,6 @@ private:
 				add(*parent.childR, newNode);
 			return ;
 		}
-		COUT CYAN << "Node is equal " << RESET ENDL;
 	}
 };
 }
